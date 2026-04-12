@@ -43,7 +43,7 @@ const AddTravellerCheckoutPage = () => {
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isUsingWallet, setIsUsingWallet] = useState(true);
   const [isWalletApplied, setIsWalletApplied] = useState(false);
-
+const [showCouponModal, setShowCouponModal] = useState(false);
   const [walletUsed, setWalletUsed] = useState<number>(0);
   const [finalPayableAmount, setFinalPayableAmount] = useState<number>(0); // after applying wallet + coupon
 
@@ -298,7 +298,7 @@ const AddTravellerCheckoutPage = () => {
   // };
   return (
     <form onSubmit={handleSubmit(handlePayment, (err) =>
-       console.log('Validation errors:', err))}>
+      console.log('Validation errors:', err))}>
       <div className="min-h-screen bg-bg">
         <div className="bg-orange text-white py-10 shadow-md">
           <div className="max-w-6xl mx-auto px-4 flex items-center gap-6">
@@ -441,10 +441,21 @@ const AddTravellerCheckoutPage = () => {
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Travel Date</h3>
-                <Input
+                {/* <Input
                   type="date"
                   min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
                   {...register('travelDate')}
+                  max={
+                    packageData?.endDate
+                      ? new Date(packageData.endDate).toISOString().split('T')[0]
+                      : undefined
+                  }
+                  {...register('travelDate')}
+                  className="border-gray-300"
+                /> */}
+                <Input
+                  type="date"
+                  min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
                   max={
                     packageData?.endDate
                       ? new Date(packageData.endDate).toISOString().split('T')[0]
@@ -656,11 +667,11 @@ const AddTravellerCheckoutPage = () => {
 
                   {(watch('paymentMethod') === 'wallet' ||
                     watch('paymentMethod') === 'wallet+razorpay') && (
-                    <div className="flex justify-between">
-                      <span>Wallet Used</span>
-                      <span>- ₹{walletUsed.toLocaleString()}</span>
-                    </div>
-                  )}
+                      <div className="flex justify-between">
+                        <span>Wallet Used</span>
+                        <span>- ₹{walletUsed.toLocaleString()}</span>
+                      </div>
+                    )}
 
                   <Separator />
 
@@ -685,4 +696,3 @@ const AddTravellerCheckoutPage = () => {
   );
 };
 
-export default AddTravellerCheckoutPage;
