@@ -52,7 +52,7 @@ const AddCustomPkgForm = () => {
       const res = await createCustomPkg(data);
       const result = res.data;
 
-      console.log(result, 'custom pkg response');
+      //console.log(result, 'custom pkg response');
 
       if (result.status === 'exact_match') {
         setExactMatch(result.package);
@@ -73,9 +73,7 @@ const AddCustomPkgForm = () => {
   };
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex flex-col items-center py-10 px-4"
-    >
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex flex-col items-center py-10 px-4">
       {/* Form Container */}
       <form
         onSubmit={handleSubmit(onSubmit)}

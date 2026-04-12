@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/Button';
 import { getCouponById, editCoupon } from '@/services/admin/couponService';
-import { type CouponFormSchema, couponSchema } from '@/schemas/CouponFormSchema';
+import { couponSchema } from '@/schemas/CouponFormSchema';
 import { z } from 'zod';
 
 // Local Label component (TypeScript-safe)

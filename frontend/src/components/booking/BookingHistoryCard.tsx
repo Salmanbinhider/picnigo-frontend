@@ -2,7 +2,6 @@
 // // import { Badge } from '@/components/ui/Badge';
 // // import type{ IBookingHistory, ITravelDateHistory,ITravelerHistory } from '@/types/IBooking';
 
-
 // // interface BookingHistoryCardProps {
 // //   title: string;
 // //   type: 'traveler' | 'date'; // choose what kind of history to show
@@ -238,12 +237,9 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
   };
 
   const getTimelineColor = (action: string) => {
-    if (action?.toLowerCase().includes('remove'))
-      return 'border-rose-500 bg-rose-500';
-    if (action?.toLowerCase().includes('add'))
-      return 'border-emerald-500 bg-emerald-500';
-    if (action?.toLowerCase().includes('change'))
-      return 'border-amber-500 bg-amber-500';
+    if (action?.toLowerCase().includes('remove')) return 'border-rose-500 bg-rose-500';
+    if (action?.toLowerCase().includes('add')) return 'border-emerald-500 bg-emerald-500';
+    if (action?.toLowerCase().includes('change')) return 'border-amber-500 bg-amber-500';
     return 'border-blue-500 bg-blue-500';
   };
 
@@ -251,11 +247,13 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
     <Card className="mt-8 border-0 shadow-2xl hover:shadow-3xl transition-all duration-300 rounded-2xl overflow-hidden bg-white">
       <CardHeader className="bg-gradient-to-r from-blue-50 via-purple-50 to-blue-50 border-b-2 border-gray-200 pb-6">
         <div className="flex items-center gap-4">
-          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${
-            type === 'traveler' 
-              ? 'bg-gradient-to-br from-purple-500 to-purple-600' 
-              : 'bg-gradient-to-br from-blue-500 to-blue-600'
-          }`}>
+          <div
+            className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${
+              type === 'traveler'
+                ? 'bg-gradient-to-br from-purple-500 to-purple-600'
+                : 'bg-gradient-to-br from-blue-500 to-blue-600'
+            }`}
+          >
             {type === 'traveler' ? (
               <User className="w-7 h-7 text-white" />
             ) : (
@@ -264,7 +262,9 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
           </div>
           <div>
             <CardTitle className="text-2xl font-bold text-gray-800">{title}</CardTitle>
-            <p className="text-sm text-gray-600 mt-1">{history.length} {history.length === 1 ? 'entry' : 'entries'} recorded</p>
+            <p className="text-sm text-gray-600 mt-1">
+              {history.length} {history.length === 1 ? 'entry' : 'entries'} recorded
+            </p>
           </div>
         </div>
       </CardHeader>
@@ -273,7 +273,7 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
         <div className="relative">
           {/* Timeline line */}
           <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-300 via-gray-200 to-transparent hidden md:block"></div>
-          
+
           <div className="space-y-8">
             {history.map((item: any, i: number) => {
               const oldDate = formatValidDate(item.oldValue);
@@ -282,21 +282,27 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
               return (
                 <div key={i} className="relative">
                   {/* Timeline dot */}
-                  <div className={`absolute left-5 top-6 w-5 h-5 rounded-full border-4 bg-white shadow-lg z-10 hidden md:block ${getTimelineColor(item.action)}`}></div>
-                  
+                  <div
+                    className={`absolute left-5 top-6 w-5 h-5 rounded-full border-4 bg-white shadow-lg z-10 hidden md:block ${getTimelineColor(item.action)}`}
+                  ></div>
+
                   {/* Content Card */}
                   <div className="md:ml-16 rounded-2xl border-2 border-gray-100 bg-gradient-to-br from-white via-gray-50 to-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     {/* Card Header with Action Badge */}
                     <div className="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
                       <div className="flex items-center justify-between flex-wrap gap-3">
                         {item.action && (
-                          <Badge className={`${getBadgeStyle(item.action)} text-sm font-bold uppercase px-4 py-1.5 rounded-full border-2`}>
+                          <Badge
+                            className={`${getBadgeStyle(item.action)} text-sm font-bold uppercase px-4 py-1.5 rounded-full border-2`}
+                          >
                             {item.action}
                           </Badge>
                         )}
                         <div className="flex items-center gap-2 text-xs text-gray-500">
                           <Clock className="w-4 h-4 text-gray-400" />
-                          <span className="font-medium">{new Date(item.changedAt).toLocaleString()}</span>
+                          <span className="font-medium">
+                            {new Date(item.changedAt).toLocaleString()}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -311,7 +317,9 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
                               <UserCircle className="w-7 h-7 text-white" />
                             </div>
                             <div className="flex-1">
-                              <h4 className="font-bold text-gray-900 text-xl mb-2">{item.traveler.fullName}</h4>
+                              <h4 className="font-bold text-gray-900 text-xl mb-2">
+                                {item.traveler.fullName}
+                              </h4>
                               <div className="flex flex-wrap gap-4 text-sm text-gray-700">
                                 <span className="flex items-center gap-1.5">
                                   <User className="w-4 h-4 text-purple-600" />
@@ -325,7 +333,9 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
                               {item.traveler.idType && item.traveler.idNumber && (
                                 <div className="mt-3 flex items-center gap-2 text-sm text-gray-600 bg-white/70 px-3 py-2 rounded-lg">
                                   <IdCard className="w-4 h-4 text-purple-600" />
-                                  <span className="font-semibold">{item.traveler.idType?.toUpperCase()}:</span>
+                                  <span className="font-semibold">
+                                    {item.traveler.idType?.toUpperCase()}:
+                                  </span>
                                   <span>{item.traveler.idNumber}</span>
                                 </div>
                               )}
@@ -340,7 +350,9 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
                           <div className="flex items-center justify-center gap-6">
                             {oldDate && (
                               <div className="flex-1 text-center">
-                                <p className="text-xs font-semibold text-gray-600 uppercase mb-2">Previous Date</p>
+                                <p className="text-xs font-semibold text-gray-600 uppercase mb-2">
+                                  Previous Date
+                                </p>
                                 <div className="bg-white px-4 py-3 rounded-lg shadow-sm border border-gray-200">
                                   <p className="text-lg font-bold text-gray-800">{oldDate}</p>
                                 </div>
@@ -351,7 +363,9 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
                             )}
                             {newDate && (
                               <div className="flex-1 text-center">
-                                <p className="text-xs font-semibold text-gray-600 uppercase mb-2">New Date</p>
+                                <p className="text-xs font-semibold text-gray-600 uppercase mb-2">
+                                  New Date
+                                </p>
                                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 px-4 py-3 rounded-lg shadow-md">
                                   <p className="text-lg font-bold text-white">{newDate}</p>
                                 </div>
@@ -367,7 +381,9 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
                           <div className="flex items-start gap-3">
                             <Edit3 className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                             <div>
-                              <p className="text-xs font-bold text-amber-700 uppercase mb-1">Note</p>
+                              <p className="text-xs font-bold text-amber-700 uppercase mb-1">
+                                Note
+                              </p>
                               <p className="text-sm text-gray-700 leading-relaxed">{item.note}</p>
                             </div>
                           </div>
@@ -378,7 +394,8 @@ export const BookingHistoryCard = ({ title, type, history }: BookingHistoryCardP
                       <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 rounded-lg">
                         <UserCircle className="w-5 h-5 text-gray-500" />
                         <p className="text-sm text-gray-600">
-                          Changed by: <span className="font-bold text-gray-800">{item.changedBy}</span>
+                          Changed by:{' '}
+                          <span className="font-bold text-gray-800">{item.changedBy}</span>
                         </p>
                       </div>
                     </div>

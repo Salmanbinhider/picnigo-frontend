@@ -16,7 +16,7 @@ export const ChatHeader: React.FC<Props> = ({ room, onBack, isMobile, isPartnerO
   // const currentUserId = useSelector((state: RootState) => state.userAuth.user?._id)
   const { id: currentUserId, profilePic, username } = useCurrentUser();
 
-  console.log(currentUserId, 'current user id in heada');
+  //console.log(currentUserId, 'current user id in heada');
   const otherUser = !room.isGroup ? room?.otherUser : null;
   const [showVideoCall, setShowVideoCall] = useState(false);
 

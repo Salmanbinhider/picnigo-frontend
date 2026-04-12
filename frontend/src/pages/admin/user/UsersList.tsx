@@ -57,7 +57,7 @@ const UserList = () => {
           status,
         };
         const res = await fetchUsersData(filters);
-        console.log(res, 'ress');
+        //console.log(res, 'ress');
 
         setUsers(res.data);
         setTotalPages(res.pagination.totalPages);

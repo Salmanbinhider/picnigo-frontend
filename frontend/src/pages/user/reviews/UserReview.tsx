@@ -31,7 +31,7 @@ const UserReviewPage = () => {
         setReviews(response.data);
         setTotalPages(response.pagination.totalPages);
       } catch {
-        console.log('Failed to fetch reviews');
+        //console.log('Failed to fetch reviews');
       } finally {
         setLoading(false);
       }
@@ -59,9 +59,7 @@ const UserReviewPage = () => {
     return [...Array(5)].map((_, i) => (
       <Star
         key={i}
-        className={`w-4 h-4 ${
-          i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-        }`}
+        className={`w-4 h-4 ${i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
       />
     ));
   };
@@ -74,10 +72,7 @@ const UserReviewPage = () => {
       {loading ? (
         <div className="space-y-6">
           {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="bg-white border rounded-xl p-6 animate-pulse"
-            >
+            <div key={i} className="bg-white border rounded-xl p-6 animate-pulse">
               <div className="flex gap-4">
                 <div className="w-12 h-12 bg-gray-200 rounded-full" />
                 <div className="flex-1 space-y-2">
@@ -97,18 +92,16 @@ const UserReviewPage = () => {
       ) : reviews.length === 0 ? (
         /* 🔥 EMPTY STATE */
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          
           {/* ⭐ Icon */}
           <div className="text-5xl mb-4">⭐</div>
 
           {/* Heading */}
-          <h3 className="text-xl font-semibold text-gray-800">
-            No Reviews Yet
-          </h3>
+          <h3 className="text-xl font-semibold text-gray-800">No Reviews Yet</h3>
 
           {/* Description */}
           <p className="text-sm text-gray-500 mt-2 max-w-md">
-            You haven’t written any reviews yet. Share your travel experience and help others choose better!
+            You haven’t written any reviews yet. Share your travel experience and help others choose
+            better!
           </p>
 
           {/* CTA */}
@@ -138,9 +131,7 @@ const UserReviewPage = () => {
                   />
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
-                      <h3 className="font-semibold text-gray-900">
-                        {user?.username}
-                      </h3>
+                      <h3 className="font-semibold text-gray-900">{user?.username}</h3>
                       <span className="text-xs text-gray-500">
                         {formatTimeAgo(review.createdAt)}
                       </span>
@@ -149,18 +140,14 @@ const UserReviewPage = () => {
                     {/* Rating */}
                     <div className="flex items-center gap-2 mt-1">
                       <div className="flex">{renderStars(review.rating)}</div>
-                      <span className="text-sm font-medium text-gray-700">
-                        {review.rating}.0
-                      </span>
+                      <span className="text-sm font-medium text-gray-700">{review.rating}.0</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Review Content */}
                 <div className="mt-4 border-t border-gray-100 pt-4">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                    {review.title}
-                  </h4>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{review.title}</h4>
                   <ReadMore text={review.comment} wordLimit={10} />
                 </div>
               </div>
@@ -205,11 +192,11 @@ export default UserReviewPage;
 //         const response = await handleUserReview(currentPage, limit);
 
 //         setReviews(response.data);
-//         console.log(response.data, 'sgs');
+//         //console.log(response.data, 'sgs');
 
 //         setTotalPages(response.pagination.totalPages);
 //       } catch {
-//         console.log('Failed to fetch reviews');
+//         //console.log('Failed to fetch reviews');
 //       }
 //     };
 //     fetchReviews();

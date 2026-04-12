@@ -63,7 +63,7 @@ const ReferralPage = () => {
               isBlocked: referral?.isBlocked ?? false,
             }}
             onSubmit={handleSave}
-           />
+          />
 
           {referral && (
             <div className="mt-8">

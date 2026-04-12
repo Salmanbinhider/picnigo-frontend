@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const couponSchema = z
-   .object({
+  .object({
     code: z
       .string()
       .trim()
@@ -12,7 +12,6 @@ export const couponSchema = z
       required_error: 'Coupon type is required',
     }),
 
- 
     discountValue: z
       .number({
         required_error: 'Discount value is required',

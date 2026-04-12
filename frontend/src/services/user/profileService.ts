@@ -25,13 +25,13 @@ export const updateUserProfile = async (profileData: ProfileFormSchema) => {
 };
 export const updateUserAddress = async (address: AddressFormSchema) => {
   const response = await api.put('/user/profile/updateAddress', { address });
-  console.log(response);
+  //console.log(response);
   return response.data;
 };
 
 export const getUserProfile = async () => {
   const response = await api.get('/user/profile');
-  console.log(response, 'profile');
+  //console.log(response, 'profile');
   return response.data;
 };
 

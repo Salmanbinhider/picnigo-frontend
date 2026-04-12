@@ -19,15 +19,9 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/Dialog';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/Select';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/Select';
 import { Textarea } from '@/components/ui/textarea';
- 
+
 const CustomPackageDetails = () => {
   const { pkgId } = useParams();
   const [pkg, setPkg] = useState<ICustomPackage | null>(null);
@@ -156,7 +150,6 @@ const CustomPackageDetails = () => {
               <Package size={16} />
               Create Custom Package
             </Button>
-
 
             {/* Delete confirmation dialog */}
             <ConfirmDialog title="Delete Package?" actionLabel="Delete" onConfirm={handleDelete}>

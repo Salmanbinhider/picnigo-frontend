@@ -1,4 +1,3 @@
-
 export const EnumMessageType = {
   TEXT: 'text',
   IMAGE: 'image',

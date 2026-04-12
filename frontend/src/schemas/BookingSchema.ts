@@ -44,7 +44,7 @@ export const TravelerSchema = z
   });
 export const BookingSchema = z.object({
   packageId: z.string().min(1, 'Package ID is required'),
-  packageType:z.string().min(1, 'Package Type is required'),
+  packageType: z.string().min(1, 'Package Type is required'),
   travelDate: z.string().refine(
     (date) => {
       const selected = new Date(date);
@@ -62,30 +62,32 @@ export const BookingSchema = z.object({
   ),
   travelers: z.array(TravelerSchema).min(1, 'At least one traveler is required'),
 
-  contactDetails: z.object({
-    name: z
-      .string()
-      .transform((val) => val.trim())
-      .refine((val) => val.length >= 3, {
-        message: 'name must be at least 3 characters',
-      }),
-    phone: z
-      .string()
-      .trim()
-      .regex(/^\d{10}$/, {
-        message: 'Phone number must be exactly 10 digits',
-      }),
-    alternatePhone: z
-      .string()
-      .trim()
-      .regex(/^\d{10}$/, {
-        message: 'Phone number must be exactly 10 digits',
-      }),
-    email: z.string().email('Invalid email address'),
-  }).refine((data) => data.phone !== data.alternatePhone, {
-    message: 'Primary and alternate phone numbers cannot be the same',
-    path: ['alternatePhone'],  
-  }),
+  contactDetails: z
+    .object({
+      name: z
+        .string()
+        .transform((val) => val.trim())
+        .refine((val) => val.length >= 3, {
+          message: 'name must be at least 3 characters',
+        }),
+      phone: z
+        .string()
+        .trim()
+        .regex(/^\d{10}$/, {
+          message: 'Phone number must be exactly 10 digits',
+        }),
+      alternatePhone: z
+        .string()
+        .trim()
+        .regex(/^\d{10}$/, {
+          message: 'Phone number must be exactly 10 digits',
+        }),
+      email: z.string().email('Invalid email address'),
+    })
+    .refine((data) => data.phone !== data.alternatePhone, {
+      message: 'Primary and alternate phone numbers cannot be the same',
+      path: ['alternatePhone'],
+    }),
 
   totalAmount: z
     .number({ required_error: 'Total amount is required' })
@@ -104,12 +106,10 @@ export const BookingSchema = z.object({
 
 export type BookingFormSchema = z.infer<typeof BookingSchema>;
 
-
- 
 export const TravelerBookingSchema = z.object({
   packageId: z.string().min(1, 'Package ID is required'),
   bookingId: z.string().min(1, 'bookingId ID is required'),
-  packageType:z.string().min(1, 'Package Type is required'),
+  packageType: z.string().min(1, 'Package Type is required'),
 
   travelDate: z.string().refine(
     (date) => {
@@ -127,9 +127,7 @@ export const TravelerBookingSchema = z.object({
     }
   ),
 
-  travelers: z
-    .array(TravelerSchema)
-    .min(1, 'At least one traveler is required'),
+  travelers: z.array(TravelerSchema).min(1, 'At least one traveler is required'),
 
   totalAmount: z
     .number({ required_error: 'Total amount is required' })

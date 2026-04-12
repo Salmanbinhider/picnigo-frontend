@@ -12,7 +12,6 @@ import { useImageUpload } from '@/hooks/useImageUpload';
 import { Label } from '@/components/Label';
 import { Button } from '@/components/ui/button';
 
-
 export default function AddPackageForm() {
   const {
     croppedImages,
@@ -123,7 +122,7 @@ export default function AddPackageForm() {
       const form = new FormData();
 
       croppedImages.forEach((file) => form.append('images', file));
-      setValue('pricePerChild',data.price)
+      setValue('pricePerChild', data.price);
       Object.entries(data).forEach(([key, value]) => {
         if (key === 'images') return;
 
@@ -149,7 +148,6 @@ export default function AddPackageForm() {
     }
   };
 
-
   const addDay = () => {
     itineraryArray.append({
       day: itineraryArray.fields.length + 1,
@@ -159,9 +157,8 @@ export default function AddPackageForm() {
     });
   };
   useEffect(() => {
-    console.log('Form errors:', errors);
+    //console.log('Form errors:', errors);
   }, [errors]);
-
 
   return (
     <>
@@ -179,7 +176,6 @@ export default function AddPackageForm() {
         </div>
       )}
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8 my-10 border border-gray-100">
-
         <div className="mb-6 border-b pb-4">
           <h1 className="text-2xl font-semibold text-gray-800">Add New Package</h1>
           <p className="text-gray-500 text-sm mt-1">
@@ -226,26 +222,21 @@ export default function AddPackageForm() {
             {/* Package Type */}
             <div>
               <label className="block font-medium">Package Type</label>
-              <select
-                {...register('packageType')}
-                className="border p-2 w-full rounded"
-              >
+              <select {...register('packageType')} className="border p-2 w-full rounded">
                 <option value="normal">Normal</option>
                 <option value="group">Group</option>
                 <option value="custom">Custom</option>
-
               </select>
-              {errors.packageType && <p className="text-red-500 text-sm">{errors.packageType.message}</p>}
+              {errors.packageType && (
+                <p className="text-red-500 text-sm">{errors.packageType.message}</p>
+              )}
             </div>
 
             {watch('packageType') === 'custom' && (
               <div className="border rounded-lg p-4 mt-3 bg-gray-50">
-                <h3 className="font-semibold text-gray-700 mb-2">custom Package  </h3>
+                <h3 className="font-semibold text-gray-700 mb-2">custom Package </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-
-
                   <div>
                     <label>Departure Date</label>
                     <input
@@ -254,22 +245,19 @@ export default function AddPackageForm() {
                       placeholder="Enter departure DAte"
                       className="border p-2 w-full rounded"
                     />
-                    {errors.departureDates && <p className="text-red-500 text-sm">{errors.departureDates.message}</p>}
+                    {errors.departureDates && (
+                      <p className="text-red-500 text-sm">{errors.departureDates.message}</p>
+                    )}
                   </div>
-
-
-
-
                 </div>
               </div>
             )}
 
             {watch('packageType') === 'group' && (
               <div className="border rounded-lg p-4 mt-3 bg-gray-50">
-                <h3 className="font-semibold text-gray-700 mb-2">Fixed Package  </h3>
+                <h3 className="font-semibold text-gray-700 mb-2">Fixed Package </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                   <div>
                     <label>Departure Date</label>
                     <input
@@ -278,9 +266,10 @@ export default function AddPackageForm() {
                       placeholder="Enter departure DAte"
                       className="border p-2 w-full rounded"
                     />
-                    {errors.departureDates && <p className="text-red-500 text-sm">{errors.departureDates.message}</p>}
+                    {errors.departureDates && (
+                      <p className="text-red-500 text-sm">{errors.departureDates.message}</p>
+                    )}
                   </div>
-
 
                   <div>
                     <label>Group Size</label>
@@ -290,17 +279,17 @@ export default function AddPackageForm() {
                       placeholder="Enter group Size "
                       className="border p-2 w-full rounded"
                     />
-                    {errors.groupSize && <p className="text-red-500 text-sm">{errors.groupSize.message}</p>}
+                    {errors.groupSize && (
+                      <p className="text-red-500 text-sm">{errors.groupSize.message}</p>
+                    )}
                   </div>
-
                 </div>
               </div>
             )}
 
-
             {watch('packageType') === 'normal' && (
               <div className="border rounded-lg p-4 mt-3 bg-gray-50">
-                <h3 className="font-semibold text-gray-700 mb-2">Normal Package  </h3>
+                <h3 className="font-semibold text-gray-700 mb-2">Normal Package </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -310,7 +299,9 @@ export default function AddPackageForm() {
                       {...register('startDate')}
                       className="border p-2 w-full rounded"
                     />
-                    {errors.startDate && <p className="text-red-500 text-sm">{errors.startDate.message}</p>}
+                    {errors.startDate && (
+                      <p className="text-red-500 text-sm">{errors.startDate.message}</p>
+                    )}
                   </div>
 
                   <div>
@@ -320,7 +311,9 @@ export default function AddPackageForm() {
                       {...register('endDate')}
                       className="border p-2 w-full rounded"
                     />
-                    {errors.endDate && <p className="text-red-500 text-sm">{errors.endDate.message}</p>}
+                    {errors.endDate && (
+                      <p className="text-red-500 text-sm">{errors.endDate.message}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -330,16 +323,12 @@ export default function AddPackageForm() {
 
             {/* Duration Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700 border-b pb-2 mb-2">
-                Duration
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-700 border-b pb-2 mb-2">Duration</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Days */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Days
-                  </label>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Days</label>
                   <input
                     type="number"
                     {...register('durationDays', { valueAsNumber: true })}
@@ -352,9 +341,7 @@ export default function AddPackageForm() {
 
                 {/* Nights */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Nights
-                  </label>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Nights</label>
                   <input
                     type="number"
                     {...register('durationNights', { valueAsNumber: true })}
@@ -375,11 +362,8 @@ export default function AddPackageForm() {
                 {...register('price', { valueAsNumber: true })}
                 className="border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 rounded-lg p-2 w-full"
               />
-              {errors.price && (
-                <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
-              )}
+              {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>}
             </div>
-
 
             {/* Dates */}
             {/* <div className="grid grid-cols-2 gap-4">
@@ -482,10 +466,11 @@ export default function AddPackageForm() {
                         type="button"
                         onClick={() => locArray.remove(i)}
                         disabled={locArray.fields.length === 1}
-                        className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${locArray.fields.length === 1
-                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                          : 'bg-red-50 text-red-600 hover:bg-red-100'
-                          }`}
+                        className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${
+                          locArray.fields.length === 1
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-red-50 text-red-600 hover:bg-red-100'
+                        }`}
                       >
                         Remove Location
                       </button>
@@ -494,7 +479,6 @@ export default function AddPackageForm() {
                 ))}
               </div>
             </div>
-
 
             {/* Included Section */}
             <div className="border border-gray-200 rounded-lg p-5 bg-gray-50 mb-6 shadow-sm">
@@ -526,10 +510,11 @@ export default function AddPackageForm() {
                         )
                       }
                       disabled={watch('included')?.length === 1}
-                      className={`px-2 py-1 rounded-lg text-sm transition ${watch('included')?.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`px-2 py-1 rounded-lg text-sm transition ${
+                        watch('included')?.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       ❌
                     </button>
@@ -575,10 +560,11 @@ export default function AddPackageForm() {
                         )
                       }
                       disabled={watch('notIncluded')?.length === 1}
-                      className={`px-2 py-1 rounded-lg text-sm transition ${watch('notIncluded')?.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`px-2 py-1 rounded-lg text-sm transition ${
+                        watch('notIncluded')?.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       ❌
                     </button>
@@ -623,10 +609,11 @@ export default function AddPackageForm() {
                       type="button"
                       onClick={() => itineraryArray.remove(i)}
                       disabled={itineraryArray.fields.length === 1}
-                      className={`text-sm font-medium px-2 py-1 rounded-lg transition ${itineraryArray.fields.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`text-sm font-medium px-2 py-1 rounded-lg transition ${
+                        itineraryArray.fields.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       Delete Day
                     </button>
@@ -634,7 +621,9 @@ export default function AddPackageForm() {
 
                   {/* Day Title */}
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Day Title</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Day Title
+                    </label>
                     <input
                       {...register(`itinerary.${i}.title`)}
                       placeholder="Enter day title"
@@ -754,10 +743,11 @@ export default function AddPackageForm() {
                                   )
                                 }
                                 disabled={field.value.length === 1}
-                                className={`mt-1 md:mt-6 px-2 py-1 rounded-lg text-sm transition ${field.value.length === 1
-                                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                  : 'bg-red-50 text-red-600 hover:bg-red-100'
-                                  }`}
+                                className={`mt-1 md:mt-6 px-2 py-1 rounded-lg text-sm transition ${
+                                  field.value.length === 1
+                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                    : 'bg-red-50 text-red-600 hover:bg-red-100'
+                                }`}
                               >
                                 ❌
                               </button>
@@ -784,7 +774,6 @@ export default function AddPackageForm() {
                 </div>
               ))}
             </div>
-
 
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-lg font-semibold text-gray-800">Offer Details (optional)</h3>
@@ -842,7 +831,6 @@ export default function AddPackageForm() {
                       <option value="percentage">Percentage</option>
                       <option value="flat">Flat</option>
                     </select>
-
                   </div>
 
                   {/* Value */}
@@ -881,7 +869,10 @@ export default function AddPackageForm() {
                     id="offerActive"
                     className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  <label htmlFor="offerActive" className="text-sm text-gray-700 font-medium select-none">
+                  <label
+                    htmlFor="offerActive"
+                    className="text-sm text-gray-700 font-medium select-none"
+                  >
                     Active Offer
                   </label>
                 </div>
@@ -892,7 +883,6 @@ export default function AddPackageForm() {
                 )}
               </div>
             )}
-
 
             <div>
               <Label>Upload Images (Max 4)</Label>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handelChangePassword } from '@/services/auth/authService';
- import { useAppSnackbar } from '@/hooks/useSnackbar';
+import { useAppSnackbar } from '@/hooks/useSnackbar';
 
 const NewPasswordPage = () => {
   const navigate = useNavigate();
-    const snackbar = useAppSnackbar();
-  
+  const snackbar = useAppSnackbar();
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [formErrors, setFormErrors] = useState<{ password?: string; confirm?: string }>({});

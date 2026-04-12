@@ -21,10 +21,10 @@ const AdminNavbar = ({ onSidebarToggle, title }: AdminNavbarProps) => {
   const adminId = useSelector((state: RootState) => state.adminAuth.admin?._id);
   const notificationUnread = useSelector((state: RootState) => state.notifications.unreadCount);
   const totalChatUnread = useTotalUnreadCount(EnumUserRole.ADMIN);
-  console.log(notificationUnread, 'notifica');
+  //console.log(notificationUnread, 'notifica');
 
   // const totalChatUnread = useTotalUnreadCount(user?._id!);
-  console.log(totalChatUnread,'totalChatUnread');
+  //console.log(totalChatUnread, 'totalChatUnread');
   const handleLogout = async () => {
     try {
       await handleAdminLogout();

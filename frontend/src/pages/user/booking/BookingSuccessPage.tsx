@@ -39,30 +39,23 @@ const BookingSuccessPage = () => {
 
   return (
     <div className="bg-orange-50 min-h-screen">
-
       {/* HERO */}
       <div className="bg-orange text-white py-16 text-center rounded-b-[3rem] shadow-lg">
         <PlaneTakeoff className="w-16 h-16 mx-auto mb-3 animate-bounce" />
         <CheckCircle2 className="w-14 h-14 mx-auto mb-3 text-green-200" />
 
         <h1 className="text-3xl font-bold">Booking Confirmed!</h1>
-        <p className="text-orange-50 mt-2">
-          Your journey is ready ✈️
-        </p>
+        <p className="text-orange-50 mt-2">Your journey is ready ✈️</p>
       </div>
 
       {/* CONTENT */}
       <div className="max-w-3xl mx-auto px-4 py-10">
-
         <div className="text-center mb-6">
-          <h2 className="text-xl font-semibold text-gray-800">
-            {booking.packageId.title}
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-800">{booking.packageId.title}</h2>
         </div>
 
         {/* CARD */}
         <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4">
-
           <div className="flex justify-between">
             <span>Booking ID</span>
             <span className="font-semibold">{booking.bookingCode}</span>
@@ -70,9 +63,7 @@ const BookingSuccessPage = () => {
 
           <div className="flex justify-between">
             <span>Travel Date</span>
-            <span>
-              {new Date(booking.bookedAt!).toLocaleDateString('en-IN')}
-            </span>
+            <span>{new Date(booking.bookedAt!).toLocaleDateString('en-IN')}</span>
           </div>
 
           <div className="flex justify-between">
@@ -94,7 +85,6 @@ const BookingSuccessPage = () => {
             <span>Paid</span>
             <span>₹{booking.amountPaid}</span>
           </div>
-
         </div>
 
         {/* ACTIONS */}

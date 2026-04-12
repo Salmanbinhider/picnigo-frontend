@@ -31,14 +31,14 @@ const AddressTab = ({ user, loading, refetchUser }: Props) => {
   });
 
   const onSubmit = async (data: AddressFormSchema) => {
-    console.log('d');
+    //console.log('d');
     try {
       const response = await updateUserAddress(data);
- 
-       toast.success(response.message);
-       refetchUser()
+
+      toast.success(response.message);
+      refetchUser();
     } catch (error: any) {
-      console.log(error, 'error');
+      //console.log(error, 'error');
       toast.error(error?.response?.data?.message || 'Failed to update coupon');
     }
   };

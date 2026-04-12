@@ -62,7 +62,7 @@ const ReportList = () => {
         const response = await handleListReport(currentPage, limit, filter);
         setReports(response.reports);
         setTotalPages(response.pagination.totalPages);
-        console.log(response, 'report response');
+        //console.log(response, 'report response');
       } catch (error: any) {
         toast.error(error?.response?.data?.message || 'Failed to fetch reports');
       }

@@ -1,4 +1,4 @@
-import type { BookingFormSchema,TravelerBookingFormSchema } from '@/schemas/BookingSchema';
+import type { BookingFormSchema, TravelerBookingFormSchema } from '@/schemas/BookingSchema';
 import api from '@/lib/axios/api';
 import type { IBooking } from '@/types/IBooking';
 
@@ -14,8 +14,8 @@ export const getBookingById = async (id: string) => {
 
 export const cancelBooking = async (id: string, reason: string) => {
   const response = await api.patch(`/user/booking/cancel/${id}`, { reason });
-  console.log(response,'booking cancel response');
-  
+  //console.log(response, 'booking cancel response');
+
   return response.data.data;
 };
 
@@ -26,7 +26,7 @@ export const applyCoupon = async (code: string, totalAmount: number) => {
 
 export const createBookingWithWalletPayment = async (data: BookingFormSchema) => {
   const response = await api.post('/user/booking/wallet', data);
-  console.log(response, 'create booking walet');
+  //console.log(response, 'create booking walet');
   return response.data;
 };
 export const createBookingWithOnlinePayment = async (data: BookingFormSchema) => {
@@ -34,20 +34,16 @@ export const createBookingWithOnlinePayment = async (data: BookingFormSchema) =>
   return response.data;
 };
 
-
 export const addTravellerBookingWithWalletPayment = async (data: TravelerBookingFormSchema) => {
   const response = await api.post('/user/booking/add-traveller/wallet', data);
-  console.log(response, 'create booking walet');
+  //console.log(response, 'create booking walet');
   return response.data;
 };
-
 
 export const addTravellerBookingWithOnlinePayment = async (data: TravelerBookingFormSchema) => {
   const response = await api.post('/user/booking/add-traveller/online', data);
   return response.data;
 };
-
-
 
 export const verifyRazorpayPayment = async (data: {
   razorpay_order_id: string;
@@ -60,7 +56,7 @@ export const verifyRazorpayPayment = async (data: {
 
 export const retryBookingPayment = async (bookingId: string): Promise<IBooking> => {
   const response = await api.post(`/user/retry-payment/${bookingId}`);
-  console.log(response, 'retry');
+  //console.log(response, 'retry');
   return response.data;
 };
 
@@ -71,7 +67,7 @@ export const cancelUnpaidBooking = async (bookingId: string): Promise<{ message:
 
 export const downloadInvoice = async (bookingId: string) => {
   try {
-    console.log(bookingId);
+    //console.log(bookingId);
     const response = await api.get(`/user/booking/invoice/${bookingId}/download`, {
       responseType: 'blob',
     });

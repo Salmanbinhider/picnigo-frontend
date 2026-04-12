@@ -64,35 +64,25 @@ const UserBookingPage = () => {
         </CardHeader>
 
         <CardContent>
-
           {/* ✅ MOBILE VIEW (Card Layout) */}
           <div className="md:hidden space-y-4">
             {bookings.length === 0 ? (
               <div className="text-center py-6">No bookings found.</div>
             ) : (
               bookings.map((booking) => (
-                <div
-                  key={booking._id}
-                  className="border rounded-lg p-4 shadow-sm space-y-3"
-                >
+                <div key={booking._id} className="border rounded-lg p-4 shadow-sm space-y-3">
                   <div className="flex gap-3">
                     <img
                       src={
-                        booking.packageImage?.url?.replace(
-                          '/upload/',
-                          '/upload/f_auto,q_auto/'
-                        ) || '/placeholder.jpg'
+                        booking.packageImage?.url?.replace('/upload/', '/upload/f_auto,q_auto/') ||
+                        '/placeholder.jpg'
                       }
                       alt={booking.packageId.title}
                       className="h-20 w-28 object-cover rounded"
                     />
                     <div className="flex-1">
-                      <div className="font-semibold text-sm">
-                        {booking.packageId.title}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        ₹{booking.amountPaid}
-                      </div>
+                      <div className="font-semibold text-sm">{booking.packageId.title}</div>
+                      <div className="text-xs text-gray-500 mt-1">₹{booking.amountPaid}</div>
                     </div>
                   </div>
 
@@ -102,8 +92,8 @@ const UserBookingPage = () => {
                         booking.bookingStatus === 'confirmed'
                           ? 'text-green-600'
                           : booking.bookingStatus === 'pending'
-                          ? 'text-yellow-600'
-                          : 'text-red-600'
+                            ? 'text-yellow-600'
+                            : 'text-red-600'
                       }`}
                     >
                       {booking.bookingStatus}
@@ -124,9 +114,7 @@ const UserBookingPage = () => {
                     size="sm"
                     variant="outline"
                     className="w-full"
-                    onClick={() =>
-                      navigate(`/account/my-bookings/${booking._id}`)
-                    }
+                    onClick={() => navigate(`/account/my-bookings/${booking._id}`)}
                   >
                     <Edit className="w-4 h-4 mr-2" /> View
                   </Button>
@@ -170,9 +158,7 @@ const UserBookingPage = () => {
                             alt={booking.packageId.title}
                             className="h-16 w-24 object-cover rounded"
                           />
-                          <div className="font-semibold">
-                            {booking.packageId.title}
-                          </div>
+                          <div className="font-semibold">{booking.packageId.title}</div>
                         </div>
                       </TableCell>
 
@@ -184,8 +170,8 @@ const UserBookingPage = () => {
                             booking.bookingStatus === 'confirmed'
                               ? 'text-green-600'
                               : booking.bookingStatus === 'pending'
-                              ? 'text-yellow-600'
-                              : 'text-red-600'
+                                ? 'text-yellow-600'
+                                : 'text-red-600'
                           }`}
                         >
                           {booking.bookingStatus}
@@ -195,14 +181,11 @@ const UserBookingPage = () => {
                       <TableCell>
                         {booking?.travelDate && (
                           <span>
-                            {new Date(booking.travelDate).toLocaleDateString(
-                              'en-IN',
-                              {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric',
-                              }
-                            )}
+                            {new Date(booking.travelDate).toLocaleDateString('en-IN', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                            })}
                           </span>
                         )}
                       </TableCell>
@@ -211,9 +194,7 @@ const UserBookingPage = () => {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() =>
-                            navigate(`/account/my-bookings/${booking._id}`)
-                          }
+                          onClick={() => navigate(`/account/my-bookings/${booking._id}`)}
                         >
                           <Edit className="w-4 h-4 mr-2" /> View
                         </Button>
@@ -281,7 +262,7 @@ export default UserBookingPage;
 //       try {
 //         setLoading(true);
 //         const response = await getUserBooking(currentPage, limit);
-//         //  console.log(response,'jj')
+//         //  //console.log(response,'jj')
 //         setBookings(response.bookings);
 //         setTotalPages(response.totalPages);
 //       } catch (error) {
@@ -293,7 +274,7 @@ export default UserBookingPage;
 
 //     fetchBookings();
 //   }, [currentPage]);
-//   console.log(bookings, totalPages);
+//   //console.log(bookings, totalPages);
 
 //   return (
 //     <div className="p-4 space-y-6">
@@ -380,7 +361,7 @@ export default UserBookingPage;
 //                     </TableRow>
 //                   ))
 //                 )}
-              
+
 //               </TableBody>
 //             </Table>
 //               <div className="flex justify-center items-center gap-2 mt-6 flex-wrap">

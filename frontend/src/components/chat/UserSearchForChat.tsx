@@ -270,10 +270,7 @@ interface Props {
   onRoomCreated?: (room: IChatRoom) => void;
 }
 
-export default function UserSearchForChat({
-  onUserSelected,
-  onRoomCreated,
-}: Props) {
+export default function UserSearchForChat({ onUserSelected, onRoomCreated }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState<IUser[]>([]);
   const [loading, setLoading] = useState(false);
@@ -331,7 +328,6 @@ export default function UserSearchForChat({
 
   return (
     <div className="w-full h-full bg-white flex flex-col">
-
       {/* 🔍 Search Bar */}
       <div className="p-3 border-b">
         <div className="flex items-center bg-gray-100 px-3 py-2 rounded-md">
@@ -361,11 +357,7 @@ export default function UserSearchForChat({
       </div>
 
       {/* ⏳ Loading */}
-      {loading && (
-        <p className="text-center text-gray-400 text-sm mt-3">
-          Searching...
-        </p>
-      )}
+      {loading && <p className="text-center text-gray-400 text-sm mt-3">Searching...</p>}
 
       {/* 👥 User List */}
       <div className="flex-1 overflow-y-auto">
@@ -383,12 +375,8 @@ export default function UserSearchForChat({
               />
 
               <div className="flex-1">
-                <p className="text-sm font-medium text-gray-900">
-                  {user.username}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {user.fullName || 'No name'}
-                </p>
+                <p className="text-sm font-medium text-gray-900">{user.username}</p>
+                <p className="text-xs text-gray-500">{user.fullName || 'No name'}</p>
               </div>
 
               {user.role === 'admin' && (
@@ -399,18 +387,12 @@ export default function UserSearchForChat({
             </div>
           ))
         ) : searchQuery && !loading ? (
-          <p className="text-center text-gray-400 text-sm mt-4">
-            No users found
-          </p>
+          <p className="text-center text-gray-400 text-sm mt-4">No users found</p>
         ) : null}
       </div>
 
       {/* ⚡ Creating Chat */}
-      {creatingRoom && (
-        <p className="text-center text-blue-500 text-sm py-2">
-          Creating chat...
-        </p>
-      )}
+      {creatingRoom && <p className="text-center text-blue-500 text-sm py-2">Creating chat...</p>}
     </div>
   );
 }

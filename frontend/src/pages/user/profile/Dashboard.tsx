@@ -1,5 +1,5 @@
 import type { IUser } from '@/types/IUser';
-import { Mail, MapPin, Calendar, Lock, Globe, Share2, MessageCircle, UserCheck, } from 'lucide-react';
+import { Mail, MapPin, Lock, Globe, MessageCircle, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const Dashboard = ({ user, loading, refetchUser }: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const profilePic = user?.profileImage?.url
     ? user.profileImage.url.replace('/upload/', '/upload/f_webp,q_auto/')
     : '/profile-default.jpg';
@@ -73,7 +73,6 @@ const Dashboard = ({ user, loading, refetchUser }: Props) => {
             }}
           ></div>
 
-
           {/* Profile Image */}
           <div className="absolute inset-x-0 -bottom-16 flex justify-center">
             <div className="relative group">
@@ -123,10 +122,11 @@ const Dashboard = ({ user, loading, refetchUser }: Props) => {
                   >
                     <Button
                       className={`px-6 py-2 rounded-full flex items-center gap-2 transition-all duration-300
-                      ${user?.isPrivate
+                      ${
+                        user?.isPrivate
                           ? 'bg-red-600 text-white hover:bg-red-700'
                           : 'bg-green-600 text-white hover:bg-green-700'
-                        }`}
+                      }`}
                     >
                       {user?.isPrivate ? (
                         <>
@@ -154,7 +154,6 @@ const Dashboard = ({ user, loading, refetchUser }: Props) => {
                     onClick={() => navigate('/chat')}
                     className="border-orange-200 text-orange-600 hover:bg-orange-50 px-6 py-2 rounded-full transition-all duration-300"
                   >
-
                     <MessageCircle className="w-4 h-4 mr-2" /> Message
                   </Button>
                 </div>
@@ -225,20 +224,16 @@ const Dashboard = ({ user, loading, refetchUser }: Props) => {
 
           <Card className="bg-white rounded-2xl shadow-lg border-0 hover:shadow-xl transition-all duration-300">
             <CardContent className="p-6 text-center">
-
               {/* ICON FIRST */}
               <UserCheck className="w-8 h-8 text-green-600 mx-auto mb-4" />
 
               {/* TITLE */}
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                Status
-              </h4>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Status</h4>
 
               {/* BADGE */}
               <Badge className="bg-green-100 text-green-800 px-3 py-1 rounded-full hover:bg-green-200">
                 Active
               </Badge>
-
             </CardContent>
           </Card>
         </div>

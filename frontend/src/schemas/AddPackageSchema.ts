@@ -71,7 +71,6 @@
 //     }
 //   });
 
-
 // // Activity schema
 // export const activitySchema = z
 //   .object({
@@ -213,17 +212,41 @@ export const offerSchema = z
   .superRefine((data, ctx) => {
     if (!data.isActive) return;
     if (!data.name?.trim())
-      ctx.addIssue({ code: 'custom', message: 'Offer name is required when active', path: ['name'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Offer name is required when active',
+        path: ['name'],
+      });
     if (!data.type)
-      ctx.addIssue({ code: 'custom', message: 'Offer type is required when active', path: ['type'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Offer type is required when active',
+        path: ['type'],
+      });
     if (data.value === undefined || data.value <= 0)
-      ctx.addIssue({ code: 'custom', message: 'Offer value must be greater than 0', path: ['value'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Offer value must be greater than 0',
+        path: ['value'],
+      });
     if (data.type === 'percentage' && data.value! > 100)
-      ctx.addIssue({ code: 'custom', message: 'Percentage offer value cannot exceed 100', path: ['value'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Percentage offer value cannot exceed 100',
+        path: ['value'],
+      });
     if (!data.validUntil)
-      ctx.addIssue({ code: 'custom', message: 'Offer valid until date is required', path: ['validUntil'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Offer valid until date is required',
+        path: ['validUntil'],
+      });
     else if (new Date(data.validUntil) <= new Date())
-      ctx.addIssue({ code: 'custom', message: 'Offer expiry date must be in the future', path: ['validUntil'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Offer expiry date must be in the future',
+        path: ['validUntil'],
+      });
   });
 
 // ---------------- ACTIVITY ----------------
@@ -258,19 +281,23 @@ const packageBaseSchema = z.object({
   durationNights: z.coerce.number().min(0, 'Duration (nights) is required'),
   category: z.array(z.string().trim()).min(1, 'At least one category is required'),
   startPoint: z.string().trim().min(3, 'Starting point must be at least 3 characters'),
-  location: z.array(
-    z.object({
-      name: z.string().trim().min(2, 'Location name must be at least 2 characters'),
-      lat: z.string().regex(latRegex, 'Latitude must be between -90 and 90'),
-      lng: z.string().regex(lngRegex, 'Longitude must be between -180 and 180'),
-    })
-  ).min(1, 'At least one location is required'),
+  location: z
+    .array(
+      z.object({
+        name: z.string().trim().min(2, 'Location name must be at least 2 characters'),
+        lat: z.string().regex(latRegex, 'Latitude must be between -90 and 90'),
+        lng: z.string().regex(lngRegex, 'Longitude must be between -180 and 180'),
+      })
+    )
+    .min(1, 'At least one location is required'),
   included: z.array(z.string().trim().min(1, 'Included item cannot be empty')),
   notIncluded: z.array(z.string().trim().min(1, 'Not Included item cannot be empty')),
   itinerary: z.array(itineraryDaySchema),
   images: z.array(z.instanceof(File)).min(1, 'At least 1 image is required'),
   offer: offerSchema.optional(),
-  packageType: z.enum(['normal', 'custom', 'group'], { required_error: 'Package type is required' }),
+  packageType: z.enum(['normal', 'custom', 'group'], {
+    required_error: 'Package type is required',
+  }),
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   departureDates: z.string().optional(),
@@ -280,22 +307,36 @@ const packageBaseSchema = z.object({
 
 // ---------------- CONDITIONAL VALIDATION ----------------
 export const addPackageSchema = packageBaseSchema.superRefine((data, ctx) => {
- 
   // Validate based on package type
   if (data.packageType === 'normal') {
     if (!data.startDate)
-      ctx.addIssue({ code: 'custom', message: 'Start date is required for normal packages', path: ['startDate'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Start date is required for normal packages',
+        path: ['startDate'],
+      });
     if (!data.endDate)
-      ctx.addIssue({ code: 'custom', message: 'End date is required for normal packages', path: ['endDate'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'End date is required for normal packages',
+        path: ['endDate'],
+      });
     if (data.startDate && data.endDate && new Date(data.endDate) < new Date(data.startDate))
-      ctx.addIssue({ code: 'custom', message: 'End date must be after start date', path: ['endDate'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'End date must be after start date',
+        path: ['endDate'],
+      });
   }
 
   if (data.ageOfAdult <= data.ageOfChild) {
-    ctx.addIssue({ code: 'custom', message: 'adult age must be greater than child age', path: ['ageOfAdult'] });
-
+    ctx.addIssue({
+      code: 'custom',
+      message: 'adult age must be greater than child age',
+      path: ['ageOfAdult'],
+    });
   }
-  
+
   if (data.packageType === 'custom') {
     if (!data.departureDates)
       ctx.addIssue({
@@ -325,7 +366,6 @@ export const addPackageSchema = packageBaseSchema.superRefine((data, ctx) => {
         message: 'Group size must be greater than 0',
         path: ['groupSize'],
       });
-
     else if (new Date(data.departureDates!) < new Date())
       ctx.addIssue({
         code: 'custom',
@@ -336,19 +376,30 @@ export const addPackageSchema = packageBaseSchema.superRefine((data, ctx) => {
 
   // Common validations
   if (data.itinerary.length !== data.durationDays)
-    ctx.addIssue({ code: 'custom', message: `Itinerary must have exactly ${data.durationDays} day(s)`, path: ['itinerary'] });
+    ctx.addIssue({
+      code: 'custom',
+      message: `Itinerary must have exactly ${data.durationDays} day(s)`,
+      path: ['itinerary'],
+    });
 
   if (data.durationNights > data.durationDays)
-    ctx.addIssue({ code: 'custom', message: 'Nights cannot be more than days', path: ['durationNights'] });
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Nights cannot be more than days',
+      path: ['durationNights'],
+    });
 
   if (data.durationDays - data.durationNights > 1)
-    ctx.addIssue({ code: 'custom', message: 'Nights should be equal to or one less than days', path: ['durationNights'] });
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Nights should be equal to or one less than days',
+      path: ['durationNights'],
+    });
 });
 
 export type AddPackageFormSchema = z.infer<typeof addPackageSchema>;
 
 // ---------------- EDIT SCHEMA ----------------
-
 
 //  Edit Package Schema
 export const editPackageSchema = packageBaseSchema
@@ -357,69 +408,98 @@ export const editPackageSchema = packageBaseSchema
   })
   .superRefine((data, ctx) => {
     if (data.itinerary.length !== data.durationDays) {
-      ctx.addIssue({ code: 'custom', message: `Itinerary must have exactly ${data.durationDays} day(s)`, path: ['itinerary'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: `Itinerary must have exactly ${data.durationDays} day(s)`,
+        path: ['itinerary'],
+      });
     }
     if (data.durationNights > data.durationDays) {
-      ctx.addIssue({ code: 'custom', message: 'Nights cannot be more than days', path: ['durationNights'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Nights cannot be more than days',
+        path: ['durationNights'],
+      });
     }
     if (data.durationDays - data.durationNights > 1) {
-      ctx.addIssue({ code: 'custom', message: 'Nights should be equal to or one less than days', path: ['durationNights'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Nights should be equal to or one less than days',
+        path: ['durationNights'],
+      });
     }
     if (new Date(data?.endDate!) < new Date(data.startDate!)) {
-      ctx.addIssue({ code: 'custom', message: 'End date must be after start date', path: ['endDate'] });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'End date must be after start date',
+        path: ['endDate'],
+      });
     }
     if (data.packageType === 'normal') {
-    if (!data.startDate)
-      ctx.addIssue({ code: 'custom', message: 'Start date is required for normal packages', path: ['startDate'] });
-    if (!data.endDate)
-      ctx.addIssue({ code: 'custom', message: 'End date is required for normal packages', path: ['endDate'] });
-    if (data.startDate && data.endDate && new Date(data.endDate) < new Date(data.startDate))
-      ctx.addIssue({ code: 'custom', message: 'End date must be after start date', path: ['endDate'] });
-  }
+      if (!data.startDate)
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Start date is required for normal packages',
+          path: ['startDate'],
+        });
+      if (!data.endDate)
+        ctx.addIssue({
+          code: 'custom',
+          message: 'End date is required for normal packages',
+          path: ['endDate'],
+        });
+      if (data.startDate && data.endDate && new Date(data.endDate) < new Date(data.startDate))
+        ctx.addIssue({
+          code: 'custom',
+          message: 'End date must be after start date',
+          path: ['endDate'],
+        });
+    }
 
-  if (data.ageOfAdult <= data.ageOfChild) {
-    ctx.addIssue({ code: 'custom', message: 'adult age must be greater than child age', path: ['ageOfAdult'] });
-
-  }
-  
-  if (data.packageType === 'custom') {
-    if (!data.departureDates)
+    if (data.ageOfAdult <= data.ageOfChild) {
       ctx.addIssue({
         code: 'custom',
-        message: 'Departure date is required for custom packages',
-        path: ['departureDates'],
+        message: 'adult age must be greater than child age',
+        path: ['ageOfAdult'],
       });
-    else if (new Date(data.departureDates) < new Date())
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Departure date must be in the future',
-        path: ['departureDates'],
-      });
-  }
+    }
 
-  if (data.packageType === 'group') {
-    if (!data.departureDates)
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Departure dates are required for group packages',
-        path: ['departureDates'],
-      });
+    if (data.packageType === 'custom') {
+      if (!data.departureDates)
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Departure date is required for custom packages',
+          path: ['departureDates'],
+        });
+      else if (new Date(data.departureDates) < new Date())
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Departure date must be in the future',
+          path: ['departureDates'],
+        });
+    }
 
-    if (!data.groupSize || data.groupSize <= 0)
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Group size must be greater than 0',
-        path: ['groupSize'],
-      });
+    if (data.packageType === 'group') {
+      if (!data.departureDates)
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Departure dates are required for group packages',
+          path: ['departureDates'],
+        });
 
-    else if (new Date(data.departureDates!) < new Date())
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Departure date must be in the future',
-        path: ['departureDates'],
-      });
-  }
-
+      if (!data.groupSize || data.groupSize <= 0)
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Group size must be greater than 0',
+          path: ['groupSize'],
+        });
+      else if (new Date(data.departureDates!) < new Date())
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Departure date must be in the future',
+          path: ['departureDates'],
+        });
+    }
   });
 
 export type EditPackageFormSchema = z.infer<typeof editPackageSchema>;

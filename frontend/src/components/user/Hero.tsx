@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../Button';
-import { ArrowRight, Play, MapPin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { IBanner } from '../../types/homeTypes';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,8 +14,7 @@ const Hero = ({ banners }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Fallback if no banners
-  const fallbackImage = '/background.jpg'
-
+  const fallbackImage = '/background.jpg';
 
   // Auto-slide every 10 seconds
   useEffect(() => {
@@ -35,87 +34,79 @@ const Hero = ({ banners }: Props) => {
 
   return (
     <section className="relative w-full overflow-hidden">
-  
-  {/* Responsive height */}
-  <div className="relative h-[300px] sm:h-[450px] md:h-[600px]">
-
-    {/* Background Images */}
-    {banners.length > 0 ? (
-      banners.map((banner, index) => (
-        <img
-          key={index}
-          src={banner.image?.url || fallbackImage}
-          alt={banner.title}
-          onError={(e) => (e.currentTarget.src = fallbackImage)}
-          className={`
+      {/* Responsive height */}
+      <div className="relative h-[300px] sm:h-[450px] md:h-[600px]">
+        {/* Background Images */}
+        {banners.length > 0 ? (
+          banners.map((banner, index) => (
+            <img
+              key={index}
+              src={banner.image?.url || fallbackImage}
+              alt={banner.title}
+              onError={(e) => (e.currentTarget.src = fallbackImage)}
+              className={`
             absolute inset-0 w-full h-full 
             object-cover object-center 
             transition-opacity duration-1000
             ${index === currentIndex ? 'opacity-100' : 'opacity-0'}
           `}
-        />
-      ))
-    ) : (
-      <img
-        src={fallbackImage}
-        alt="fallback"
-        className="absolute inset-0 w-full h-full object-cover object-center"
-      />
-    )}
+            />
+          ))
+        ) : (
+          <img
+            src={fallbackImage}
+            alt="fallback"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+        )}
 
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-black/30" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30" />
 
-    {/* Content INSIDE image */}
-    <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 text-white">
+        {/* Content INSIDE image */}
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 text-white">
+          <div className="max-w-xs sm:max-w-xl md:max-w-2xl">
+            <h1 className="text-xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
+              {currentBanner.title || 'Discover Your Next'}
+              <span className="text-orange block">Adventure</span>
+            </h1>
 
-      <div className="max-w-xs sm:max-w-xl md:max-w-2xl">
+            <p className="text-xs sm:text-base md:text-lg mb-4 sm:mb-8 text-gray-200">
+              {currentBanner.description ||
+                'Explore breathtaking destinations and unforgettable journeys.'}
+            </p>
 
-        <h1 className="text-xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
-          {currentBanner.title || 'Discover Your Next'}
-          <span className="text-orange block">Adventure</span>
-        </h1>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-orange hover:bg-orange-dark text-white px-5 sm:px-8 py-2 sm:py-3 text-xs sm:text-base"
+                onClick={() => navigate('/packages')}
+              >
+                Explore
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </div>
+          </div>
 
-        <p className="text-xs sm:text-base md:text-lg mb-4 sm:mb-8 text-gray-200">
-          {currentBanner.description ||
-            'Explore breathtaking destinations and unforgettable journeys.'}
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center">
-          <Button
-            size="lg"
-            className="bg-orange hover:bg-orange-dark text-white px-5 sm:px-8 py-2 sm:py-3 text-xs sm:text-base"
-            onClick={() => navigate('/packages')}
-          >
-            Explore
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </Button>
-
-          
+          {/* Dots */}
+          {banners.length > 1 && (
+            <div className="absolute bottom-3 sm:bottom-6 flex gap-2">
+              {banners.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
+                    i === currentIndex ? 'bg-orange scale-125' : 'bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Dots */}
-      {banners.length > 1 && (
-        <div className="absolute bottom-3 sm:bottom-6 flex gap-2">
-          {banners.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
-                i === currentIndex
-                  ? 'bg-orange scale-125'
-                  : 'bg-white/50'
-              }`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
-</section>
+    </section>
     // <section className="relative h-[600px] w-full overflow-hidden">
-       
+
     //   <div className="absolute inset-0">
     //     {banners.length > 0 ? (
     //       banners.map((banner, index) => (

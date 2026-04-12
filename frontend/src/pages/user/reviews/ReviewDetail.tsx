@@ -21,7 +21,7 @@ const ReviewDetail = () => {
       if (!reviewId) return;
       try {
         const response = await handleReviewDetail(reviewId);
-        console.log(response, 'res');
+        //console.log(response, 'res');
         setReview(response.review);
       } catch {
         toast.error('Failed to fetch review');
@@ -31,7 +31,7 @@ const ReviewDetail = () => {
   }, []);
 
   const profileImage = user?.profileImage?.url || '/profile-default.jpg';
-  console.log(profileImage, 'profile img');
+  //console.log(profileImage, 'profile img');
   const handleDelete = async () => {
     if (!reviewId) return;
     try {

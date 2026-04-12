@@ -24,7 +24,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }: { email: string; password: string }, { rejectWithValue }) => {
     try {
       const { user, accessToken } = await handleLogin(email, password);
-      
+
       return { user, accessToken };
     } catch (error: any) {
       const errorMessage = error?.response?.data?.message || error.message || 'Login failed';
@@ -37,7 +37,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, { rejectWithValue }) => {
   try {
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('user'); 
+    localStorage.removeItem('user');
     await handleLogout();
     return true;
   } catch (error: any) {
@@ -88,7 +88,7 @@ const userAuthSlice = createSlice({
           state.error = null;
 
           localStorage.setItem('accessToken', action.payload.accessToken);
-          //  console.log(action.payload.accessToken,'redux')
+          //  //console.log(action.payload.accessToken,'redux')
           localStorage.setItem('user', JSON.stringify(action.payload.user));
         }
       )
@@ -104,7 +104,7 @@ const userAuthSlice = createSlice({
         state.isAuthenticated = false;
         state.loading = false;
         state.error = null;
-        //console.log(state.accessToken,'redux')
+        ////console.log(state.accessToken,'redux')
 
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');

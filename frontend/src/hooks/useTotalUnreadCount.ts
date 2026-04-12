@@ -31,9 +31,9 @@ export function useTotalUnreadCount(role: EnumUserRole) {
       }
     };
 
-  //  if (role) {
-      fetchUnread();
-  //  }
+    //  if (role) {
+    fetchUnread();
+    //  }
   }, [dispatch, role]);
 
   return totalUnread;

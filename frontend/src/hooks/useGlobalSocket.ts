@@ -32,7 +32,7 @@
 // //       callId,
 // //       callType,
 // //     }: any) => {
-// //       console.log('Incoming call OFFER:', { from, offer, roomId, fromUserName, callId });
+// //       //console.log('Incoming call OFFER:', { from, offer, roomId, fromUserName, callId });
 // //       onIncomingCall?.(offer, from, roomId, fromUserName, fromUserAvatar, callId, callType);
 // //     };
 
@@ -76,10 +76,9 @@
 
 //     //  Handle new message globally
 //     const handleNewMessage = (message: IMessage) => {
-//       console.log('📩 Global new message received:', message);
+//       //console.log('📩 Global new message received:', message);
 
 //       //  Update specific chat room data
-     
 
 //       //  Increment global unread if it's not from this user
 //       if (message.senderId._id !== userId) {
@@ -99,7 +98,7 @@
 //       callId,
 //       callType,
 //     }: any) => {
-//       console.log(' Incoming call OFFER:', { from, offer, roomId });
+//       //console.log(' Incoming call OFFER:', { from, offer, roomId });
 //       onIncomingCall?.(offer, from, roomId, fromUserName, fromUserAvatar, callId, callType);
 //     };
 
@@ -117,10 +116,7 @@ import { useEffect } from 'react';
 import socket from '@/sockets/socket';
 import { SOCKET_EVENTS, SOCKET_WEBRTC_EVENTS } from '@/sockets/events';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  incrementTotalUnread,
-  updateRoomOnNewMessage,
-} from '@/redux/slices/chatRoomSlice';
+import { incrementTotalUnread, updateRoomOnNewMessage } from '@/redux/slices/chatRoomSlice';
 import type { IMessage } from '@/types/IMessage';
 import type { RootState } from '@/redux/store';
 
@@ -151,7 +147,7 @@ export function useGlobalSocket({ userId, onIncomingCall }: UseGlobalSocketProps
 
     //  Handle new message globally
     const handleNewMessage = (message: IMessage) => {
-      console.log(' Global new message received:', message);
+      //console.log(' Global new message received:', message);
 
       //  update that chat room’s data in Redux
       dispatch(
@@ -162,7 +158,6 @@ export function useGlobalSocket({ userId, onIncomingCall }: UseGlobalSocketProps
         })
       );
 
-     
       // - Message not sent by me
       // - User is NOT currently inside that room
       if (message.senderId._id !== userId && message.roomId !== activeRoomId) {
@@ -182,12 +177,11 @@ export function useGlobalSocket({ userId, onIncomingCall }: UseGlobalSocketProps
       callId,
       callType,
     }: any) => {
-      console.log(' Incoming call OFFER:', { from, offer, roomId });
+      //console.log(' Incoming call OFFER:', { from, offer, roomId });
       onIncomingCall?.(offer, from, roomId, fromUserName, fromUserAvatar, callId, callType);
     };
 
     socket.on(SOCKET_WEBRTC_EVENTS.OFFER, handleOffer);
-
 
     return () => {
       socket.emit(SOCKET_EVENTS.USER_DISCONNECTED, { userId });

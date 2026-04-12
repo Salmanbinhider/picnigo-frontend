@@ -47,7 +47,7 @@ export default function TravelAdminDashboard() {
       setSummary(summaryRes.data);
       setTopPackages(packagesRes.data);
       setTopCategories(categoriesRes.data);
-      console.log(chartRes, 'res');
+      //console.log(chartRes, 'res');
       setChartData(chartRes.data);
     } catch (err: any) {
       console.error(err);
@@ -57,12 +57,12 @@ export default function TravelAdminDashboard() {
       setLoading(false);
     }
   }, [params]);
-  console.log(summary, 'sum');
+  //console.log(summary, 'sum');
   //  Fetch only when params change
   useEffect(() => {
     fetchDashboardData();
   }, [fetchDashboardData]);
-  console.log(chartData, 'chart');
+  //console.log(chartData, 'chart');
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8">
       {/* ---------- Header ---------- */}

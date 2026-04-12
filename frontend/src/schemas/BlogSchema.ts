@@ -113,9 +113,8 @@ export const blogSchema = z.object({
   coverImage: z
     .array(imageFileSchema)
     //.refine((file) => file instanceof File, 'Cover image is required').optional(),
-    .min(1, 'Image is required')
-    ,
-   sections: z
+    .min(1, 'Image is required'),
+  sections: z
     .array(
       z.object({
         heading: z.string().min(3, 'Section title must be at least 3 characters'),
@@ -132,14 +131,11 @@ export const blogSchema = z.object({
 
 export type BlogFormSchema = z.infer<typeof blogSchema>;
 
-
-
 // //  Edit Package Schema
 // export const EditBlogSchema = blogSchema
 //   .extend({
 //     coverImage: z.array(z.instanceof(File)).optional(),
 //   })
-
 
 export const EditBlogSchema = blogSchema.extend({
   // optional cover image (user may keep the existing one)
@@ -166,10 +162,7 @@ export const EditBlogSchema = blogSchema.extend({
           .array(imageFileSchema)
           .optional()
           .default([])
-          .refine(
-            (val) => Array.isArray(val),
-            'Invalid image input'
-          ),
+          .refine((val) => Array.isArray(val), 'Invalid image input'),
       })
     )
     .optional(),

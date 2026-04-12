@@ -70,7 +70,7 @@ const PackageList = () => {
 
         const res = await fetchPackagesData(currentPage, limit, filters);
 
-        console.log('Pagination response', res);
+        //console.log('Pagination response', res);
         setPackages(res.data);
         setTotalPages(res.pagination.totalPages);
       } catch (error) {
@@ -79,7 +79,7 @@ const PackageList = () => {
     };
     fetchPackages();
   }, [debouncedSearch, searchParams, currentPage]);
-  console.log(packages);
+  //console.log(packages);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
@@ -120,7 +120,7 @@ const PackageList = () => {
     setEndDate('');
     setSort('');
     setRating('');
-    setCustomFilter('')
+    setCustomFilter('');
     setSearchParams({ page: '1' });
   };
 
@@ -176,7 +176,6 @@ const PackageList = () => {
             { value: 'asc', label: 'Newest' },
             { value: 'desc', label: 'Oldest' },
           ]}
-
           customOption={[
             { value: 'all', label: 'All Packages' },
             { value: 'normal', label: 'Normal Packages' },
@@ -257,52 +256,51 @@ const PackageList = () => {
                   </TableCell>
 
                   <TableCell className="flex gap-2 items-center">
-  <Button
-    onClick={() => navigate(`/admin/package/edit/${pkg._id}`)}
-    className="border-orange text-orange"
-    variant="outline"
-    size="sm"
-  >
-    <Edit className="h-4 w-4" />
-  </Button>
+                    <Button
+                      onClick={() => navigate(`/admin/package/edit/${pkg._id}`)}
+                      className="border-orange text-orange"
+                      variant="outline"
+                      size="sm"
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
 
-  <Button
-    onClick={() => navigate(`/admin/package/${pkg._id}`)}
-    className="border-blue-500 text-blue-500"
-    variant="outline"
-    size="sm"
-    title="View Details"
-  >
-    <Eye className="h-4 w-4" />
-  </Button>
+                    <Button
+                      onClick={() => navigate(`/admin/package/${pkg._id}`)}
+                      className="border-blue-500 text-blue-500"
+                      variant="outline"
+                      size="sm"
+                      title="View Details"
+                    >
+                      <Eye className="h-4 w-4" />
+                    </Button>
 
-  {pkg.isBlocked ? (
-    <ConfirmDialog
-      title="Unblock this package?"
-      actionLabel="Unblock"
-      onConfirm={() => handleToggleBlock(pkg._id!, false)}
-    >
-      <Button
-        size="sm"
-        variant="outline"
-        className="text-green-600 border-green-600"
-      >
-        Unblock
-      </Button>
-    </ConfirmDialog>
-  ) : (
-    <ConfirmDialog
-      title="Block this package?"
-      actionLabel="Block"
-      onConfirm={() => handleToggleBlock(pkg._id!, true)}
-    >
-      <Button size="sm" variant="destructive">
-        Block
-      </Button>
-    </ConfirmDialog>
-  )}
-</TableCell>
-
+                    {pkg.isBlocked ? (
+                      <ConfirmDialog
+                        title="Unblock this package?"
+                        actionLabel="Unblock"
+                        onConfirm={() => handleToggleBlock(pkg._id!, false)}
+                      >
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="text-green-600 border-green-600"
+                        >
+                          Unblock
+                        </Button>
+                      </ConfirmDialog>
+                    ) : (
+                      <ConfirmDialog
+                        title="Block this package?"
+                        actionLabel="Block"
+                        onConfirm={() => handleToggleBlock(pkg._id!, true)}
+                      >
+                        <Button size="sm" variant="destructive">
+                          Block
+                        </Button>
+                      </ConfirmDialog>
+                    )}
+                  </TableCell>
                 </TableRow>
               );
             })}

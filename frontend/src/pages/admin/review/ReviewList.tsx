@@ -63,15 +63,15 @@ const ReviewList = () => {
 
         setreviews(response.data);
         setTotalPages(response.pagination.totalPages);
-        //    console.log(response.pagination,'pagination')
+        //    //console.log(response.pagination,'pagination')
       } catch (error) {
-        console.log('failed to fetch review');
+        //console.log('failed to fetch review');
       }
     };
     fetchReviews();
   }, [debouncedSearch, searchParams, currentPage]);
 
-  console.log(reviews, 'revies');
+  //console.log(reviews, 'revies');
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     if (debouncedSearch) {

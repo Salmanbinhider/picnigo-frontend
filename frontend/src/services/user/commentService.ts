@@ -2,14 +2,14 @@ import api from '@/lib/axios/api';
 
 export const fetchComments = async (parentId: string, page: number, limit: number) => {
   const res = await api.get(`/user/comment/${parentId}?page=${page}&limit=${limit}`);
-  console.log(res, 'from service');
+  //console.log(res, 'from service');
 
   return res.data.data;
 };
 
 export const fetchReplies = async (commentId: string, page: number, limit: number) => {
   const res = await api.get(`/user/comment/${commentId}/replies?page=${page}&limit=${limit}`);
-  console.log(res, 'from service');
+  //console.log(res, 'from service');
 
   return res.data.data;
 };

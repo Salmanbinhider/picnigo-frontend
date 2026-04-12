@@ -2,8 +2,6 @@ import { useEffect, useCallback } from 'react';
 import socket from '@/sockets/socket';
 import { SOCKET_EVENTS } from '@/sockets/events';
 import type { IMessage, ISendMessage } from '@/types/IMessage';
-import { incrementTotalUnread,decrementTotalUnread } from '@/redux/slices/chatRoomSlice';
-import type{ AppDispatch } from '@/redux/store';
 import { useDispatch } from 'react-redux';
 
 interface UseChatSocketProps {
@@ -27,8 +25,7 @@ export const useChatSocket = ({
   onTyping,
   onStopTyping,
 }: UseChatSocketProps) => {
-
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   const handleMessageDeleted = useCallback(
     ({ messageId }: { messageId: string }) => onMessageDeleted(messageId),
@@ -39,7 +36,7 @@ export const useChatSocket = ({
     ({ messageId, userId }: { messageId: string; userId: string }) =>
       onMessageRead(messageId, userId),
     [onMessageRead]
-   );
+  );
 
   const handleTyping = useCallback(
     ({ userId, username }: { userId: string; username: string }) => {

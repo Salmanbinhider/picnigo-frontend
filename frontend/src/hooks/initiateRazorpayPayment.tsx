@@ -14,7 +14,7 @@ export const useRazorpayPayment = () => {
       contact: string;
     }
   ) => {
-    console.log('razorpayOrder', razorpayOrder);
+    //console.log('razorpayOrder', razorpayOrder);
 
     const options = {
       key: import.meta.env.VITE_RAZORPAY_ID_KEY,

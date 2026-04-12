@@ -6,12 +6,11 @@ export interface UserBasicInfo {
   isNewsletterSubscribed?: boolean;
 }
 
-
 export interface IUserReduxBasicInfo {
   _id: string;
   username?: string;
   email?: string;
- profileImage?: {
+  profileImage?: {
     url: string;
     public_id: string;
   };

@@ -49,7 +49,6 @@ const CouponList = ({ onSelect }: Props) => {
 
   return (
     <div className="p-4">
-
       {/* Title only for page mode */}
       {!onSelect && (
         <h2 className="text-3xl font-extrabold text-orange text-center mb-8">
@@ -68,21 +67,17 @@ const CouponList = ({ onSelect }: Props) => {
           {/* Coupon Grid OR Empty State */}
           {coupons.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-
               {/* 🎟️ Icon */}
               <div className="text-5xl mb-4">🎟️</div>
 
               {/* Heading */}
-              <h3 className="text-xl font-semibold text-gray-800">
-                No Coupons Available
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-800">No Coupons Available</h3>
 
               {/* Sub text */}
               <p className="text-sm text-gray-500 mt-2 max-w-md">
-                There are no active coupons available at the moment.
-                Please check back later for exciting offers and discounts!
+                There are no active coupons available at the moment. Please check back later for
+                exciting offers and discounts!
               </p>
-
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -129,9 +124,7 @@ const CouponList = ({ onSelect }: Props) => {
                       </p>
                       <p>
                         Max Discount:{' '}
-                        <span className="font-semibold">
-                          ₹{coupon.maxDiscountAmount || '-'}
-                        </span>
+                        <span className="font-semibold">₹{coupon.maxDiscountAmount || '-'}</span>
                       </p>
                       <p>
                         Valid Till:{' '}
@@ -150,9 +143,7 @@ const CouponList = ({ onSelect }: Props) => {
 
           {/* Pagination only for page mode */}
           {!onSelect && (
-            <div className="flex justify-center items-center gap-2 mt-8">
-              {paginationButtons}
-            </div>
+            <div className="flex justify-center items-center gap-2 mt-8">{paginationButtons}</div>
           )}
         </>
       )}

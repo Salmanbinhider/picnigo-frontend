@@ -8,7 +8,7 @@ export const getAllCustomPkg = async (page: number, limit: number, filter: IFilt
     ...filter,
   };
   const response = await api.get(`/admin/custom-package`, { params });
-  console.log(response.data, 'jjj');
+  //console.log(response.data, 'jjj');
 
   return response.data.data;
 };
@@ -20,7 +20,7 @@ export const fetchAllApprovedCustomPkg = async (page: number, limit: number, fil
     ...filter,
   };
   const response = await api.get(`/admin/custom-package/approved`, { params });
-  console.log(response.data, 'jjj');
+  //console.log(response.data, 'jjj');
 
   return response.data.data;
 };
@@ -44,7 +44,6 @@ export const deleteCustomPkg = async (packageId: string) => {
   return response.data;
 };
 
-
 //for admin to add pacakge for users
 
 export const addPackageForUser = async (formData: FormData) => {
@@ -56,7 +55,6 @@ export const addPackageForUser = async (formData: FormData) => {
   return response.data;
 };
 
- 
 //for admin to update pacakge
 export const updatePackageForUser = async (id: string, formData: FormData) => {
   try {

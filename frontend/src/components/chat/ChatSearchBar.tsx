@@ -20,10 +20,7 @@ export default function ChatSearchBar({ value, onChange }: Props) {
         />
 
         {value && (
-          <button
-            onClick={() => onChange('')}
-            className="text-gray-400 hover:text-gray-700"
-          >
+          <button onClick={() => onChange('')} className="text-gray-400 hover:text-gray-700">
             <X size={16} />
           </button>
         )}

@@ -30,7 +30,7 @@ const EditCustomPkgForm = () => {
       try {
         const response = await getCustomPkgById(id!);
         const pkg = response.data;
-        console.log(pkg, 'pkg');
+        //console.log(pkg, 'pkg');
         if (pkg) {
           // Prefill top-level fields
           setValue('destination', pkg.destination || '');
@@ -96,10 +96,16 @@ const EditCustomPkgForm = () => {
         <Input id="destination" {...register('destination')} placeholder="Enter destination" />
         {errors.destination && <p className="text-red-500 text-sm">{errors.destination.message}</p>}
       </div>
- <div>
+      <div>
         <Label htmlFor="destination">Starting Point</Label>
-        <Input id="startingPoint" {...register('startingPoint')} placeholder="Enter Starting Point" />
-        {errors.startingPoint && <p className="text-red-500 text-sm">{errors.startingPoint.message}</p>}
+        <Input
+          id="startingPoint"
+          {...register('startingPoint')}
+          placeholder="Enter Starting Point"
+        />
+        {errors.startingPoint && (
+          <p className="text-red-500 text-sm">{errors.startingPoint.message}</p>
+        )}
       </div>
       {/* Trip Type */}
       <div>

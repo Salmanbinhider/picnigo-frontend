@@ -45,11 +45,11 @@ const ReportForm = ({ status, id, onSuccess }: Props) => {
         reportedType: status,
       };
       const response = await createReport(id, report);
-      console.log(response, 'report');
+      //console.log(response, 'report');
       onSuccess();
       toast.success(response?.message || 'Report submitted successfully');
     } catch (error: any) {
-      console.log(error);
+      //console.log(error);
       toast.error(error?.response?.data?.message);
     }
   };

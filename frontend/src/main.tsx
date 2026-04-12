@@ -17,19 +17,15 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-
       <ErrorBoundary>
-
         <GoogleOAuthProvider clientId={clientId}>
           <AuthModalProvider>
-
             <Provider store={store}>
               <BrowserRouter>
                 <App />
               </BrowserRouter>
             </Provider>
           </AuthModalProvider>
-
         </GoogleOAuthProvider>
       </ErrorBoundary>
     </QueryClientProvider>

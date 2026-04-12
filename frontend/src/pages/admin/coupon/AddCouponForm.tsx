@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/Button';
 import { createCoupon } from '@/services/admin/couponService';
-import {type  CouponFormSchema, couponSchema } from '@/schemas/CouponFormSchema';
+import { couponSchema } from '@/schemas/CouponFormSchema';
 import { z } from 'zod';
 
 // Add a properly typed Label component
@@ -58,8 +58,8 @@ const AddCouponForm: React.FC = () => {
 
       <div>
         <Label htmlFor="code">Code</Label>
-        <Input    {...register('code')} />
-        
+        <Input {...register('code')} />
+
         {errors.code && <p className="text-red-500 text-sm">{errors.code.message}</p>}
       </div>
 

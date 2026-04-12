@@ -61,13 +61,13 @@ export default function ReviewPage() {
         const filters = cleanFilter(rawFilters);
         const response = await handlePackageReview(packageId, currentPage, limit, filters);
         const reviewRating = await handleReviewRating(packageId);
-        // console.log(reviewRating, 'review')
+        // //console.log(reviewRating, 'review')
         setRatingSummary(reviewRating);
-        console.log(response, 'll');
+        //console.log(response, 'll');
         setReviews(response.data);
         setTotalPages(response.pagination.totalPages);
       } catch (error) {
-        console.log('failed to fetch review');
+        //console.log('failed to fetch review');
       }
     };
     fetchReviews();
@@ -88,7 +88,7 @@ export default function ReviewPage() {
       return newParams;
     });
   };
-  console.log(reviews, 'reavew page');
+  //console.log(reviews, 'reavew page');
 
   const paginationButtons = usePaginationButtons({
     currentPage,

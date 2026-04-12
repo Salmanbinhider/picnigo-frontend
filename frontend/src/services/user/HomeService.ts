@@ -1,5 +1,5 @@
 import type { IBanner } from '@/types/homeTypes';
-import type{ IPackage } from '@/types/IPackage';
+import type { IPackage } from '@/types/IPackage';
 import api from '@/lib/axios/api';
 
 export const fetchHomeData = async (): Promise<{
@@ -14,4 +14,4 @@ export const fetchTopBookedPackages = async (limit: number = 10): Promise<IPacka
     params: { limit },
   });
   return res.data.packages;
-}
+};

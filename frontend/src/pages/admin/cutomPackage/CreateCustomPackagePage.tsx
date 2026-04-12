@@ -16,16 +16,11 @@ import { addPackageForUser } from '@/services/admin/customPkgService';
 import type { ICustomAdminPackage } from '@/types/ICustomPkg';
 import { getCustomPkgById } from '@/services/admin/customPkgService';
 
-
-
 const CreateCustomPackagePage = () => {
   const { customId } = useParams();
   const [customRequest, setCustomRequest] = useState<ICustomAdminPackage | null>(null);
-  const [createdFor, setCreatedFor] = useState<string>()
+  const [createdFor, setCreatedFor] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
-
-
-
 
   // Fetch package details
   const fetchPkg = async () => {
@@ -38,18 +33,18 @@ const CreateCustomPackagePage = () => {
       setCustomRequest(data);
       setCreatedFor(data.userId);
 
-      console.log(data, 'custom package data');
+      //console.log(data, 'custom package data');
 
       //  use response.data directly to reset form
       reset({
         price: data.budget || 0,
-        
+
         durationDays: data.days || 0,
         durationNights: data.nights || 0,
         included: [''],
-        ageOfAdult:18,
-        ageOfChild:5,
-        
+        ageOfAdult: 18,
+        ageOfChild: 5,
+
         notIncluded: [''],
         itinerary: [
           {
@@ -69,9 +64,7 @@ const CreateCustomPackagePage = () => {
         images: [],
         // description: data.additionalDetails || '',
         packageType: 'custom',
-        departureDates:data.startDate
-          ? new Date(data.startDate).toISOString().split("T")[0]
-          : "",
+        departureDates: data.startDate ? new Date(data.startDate).toISOString().split('T')[0] : '',
         offer: { type: 'percentage', value: 0, validUntil: '', isActive: false },
 
         startPoint: data.destination,
@@ -86,9 +79,10 @@ const CreateCustomPackagePage = () => {
     fetchPkg();
   }, [customId]);
 
-
   if (!customId) {
-    return <p className="text-red-500 text-center mt-10">No customId selected for custom package.</p>;
+    return (
+      <p className="text-red-500 text-center mt-10">No customId selected for custom package.</p>
+    );
   }
 
   // return <AddPackageForm isCustom={true} createdFor={userId} />;
@@ -173,17 +167,15 @@ const CreateCustomPackagePage = () => {
         }
       });
 
-
       form.append('isCustom', 'true');
       if (createdFor) {
         form.append('createdFor', createdFor);
-        form.append('customReqId', customRequest?.id!)
+        form.append('customReqId', customRequest?.id!);
       }
 
       await addPackageForUser(form);
       toast.success('Custom package created successfully');
       navigate(`/admin/custom-packages/${customId}`);
-
 
       reset();
       setCroppedImages([]);
@@ -204,7 +196,7 @@ const CreateCustomPackagePage = () => {
     });
   };
   useEffect(() => {
-    console.log('Form errors:', errors);
+    //console.log('Form errors:', errors);
   }, [errors]);
 
   return (
@@ -261,17 +253,13 @@ const CreateCustomPackagePage = () => {
               />
               {errors.category && <p className="text-red-500">{errors.category.message}</p>}
             </div>
-               <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700 border-b pb-2 mb-2">
-                Duration
-              </h3>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-gray-700 border-b pb-2 mb-2">Duration</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Days */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Days
-                  </label>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Days</label>
                   <input
                     type="number"
                     {...register('durationDays', { valueAsNumber: true })}
@@ -284,9 +272,7 @@ const CreateCustomPackagePage = () => {
 
                 {/* Nights */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Nights
-                  </label>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Nights</label>
                   <input
                     type="number"
                     {...register('durationNights', { valueAsNumber: true })}
@@ -307,23 +293,17 @@ const CreateCustomPackagePage = () => {
                 {...register('price', { valueAsNumber: true })}
                 className="border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 rounded-lg p-2 w-full"
               />
-              {errors.price && (
-                <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
-              )}
+              {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>}
             </div>
 
             {/* Price & duration */}
-             
 
             {/* Dates */}
             {watch('packageType') === 'custom' && (
               <div className="border rounded-lg p-4 mt-3 bg-gray-50">
-                <h3 className="font-semibold text-gray-700 mb-2">custom Package  </h3>
+                <h3 className="font-semibold text-gray-700 mb-2">custom Package </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-
-
                   <div>
                     <label>Departure Date</label>
                     <input
@@ -332,12 +312,10 @@ const CreateCustomPackagePage = () => {
                       placeholder="Enter departure DAte"
                       className="border p-2 w-full rounded"
                     />
-                    {errors.departureDates && <p className="text-red-500 text-sm">{errors.departureDates.message}</p>}
+                    {errors.departureDates && (
+                      <p className="text-red-500 text-sm">{errors.departureDates.message}</p>
+                    )}
                   </div>
-
-
-
-
                 </div>
               </div>
             )}
@@ -423,10 +401,11 @@ const CreateCustomPackagePage = () => {
                         type="button"
                         onClick={() => locArray.remove(i)}
                         disabled={locArray.fields.length === 1}
-                        className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${locArray.fields.length === 1
-                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                          : 'bg-red-50 text-red-600 hover:bg-red-100'
-                          }`}
+                        className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${
+                          locArray.fields.length === 1
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-red-50 text-red-600 hover:bg-red-100'
+                        }`}
                       >
                         Remove Location
                       </button>
@@ -435,7 +414,6 @@ const CreateCustomPackagePage = () => {
                 ))}
               </div>
             </div>
-
 
             {/* Included */}
             {/* Included Section */}
@@ -468,10 +446,11 @@ const CreateCustomPackagePage = () => {
                         )
                       }
                       disabled={watch('included')?.length === 1}
-                      className={`px-2 py-1 rounded-lg text-sm transition ${watch('included')?.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`px-2 py-1 rounded-lg text-sm transition ${
+                        watch('included')?.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       ❌
                     </button>
@@ -517,10 +496,11 @@ const CreateCustomPackagePage = () => {
                         )
                       }
                       disabled={watch('notIncluded')?.length === 1}
-                      className={`px-2 py-1 rounded-lg text-sm transition ${watch('notIncluded')?.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`px-2 py-1 rounded-lg text-sm transition ${
+                        watch('notIncluded')?.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       ❌
                     </button>
@@ -565,10 +545,11 @@ const CreateCustomPackagePage = () => {
                       type="button"
                       onClick={() => itineraryArray.remove(i)}
                       disabled={itineraryArray.fields.length === 1}
-                      className={`text-sm font-medium px-2 py-1 rounded-lg transition ${itineraryArray.fields.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`text-sm font-medium px-2 py-1 rounded-lg transition ${
+                        itineraryArray.fields.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       Delete Day
                     </button>
@@ -576,7 +557,9 @@ const CreateCustomPackagePage = () => {
 
                   {/* Day Title */}
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Day Title</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Day Title
+                    </label>
                     <input
                       {...register(`itinerary.${i}.title`)}
                       placeholder="Enter day title"
@@ -696,10 +679,11 @@ const CreateCustomPackagePage = () => {
                                   )
                                 }
                                 disabled={field.value.length === 1}
-                                className={`mt-1 md:mt-6 px-2 py-1 rounded-lg text-sm transition ${field.value.length === 1
-                                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                  : 'bg-red-50 text-red-600 hover:bg-red-100'
-                                  }`}
+                                className={`mt-1 md:mt-6 px-2 py-1 rounded-lg text-sm transition ${
+                                  field.value.length === 1
+                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                    : 'bg-red-50 text-red-600 hover:bg-red-100'
+                                }`}
                               >
                                 ❌
                               </button>
@@ -772,9 +756,7 @@ const CreateCustomPackagePage = () => {
       </div>
     </>
   );
-}
-
-
+};
 
 export default CreateCustomPackagePage;
 

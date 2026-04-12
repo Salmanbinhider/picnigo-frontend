@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Plus, ArrowLeft, ArrowBigLeft } from 'lucide-react';
+import { X, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatFilter from './ChatFilter';
 import UserSearchForChat from './UserSearchForChat';
@@ -31,10 +31,7 @@ export const ChatListHeader = ({
 
         <div className="flex items-center space-x-2">
           {showToggle && onToggleSidebar && (
-            <button
-              onClick={onToggleSidebar}
-              className="p-2 hover:bg-blue-700 rounded-full"
-            >
+            <button onClick={onToggleSidebar} className="p-2 hover:bg-blue-700 rounded-full">
               <X className="w-5 h-5" />
             </button>
           )}
@@ -94,24 +91,24 @@ export const ChatListHeader = ({
               />
             </div> */}
             <div className="p-3">
-  {role === 'user' ? (
-    <UserSearchForChat
-      onUserSelected={() => setIsUserSearchOpen(false)}
-      onRoomCreated={(room) => {
-        onRoomCreated?.(room);
-        setIsUserSearchOpen(false);
-      }}
-    />
-  ) : (
-    <AdminSearchForChat
-      onUserSelected={() => setIsUserSearchOpen(false)}
-      onRoomCreated={(room) => {
-        onRoomCreated?.(room);
-        setIsUserSearchOpen(false);
-      }}
-    />
-  )}
-</div>
+              {role === 'user' ? (
+                <UserSearchForChat
+                  onUserSelected={() => setIsUserSearchOpen(false)}
+                  onRoomCreated={(room) => {
+                    onRoomCreated?.(room);
+                    setIsUserSearchOpen(false);
+                  }}
+                />
+              ) : (
+                <AdminSearchForChat
+                  onUserSelected={() => setIsUserSearchOpen(false)}
+                  onRoomCreated={(room) => {
+                    onRoomCreated?.(room);
+                    setIsUserSearchOpen(false);
+                  }}
+                />
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

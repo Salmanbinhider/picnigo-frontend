@@ -24,7 +24,7 @@ export const handleResendOtp = async (email: string) => {
 
 export const handleLogin = async (email: string, password: string) => {
   const response = await api.post('/user/login', { email, password });
-  console.log(response, 'from service');
+  //console.log(response, 'from service');
   return response.data;
 };
 
@@ -35,24 +35,24 @@ export const handleGoogleLogin = async (token: string) => {
 
 export const handleForgotPassword = async (email: string) => {
   const response = await api.post('/user/forgotPassword', { email });
-  console.log(email, 'forgot password');
+  //console.log(email, 'forgot password');
   return response.data;
 };
 export const handleVerifyOtp = async (email: string, otp: string) => {
   const response = await api.post('/user/verify-otp', { email, otp });
-  console.log(response, 'verify otp');
+  //console.log(response, 'verify otp');
   return response.data;
 };
 export const handelChangePassword = async (token: string, password: string) => {
   const response = await api.post('/user/forgotPasswordChange', { token, password });
-  console.log(token, 'forgot password');
+  //console.log(token, 'forgot password');
   return response.data;
 };
 
 export const handleLogout = async (): Promise<void> => {
   try {
-        localStorage.removeItem('accessToken');
-    localStorage.removeItem('user'); 
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
     await api.post('/user/logout', {}, { withCredentials: true });
   } catch (error: any) {
     throw new Error(error?.response?.data?.message || 'Logout failed');

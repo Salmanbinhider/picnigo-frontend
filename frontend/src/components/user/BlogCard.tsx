@@ -9,10 +9,9 @@ type Props = {
 
 const BlogCard = ({ blog, linkPrefix }: Props) => {
   const blogUrl = `${linkPrefix}/${blog.slug}`;
-  const image =
-    blog.coverImage
-      ? blog.coverImage.url.replace('/upload/', '/upload/f_auto,q_auto/')
-      : 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop';
+  const image = blog.coverImage
+    ? blog.coverImage.url.replace('/upload/', '/upload/f_auto,q_auto/')
+    : 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop';
 
   const formatDate = (date?: Date) => {
     if (!date) return 'Recent';
@@ -99,16 +98,12 @@ const BlogCard = ({ blog, linkPrefix }: Props) => {
 
           {/* Author + Read More */}
           <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
- 
-
             {/* Read More Button */}
             <div className="flex items-center text-orange-600 font-semibold hover:text-orange-700 transition-colors group/btn">
               Read More
               <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
             </div>
           </div>
-
-         
         </div>
 
         {/* Hover Border Animation */}

@@ -132,24 +132,25 @@
 
 // export type EditBlogFormSchema = z.infer<typeof editBlogSchema>;
 // src/schemas/EditBlogSchema.ts
-import z from "zod";
+import z from 'zod';
 
-const imageFileSchema = z
-  .instanceof(File)
-  .refine((file) => file.size <= 5 * 1024 * 1024, {
-    message: "Image size must be less than 5MB",
-  });
+const imageFileSchema = z.instanceof(File).refine((file) => file.size <= 5 * 1024 * 1024, {
+  message: 'Image size must be less than 5MB',
+});
 
 export const editBlogSchema = z.object({
-  title: z.string().min(3, "Title must be at least 3 characters").transform((v) => v.trim()),
+  title: z
+    .string()
+    .min(3, 'Title must be at least 3 characters')
+    .transform((v) => v.trim()),
   overview: z
     .string()
-    .min(10, "Overview must be at least 10 characters")
-    .max(250, "Overview must be at long")
+    .min(10, 'Overview must be at least 10 characters')
+    .max(250, 'Overview must be at long')
     .transform((v) => v.trim()),
   content: z
     .string()
-    .min(20, "Content must be at least 20 characters")
+    .min(20, 'Content must be at least 20 characters')
     .transform((v) => v.trim()),
 
   // Optional cover image (only if changed)
@@ -158,8 +159,8 @@ export const editBlogSchema = z.object({
   sections: z
     .array(
       z.object({
-        heading: z.string().min(3, "Section title must be at least 3 characters"),
-        content: z.string().min(10, "Section content must be at least 10 characters"),
+        heading: z.string().min(3, 'Section title must be at least 3 characters'),
+        content: z.string().min(10, 'Section content must be at least 10 characters'),
         image: z.any().optional(),
         existingImage: z.any().optional(),
       })
@@ -168,7 +169,7 @@ export const editBlogSchema = z.object({
 
   tags: z.array(z.string().transform((tag) => tag.trim())).optional(),
 
-  status: z.enum(["draft", "published", "archived"]).default("draft"),
+  status: z.enum(['draft', 'published', 'archived']).default('draft'),
 
   // For tracking existing Cloudinary images
   existingImages: z.any().optional(),

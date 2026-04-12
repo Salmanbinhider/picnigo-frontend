@@ -8,27 +8,20 @@ export default function PaymentFailed() {
 
   return (
     <div className="bg-red-50 min-h-screen">
-
       {/* 🔥 HERO SECTION */}
       <div className="bg-red-500 text-white py-16 text-center rounded-b-[3rem] shadow-lg">
         <PlaneTakeoff className="w-16 h-16 mx-auto mb-3 opacity-80 animate-pulse" />
         <AlertTriangle className="w-14 h-14 mx-auto mb-3 text-white" />
 
         <h1 className="text-3xl font-bold">Payment Failed</h1>
-        <p className="text-red-100 mt-2">
-          Oops! Something went wrong with your booking
-        </p>
+        <p className="text-red-100 mt-2">Oops! Something went wrong with your booking</p>
       </div>
 
       {/* 🔥 CONTENT */}
       <div className="max-w-2xl mx-auto px-4 py-10 text-center">
-
         {/* CARD */}
         <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4 border">
-
-          <p className="text-gray-700">
-            Your booking could not be completed. This may be due to:
-          </p>
+          <p className="text-gray-700">Your booking could not be completed. This may be due to:</p>
 
           <ul className="text-sm text-gray-500 space-y-1">
             <li>• Payment cancelled</li>
@@ -40,12 +33,10 @@ export default function PaymentFailed() {
             <span className="text-gray-500 text-sm">Booking ID</span>
             <p className="font-semibold text-gray-800">{id}</p>
           </div>
-
         </div>
 
         {/* 🔥 ACTION BUTTONS */}
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-
           <Button
             onClick={() => navigate(-1)}
             className="bg-red-500 text-white px-6 py-3 rounded-xl shadow-md hover:bg-red-600 transition"
@@ -60,7 +51,6 @@ export default function PaymentFailed() {
           >
             Explore Packages
           </Button>
-
         </div>
       </div>
     </div>

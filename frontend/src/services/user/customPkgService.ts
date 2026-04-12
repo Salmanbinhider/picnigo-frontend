@@ -3,7 +3,7 @@ import type { CustomPkgFormSchema, EditCustomPkgFormSchema } from '@/schemas/cus
 
 export const getAllCustomPkg = async (page: number, limit: number) => {
   const response = await api.get(`/user/custom-package?page=${page}&limit=${limit}`);
-  console.log(response.data, 'cutm pkg 1');
+  //console.log(response.data, 'cutm pkg 1');
 
   return response.data.data;
 };
@@ -30,11 +30,7 @@ export const deleteCustomPkg = async (packageId: string) => {
   return response.data;
 };
 
-
-export const fetchUserCustomPackages = async (
-  page: number ,
-  limit: number 
-)=> {
+export const fetchUserCustomPackages = async (page: number, limit: number) => {
   const res = await api.get('/user/custom-packages/user', {
     params: { page, limit },
   });

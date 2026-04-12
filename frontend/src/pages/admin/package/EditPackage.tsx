@@ -84,15 +84,17 @@ export default function EditPackageForm() {
     const fetchData = async () => {
       try {
         const data = await getPackageById(id);
-        console.log(data, 'edit pkg');
+        //console.log(data, 'edit pkg');
 
         reset({
           ...data,
-          ageOfAdult:data.ageOfAdult,
+          ageOfAdult: data.ageOfAdult,
           category: data.category?.map((c: any) => c._id ?? c),
           startDate: data.startDate ? new Date(data.startDate).toISOString().split('T')[0] : '',
           endDate: data.endDate ? new Date(data.endDate).toISOString().split('T')[0] : '',
-          departureDates: data.departureDates ? new Date(data.departureDates).toISOString().split('T')[0] : '',
+          departureDates: data.departureDates
+            ? new Date(data.departureDates).toISOString().split('T')[0]
+            : '',
           location: data.location?.map((loc: any) => ({
             name: loc.name,
             lat: loc.geo.coordinates[1].toString(), // lat is 2nd
@@ -100,11 +102,11 @@ export default function EditPackageForm() {
           })),
           offer: data.offer
             ? {
-              ...data.offer,
-              validUntil: data.offer.validUntil
-                ? new Date(data.offer.validUntil).toISOString().split('T')[0]
-                : '',
-            }
+                ...data.offer,
+                validUntil: data.offer.validUntil
+                  ? new Date(data.offer.validUntil).toISOString().split('T')[0]
+                  : '',
+              }
             : undefined,
           images: [], // keep upload field empty
         });
@@ -117,7 +119,7 @@ export default function EditPackageForm() {
     };
     fetchData();
   }, [id, reset, setCroppedImages]);
-  console.log(existingImages, 'exist');
+  //console.log(existingImages, 'exist');
   const onImageChangeWithLimit = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
@@ -199,7 +201,7 @@ export default function EditPackageForm() {
     });
   };
   useEffect(() => {
-    console.log('Form errors:', errors);
+    //console.log('Form errors:', errors);
   }, [errors]);
 
   return (
@@ -304,17 +306,13 @@ export default function EditPackageForm() {
               </div>
             </div> */}
 
-             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700 border-b pb-2 mb-2">
-                Duration
-              </h3>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-gray-700 border-b pb-2 mb-2">Duration</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Days */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Days
-                  </label>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Days</label>
                   <input
                     type="number"
                     {...register('durationDays', { valueAsNumber: true })}
@@ -327,9 +325,7 @@ export default function EditPackageForm() {
 
                 {/* Nights */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Nights
-                  </label>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Nights</label>
                   <input
                     type="number"
                     {...register('durationNights', { valueAsNumber: true })}
@@ -350,28 +346,24 @@ export default function EditPackageForm() {
                 {...register('price', { valueAsNumber: true })}
                 className="border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 rounded-lg p-2 w-full"
               />
-              {errors.price && (
-                <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
-              )}
+              {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>}
             </div>
 
             {/* Package Type */}
             <div>
               <label className="block font-medium">Package Type</label>
-              <select
-                {...register('packageType')}
-                className="border p-2 w-full rounded"
-              >
+              <select {...register('packageType')} className="border p-2 w-full rounded">
                 <option value="normal">Normal</option>
                 <option value="group">Group</option>
                 <option value="custom">Custom</option>
-
               </select>
-              {errors.packageType && <p className="text-red-500 text-sm">{errors.packageType.message}</p>}
+              {errors.packageType && (
+                <p className="text-red-500 text-sm">{errors.packageType.message}</p>
+              )}
             </div>
-  {watch('packageType') === 'normal' && (
+            {watch('packageType') === 'normal' && (
               <div className="border rounded-lg p-4 mt-3 bg-gray-50">
-                <h3 className="font-semibold text-gray-700 mb-2">Normal Package  </h3>
+                <h3 className="font-semibold text-gray-700 mb-2">Normal Package </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -381,7 +373,9 @@ export default function EditPackageForm() {
                       {...register('startDate')}
                       className="border p-2 w-full rounded"
                     />
-                    {errors.startDate && <p className="text-red-500 text-sm">{errors.startDate.message}</p>}
+                    {errors.startDate && (
+                      <p className="text-red-500 text-sm">{errors.startDate.message}</p>
+                    )}
                   </div>
 
                   <div>
@@ -391,7 +385,9 @@ export default function EditPackageForm() {
                       {...register('endDate')}
                       className="border p-2 w-full rounded"
                     />
-                    {errors.endDate && <p className="text-red-500 text-sm">{errors.endDate.message}</p>}
+                    {errors.endDate && (
+                      <p className="text-red-500 text-sm">{errors.endDate.message}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -399,12 +395,9 @@ export default function EditPackageForm() {
 
             {watch('packageType') === 'custom' && (
               <div className="border rounded-lg p-4 mt-3 bg-gray-50">
-                <h3 className="font-semibold text-gray-700 mb-2">custom Package  </h3>
+                <h3 className="font-semibold text-gray-700 mb-2">custom Package </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-
-
                   <div>
                     <label>Departure Date</label>
                     <input
@@ -413,22 +406,19 @@ export default function EditPackageForm() {
                       placeholder="Enter departure DAte"
                       className="border p-2 w-full rounded"
                     />
-                    {errors.departureDates && <p className="text-red-500 text-sm">{errors.departureDates.message}</p>}
+                    {errors.departureDates && (
+                      <p className="text-red-500 text-sm">{errors.departureDates.message}</p>
+                    )}
                   </div>
-
-
-
-
                 </div>
               </div>
             )}
 
             {watch('packageType') === 'group' && (
               <div className="border rounded-lg p-4 mt-3 bg-gray-50">
-                <h3 className="font-semibold text-gray-700 mb-2">Group Package  </h3>
+                <h3 className="font-semibold text-gray-700 mb-2">Group Package </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                   <div>
                     <label>Departure Date</label>
                     <input
@@ -437,9 +427,10 @@ export default function EditPackageForm() {
                       placeholder="Enter departure DAte"
                       className="border p-2 w-full rounded"
                     />
-                    {errors.departureDates && <p className="text-red-500 text-sm">{errors.departureDates.message}</p>}
+                    {errors.departureDates && (
+                      <p className="text-red-500 text-sm">{errors.departureDates.message}</p>
+                    )}
                   </div>
-
 
                   <div>
                     <label>Group Size</label>
@@ -449,15 +440,14 @@ export default function EditPackageForm() {
                       placeholder="Enter group Size "
                       className="border p-2 w-full rounded"
                     />
-                    {errors.groupSize && <p className="text-red-500 text-sm">{errors.groupSize.message}</p>}
+                    {errors.groupSize && (
+                      <p className="text-red-500 text-sm">{errors.groupSize.message}</p>
+                    )}
                   </div>
-
                 </div>
               </div>
             )}
 
-
-          
             {/* Dates */}
             {/* <div className="grid grid-cols-2 gap-4">
               <div>
@@ -557,10 +547,11 @@ export default function EditPackageForm() {
                         type="button"
                         onClick={() => locArray.remove(i)}
                         disabled={locArray.fields.length === 1}
-                        className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${locArray.fields.length === 1
-                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                          : 'bg-red-50 text-red-600 hover:bg-red-100'
-                          }`}
+                        className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${
+                          locArray.fields.length === 1
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-red-50 text-red-600 hover:bg-red-100'
+                        }`}
                       >
                         Remove Location
                       </button>
@@ -600,10 +591,11 @@ export default function EditPackageForm() {
                         )
                       }
                       disabled={watch('included')?.length === 1}
-                      className={`px-2 py-1 rounded-lg text-sm transition ${watch('included')?.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`px-2 py-1 rounded-lg text-sm transition ${
+                        watch('included')?.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       ❌
                     </button>
@@ -618,7 +610,6 @@ export default function EditPackageForm() {
                 </div>
               ))}
             </div>
-
 
             {/* Not Included */}
             <div className="border border-gray-200 rounded-lg p-5 bg-gray-50 shadow-sm">
@@ -650,10 +641,11 @@ export default function EditPackageForm() {
                         )
                       }
                       disabled={watch('notIncluded')?.length === 1}
-                      className={`px-2 py-1 rounded-lg text-sm transition ${watch('notIncluded')?.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`px-2 py-1 rounded-lg text-sm transition ${
+                        watch('notIncluded')?.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       ❌
                     </button>
@@ -668,7 +660,6 @@ export default function EditPackageForm() {
                 </div>
               ))}
             </div>
-
 
             {/* Itinerary */}
 
@@ -700,10 +691,11 @@ export default function EditPackageForm() {
                       type="button"
                       onClick={() => itineraryArray.remove(i)}
                       disabled={itineraryArray.fields.length === 1}
-                      className={`text-sm font-medium px-2 py-1 rounded-lg transition ${itineraryArray.fields.length === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100'
-                        }`}
+                      className={`text-sm font-medium px-2 py-1 rounded-lg transition ${
+                        itineraryArray.fields.length === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100'
+                      }`}
                     >
                       Delete Day
                     </button>
@@ -711,7 +703,9 @@ export default function EditPackageForm() {
 
                   {/* Day Title */}
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Day Title</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Day Title
+                    </label>
                     <input
                       {...register(`itinerary.${i}.title`)}
                       placeholder="Enter day title"
@@ -831,10 +825,11 @@ export default function EditPackageForm() {
                                   )
                                 }
                                 disabled={field.value.length === 1}
-                                className={`mt-1 md:mt-6 px-2 py-1 rounded-lg text-sm transition ${field.value.length === 1
-                                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                  : 'bg-red-50 text-red-600 hover:bg-red-100'
-                                  }`}
+                                className={`mt-1 md:mt-6 px-2 py-1 rounded-lg text-sm transition ${
+                                  field.value.length === 1
+                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                    : 'bg-red-50 text-red-600 hover:bg-red-100'
+                                }`}
                               >
                                 ❌
                               </button>
@@ -861,7 +856,6 @@ export default function EditPackageForm() {
                 </div>
               ))}
             </div>
-
 
             <div className="border p-4 rounded-md bg-gray-50">
               <h3 className="font-semibold mb-2">Offer Details (optional)</h3>

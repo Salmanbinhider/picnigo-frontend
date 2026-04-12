@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { Button } from '@/components/Button';
 import { Badge } from '@/components/ui/Badge';
-import { Star, MapPin, Clock, Calendar, Check, Heart, Share2, Loader2 } from 'lucide-react';
+import { Star, MapPin, Clock, Calendar, Check, Heart, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 
 import type { IPackage } from '@/types/IPackage';
@@ -27,16 +27,12 @@ import MapPreview from '@/components/MapPreview';
 import { useAuthModal } from '@/context/AuthModalContext';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
-import Loader from '@/components/Loader';
 
 const PackageDetails = () => {
-
   const navigate = useNavigate();
-const { openLogin } = useAuthModal();
+  const { openLogin } = useAuthModal();
 
-const { isAuthenticated, user } = useSelector(
-  (state: RootState) => state.userAuth
-);
+  const { isAuthenticated, user } = useSelector((state: RootState) => state.userAuth);
   const { id } = useParams();
   const [pkg, setPkg] = useState<IPackage | null>(null);
   const [loading, setLoading] = useState(false);
@@ -54,17 +50,17 @@ const { isAuthenticated, user } = useSelector(
     const loadWishListCheck = async () => {
       try {
         const checkWishlist = await checkPackageInWishlist(id);
-        //  console.log(checkWishlist.result, 'check')
+        //  //console.log(checkWishlist.result, 'check')
         setWishlisted(checkWishlist.result);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
     loadWishListCheck();
   }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
@@ -74,7 +70,7 @@ const { isAuthenticated, user } = useSelector(
       }
       try {
         const data = await fetchPackgeById(id);
-        console.log(data, 'pkg data');
+        //console.log(data, 'pkg data');
         setPkg(data as IPackage);
       } catch (error) {
         console.error('Failed to fetch package details', error);
@@ -85,12 +81,12 @@ const { isAuthenticated, user } = useSelector(
 
   const handleWishlist = async () => {
     if (!id || loading) return;
-     const isAllowed = isAuthenticated && !user?.isBlocked;
+    const isAllowed = isAuthenticated && !user?.isBlocked;
 
-  if (!isAllowed) {
-    openLogin(); // 🔥 open modal
-    return;      // ❌ stop navigation
-  }
+    if (!isAllowed) {
+      openLogin(); // 🔥 open modal
+      return; // ❌ stop navigation
+    }
     setLoading(true);
 
     try {
@@ -112,54 +108,49 @@ const { isAuthenticated, user } = useSelector(
   useEffect(() => {
     const fetchReviews = async () => {
       const res = await handlePackageReview(id!, 1, 3, {});
-      console.log(res.review, 'review res ponse');
+      //console.log(res.review, 'review res ponse');
       const reviewRating = await handleReviewRating(id!);
       setRatingSummary(reviewRating.summary);
-      //console.log(reviewRating, 'review')
+      ////console.log(reviewRating, 'review')
       setPreviewReviews(res.review.data);
     };
     fetchReviews();
   }, []);
 
-
   // const handleClick = () => {
   //   navigate(`/checkout/${id}`);
   // };
 
-const handleClick = () => {
-  const isAllowed = isAuthenticated && !user?.isBlocked;
+  const handleClick = () => {
+    const isAllowed = isAuthenticated && !user?.isBlocked;
 
-  if (!isAllowed) {
-    openLogin(); // 🔥 open modal
-    return;      // ❌ stop navigation
-  }
+    if (!isAllowed) {
+      openLogin(); // 🔥 open modal
+      return; // ❌ stop navigation
+    }
 
-  navigate(`/checkout/${id}`); // ✅ allowed
-};
-  
+    navigate(`/checkout/${id}`); // ✅ allowed
+  };
 
- 
+  const handleAddReview = () => {
+    const isAllowed = isAuthenticated && !user?.isBlocked;
 
-const handleAddReview = () => {
-  const isAllowed = isAuthenticated && !user?.isBlocked;
+    if (!isAllowed) {
+      openLogin(); // 🔥 open modal
+      return; // ❌ stop navigation
+    }
+    navigate(`/packages/${id}/review/add`);
+  };
 
-  if (!isAllowed) {
-    openLogin(); // 🔥 open modal
-    return;      // ❌ stop navigation
-  }
-   navigate(`/packages/${id}/review/add`);
-};
+  const handleSeeAllReviews = () => {
+    const isAllowed = isAuthenticated && !user?.isBlocked;
 
-
-const handleSeeAllReviews = () => {
-  const isAllowed = isAuthenticated && !user?.isBlocked;
-
-  if (!isAllowed) {
-    openLogin(); // 🔥 open modal
-    return;      // ❌ stop navigation
-  }
-navigate(`/packages/${id}/review?page=1&limit=10`)
-};
+    if (!isAllowed) {
+      openLogin(); // 🔥 open modal
+      return; // ❌ stop navigation
+    }
+    navigate(`/packages/${id}/review?page=1&limit=10`);
+  };
   // const handleAddReview = () => {
   //   navigate(`/packages/${id}/review/add`);
   // };
@@ -171,7 +162,11 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
   const isBookingDisabled: boolean = Boolean(isSlotFull || isExpired);
 
   if (!pkg) {
-    return <div className="h-screen flex items-center justify-center"><Loader2/></div>;
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <Loader2 />
+      </div>
+    );
   }
 
   const imageObjects = pkg.imageUrls ?? [];
@@ -210,7 +205,9 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
             <div>
               <div className="flex items-center gap-4 mb-4">
-                <Badge className="bg-orange text-white px-3 py-1">{pkg.durationDays}D/{pkg.durationNights}N Days</Badge>
+                <Badge className="bg-orange text-white px-3 py-1">
+                  {pkg.durationDays}D/{pkg.durationNights}N Days
+                </Badge>
 
                 {ratingSummary && (
                   <div className="flex items-center text-sm">
@@ -255,58 +252,51 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
             </div>
           </div>
           {/* Image Gallery */}
-        <div className="w-full max-w-7xl mx-auto mb-6 sm:mb-10 px-2 sm:px-0">
-  <div className="flex flex-col items-center gap-3 sm:gap-4">
-
-    {/* Main Image */}
-    <div className="w-full h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-xl overflow-hidden relative bg-white flex items-center justify-center">
-      
-      <img
-        src={currentImage}
-        alt={`Image ${selectedImage + 1}`}
-        className="
+          <div className="w-full max-w-7xl mx-auto mb-6 sm:mb-10 px-2 sm:px-0">
+            <div className="flex flex-col items-center gap-3 sm:gap-4">
+              {/* Main Image */}
+              <div className="w-full h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-xl overflow-hidden relative bg-white flex items-center justify-center">
+                <img
+                  src={currentImage}
+                  alt={`Image ${selectedImage + 1}`}
+                  className="
           w-full h-full
           object-contain sm:object-cover
           transition-all duration-300
         "
-      />
+                />
 
-      {/* Image Counter */}
-      <div className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-black/60 text-white px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-lg">
-        {selectedImage + 1} / {allImages.length}
-      </div>
-    </div>
+                {/* Image Counter */}
+                <div className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-black/60 text-white px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-lg">
+                  {selectedImage + 1} / {allImages.length}
+                </div>
+              </div>
 
-    {/* Thumbnails */}
-    <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2 w-full">
-      {allImages.map((image, index) => {
-        const isSelected = selectedImage === index;
-        return (
-          <div
-            key={index}
-            onClick={() => setSelectedImage(index)}
-            className={`relative h-[70px] sm:h-[80px] md:h-[96px] overflow-hidden rounded-lg cursor-pointer transition-all duration-200 ${
-              isSelected
-                ? 'ring-2 ring-orange ring-offset-2'
-                : 'hover:opacity-80'
-            }`}
-          >
-            <img
-              src={image}
-              alt={`Thumbnail ${index + 1}`}
-              className="w-full h-full object-cover"
-            />
+              {/* Thumbnails */}
+              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2 w-full">
+                {allImages.map((image, index) => {
+                  const isSelected = selectedImage === index;
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={`relative h-[70px] sm:h-[80px] md:h-[96px] overflow-hidden rounded-lg cursor-pointer transition-all duration-200 ${
+                        isSelected ? 'ring-2 ring-orange ring-offset-2' : 'hover:opacity-80'
+                      }`}
+                    >
+                      <img
+                        src={image}
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
 
-            {isSelected && (
-              <div className="absolute inset-0 bg-orange/20" />
-            )}
+                      {isSelected && <div className="absolute inset-0 bg-orange/20" />}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        );
-      })}
-    </div>
-
-  </div>
-</div>
         </div>
       </div>
       <div className="container mx-auto px-4 py-12">
@@ -319,14 +309,11 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
               <p className="text-muted-foreground text-lg leading-relaxed">{pkg.description}</p>
             </section>
             <PackageDetailPickUp startPoint={pkg?.startPoint!} />
-             
+
             {/* <div className="h-96 w-full rounded-lg overflow-hidden border"> */}
-           <div className="h-96 w-full rounded-lg overflow-hidden border relative z-0">
+            <div className="h-96 w-full rounded-lg overflow-hidden border relative z-0">
               {!openMap && (
-                <MapPreview
-                  locations={packageLocations}
-                  onClick={() => setOpenMap(true)}
-                />
+                <MapPreview locations={packageLocations} onClick={() => setOpenMap(true)} />
               )}
             </div>
 
@@ -336,8 +323,6 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
               onClose={() => setOpenMap(false)}
               locations={packageLocations}
             />
-
-
 
             {/* Itinerary */}
             <section className="bg-white rounded-xl p-8 shadow-sm border">
@@ -429,9 +414,7 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
                 </div>
               </div>
             </section>
-
           </div>
-
 
           {/* Sidebar */}
           <div className="space-y-6">
@@ -441,7 +424,9 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
                 {/* PRICE + OFFER */}
                 <div className="text-center mb-6">
                   <div className="flex items-center justify-center mb-2 space-x-3 relative">
-                    {pkg.offer && pkg.offer.isActive && new Date(pkg.offer.validUntil) > new Date() ? (
+                    {pkg.offer &&
+                    pkg.offer.isActive &&
+                    new Date(pkg.offer.validUntil) > new Date() ? (
                       <>
                         {/* Original Price (strike-through) */}
                         {pkg.price !== pkg.finalPrice && (
@@ -491,12 +476,13 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
                   <div className="flex items-center justify-between py-3 border-b">
                     <span className="text-sm font-medium text-gray-700">Package Type</span>
                     <span
-                      className={`text-sm font-semibold ${pkg.packageType === 'custom'
-                        ? 'text-blue-600'
-                        : pkg.packageType === 'group'
-                          ? 'text-purple-600'
-                          : 'text-green-600'
-                        }`}
+                      className={`text-sm font-semibold ${
+                        pkg.packageType === 'custom'
+                          ? 'text-blue-600'
+                          : pkg.packageType === 'group'
+                            ? 'text-purple-600'
+                            : 'text-green-600'
+                      }`}
                     >
                       {pkg.packageType === 'custom'
                         ? 'Custom Package'
@@ -583,19 +569,14 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
                     onClick={handleClick}
                     disabled={isBookingDisabled}
                     className={cn(
-                      "w-full py-3 text-lg font-semibold transition-all",
+                      'w-full py-3 text-lg font-semibold transition-all',
                       isBookingDisabled
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-orange hover:bg-orange-dark text-white"
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-orange hover:bg-orange-dark text-white'
                     )}
                   >
-                    {isSlotFull
-                      ? "Slots Full"
-                      : isExpired
-                        ? "Package Expired"
-                        : "Book Now"}
+                    {isSlotFull ? 'Slots Full' : isExpired ? 'Package Expired' : 'Book Now'}
                   </Button>
-
 
                   <Button
                     variant="outline"
@@ -604,12 +585,8 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
                     Contact Us
                   </Button>
                 </div>
-
               </CardContent>
             </Card>
-
-
-
           </div>
         </div>
         <section className="mt-8">
@@ -664,7 +641,7 @@ navigate(`/packages/${id}/review?page=1&limit=10`)
           </div>
 
           <button
-            onClick={ handleSeeAllReviews}
+            onClick={handleSeeAllReviews}
             className="text-orange font-semibold mt-2 hover:underline"
           >
             See all reviews →

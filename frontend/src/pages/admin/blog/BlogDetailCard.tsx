@@ -45,9 +45,7 @@ const BlogDetailCard = ({ blog, likesCount, onDelete, onToggleBlock }: Props) =>
           >
             <button
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-white transition ${
-                blog?.isBlocked
-                  ? 'bg-green-600 hover:bg-green-700'
-                  : 'bg-red-600 hover:bg-red-700'
+                blog?.isBlocked ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'
               }`}
             >
               {blog?.isBlocked ? (
@@ -148,10 +146,7 @@ const BlogDetailCard = ({ blog, likesCount, onDelete, onToggleBlock }: Props) =>
         {blog?.tags?.length ? (
           <section className="flex flex-wrap gap-2">
             {blog.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm"
-              >
+              <span key={tag} className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
                 #{tag}
               </span>
             ))}

@@ -11,12 +11,10 @@ import { toast } from 'sonner';
 import type { IBlog } from '@/types/IBlog';
 import { Heart, Calendar, ArrowLeft, Edit, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { OptionsDropdown } from '@/components/OptionsDropdown ';
 import UserList from '@/components/UserList';
 import type { UserBasicInfo } from '@/types/UserBasicInfo';
 import CommentSection from '@/components/CommentSection';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import type { IReportedType } from '@/types/IReport';
 
 const UserBlogDetails = () => {
   const { slug } = useParams();
@@ -87,7 +85,6 @@ const UserBlogDetails = () => {
     { label: 'Delete', value: 'delete', className: 'text-red-500' },
   ];
 
-  
   return (
     <div className="relative max-w-[90vw] mx-auto mt-6 rounded-2xl overflow-hidden">
       {/* ===== COVER IMAGE ===== */}
@@ -132,7 +129,6 @@ const UserBlogDetails = () => {
             </button>
           </ConfirmDialog>
         </div>
-
 
         {/* Title and details */}
         <div className="absolute bottom-10 left-10 text-white space-y-4 max-w-3xl">
@@ -227,10 +223,7 @@ const UserBlogDetails = () => {
         {blogData?.tags?.length ? (
           <section className="flex flex-wrap gap-2">
             {blogData.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm"
-              >
+              <span key={tag} className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
                 #{tag}
               </span>
             ))}
@@ -262,9 +255,6 @@ const UserBlogDetails = () => {
         isOpen={isLikesModalOpen}
         onClose={() => setIsLikesModalOpen(false)}
       />
-
-
-
     </div>
   );
 };

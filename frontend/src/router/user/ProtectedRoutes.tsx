@@ -12,7 +12,9 @@ const CouponList = lazy(() => import('@/pages/user/coupons/CouponList'));
 const WalletPage = lazy(() => import('@/pages/user/wallet/WalletPage'));
 
 const CheckoutPage = lazy(() => import('@/pages/user/booking/CheckoutPage'));
-const AddTravellerCheckoutPage = lazy(() => import('@/pages/user/booking/AddTravellerCheckoutPage'));
+const AddTravellerCheckoutPage = lazy(
+  () => import('@/pages/user/booking/AddTravellerCheckoutPage')
+);
 const BookingSuccessPage = lazy(() => import('@/pages/user/booking/BookingSuccessPage'));
 const UserBookingPage = lazy(() => import('@/pages/user/booking/UserBookingPage'));
 const BookingDetailPage = lazy(() => import('@/pages/user/booking/BookingDetailPage'));
@@ -48,7 +50,10 @@ const ProtectedRoutes = (
   <Route element={<UserProtectedRoutes />}>
     <Route path="/home" element={<Home />} />
     <Route path="/checkout/:id" element={<CheckoutPage />} />
-    <Route path="/checkout/add-traveller/:packageId/:bookingId" element={<AddTravellerCheckoutPage />} />
+    <Route
+      path="/checkout/add-traveller/:packageId/:bookingId"
+      element={<AddTravellerCheckoutPage />}
+    />
     <Route path="/booking-success/:id" element={<BookingSuccessPage />} />
     <Route path="/booking-failed/:id" element={<PaymentFailed />} />
 

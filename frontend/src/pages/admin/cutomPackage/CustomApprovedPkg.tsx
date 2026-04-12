@@ -19,7 +19,7 @@ import { FilterBar } from '@/components/FilterBar ';
 import { useSearchFilters } from '@/hooks/useSearchFilters';
 import { useCleanFilter } from '@/hooks/useCleanFilter ';
 import { usePaginationButtons } from '@/hooks/usePaginationButtons';
-import {  blockPackage, unBlockPackage } from '@/services/admin/packageService';
+import { blockPackage, unBlockPackage } from '@/services/admin/packageService';
 
 import type { CustomPackageApprovedResponseDTO } from '@/types/ICustomPkg';
 import { fetchAllApprovedCustomPkg } from '@/services/admin/customPkgService';
@@ -110,7 +110,7 @@ const CustomApprovedPkg = () => {
     setSearchParams({ page: '1' });
   };
 
-const handleToggleBlock = async (id: string, shouldBlock: boolean) => {
+  const handleToggleBlock = async (id: string, shouldBlock: boolean) => {
     const action = shouldBlock ? 'block' : 'unblock';
 
     try {
@@ -168,7 +168,7 @@ const handleToggleBlock = async (id: string, shouldBlock: boolean) => {
               <TableHead>#</TableHead>
               <TableHead>Package Name</TableHead>
               <TableHead>User</TableHead>
-              
+
               <TableHead>Price</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Actions</TableHead>
@@ -194,7 +194,7 @@ const handleToggleBlock = async (id: string, shouldBlock: boolean) => {
                     </div>
                   </div>
                 </TableCell>
-              
+
                 <TableCell>₹{pkg.price}</TableCell>
                 <TableCell>
                   {pkg.isBlocked ? (

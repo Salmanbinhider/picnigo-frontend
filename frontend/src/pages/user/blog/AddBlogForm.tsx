@@ -35,7 +35,6 @@ const AddBlogForm = () => {
   } = useForm<BlogFormSchema>({
     resolver: zodResolver(blogSchema),
     defaultValues: {
-
       sections: [],
 
       tags: [],
@@ -52,7 +51,7 @@ const AddBlogForm = () => {
     setValue('coverImage', coverUpload.croppedImages, { shouldValidate: true });
   }, [coverUpload.croppedImages, setValue]);
   useEffect(() => {
-    console.log('Sections updated:', watch('sections'));
+    //console.log('Sections updated:', watch('sections'));
   }, [watch('sections')]);
 
   const onSubmit = async (data: BlogFormSchema) => {
@@ -72,7 +71,6 @@ const AddBlogForm = () => {
 
       // tags
       data.tags?.forEach((tag) => formData.append('tags', tag));
-
 
       data.sections?.forEach((section, index) => {
         formData.append(`sections[${index}][heading]`, section.heading);
@@ -96,7 +94,7 @@ const AddBlogForm = () => {
     }
   };
   useEffect(() => {
-    console.log('Form errors:', errors);
+    //console.log('Form errors:', errors);
   }, [errors]);
 
   return (
@@ -111,7 +109,6 @@ const AddBlogForm = () => {
               onCropComplete={coverUpload.handleCropComplete}
               onCancel={coverUpload.handleCropCancel}
               aspect={16 / 9}
-
             />
           </div>
         </div>
@@ -135,11 +132,11 @@ const AddBlogForm = () => {
                 newImages[sectionCropIndex] = croppedFile;
                 setSectionImages(newImages);
                 setSectionCropIndex(null);
-                setValue(`sections.${sectionCropIndex}.image`, [croppedFile], { shouldValidate: true });
-
+                setValue(`sections.${sectionCropIndex}.image`, [croppedFile], {
+                  shouldValidate: true,
+                });
               }}
               onCancel={() => setSectionCropIndex(null)}
-              
             />
           </div>
         </div>
@@ -215,14 +212,11 @@ const AddBlogForm = () => {
               <div>
                 <Label>Content</Label>
                 <Textarea {...register('content')} rows={6} placeholder="Main story..." />
-                {errors.content && (
-                  <p className="text-red-500 text-sm">{errors.content.message}</p>
-                )}
+                {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
               </div>
 
               {/* Sections */}
               <div>
-
                 {fields.map((section, index) => (
                   <div key={section.id} className="border rounded-lg p-4 mb-3 bg-gray-50">
                     <div className="flex justify-between items-center mb-2">
@@ -233,7 +227,6 @@ const AddBlogForm = () => {
                           remove(index);
                           setSectionImages((prev) => prev.filter((_, i) => i !== index));
                         }}
-
                         className="text-red-500 hover:text-red-700"
                       >
                         <X size={16} />
@@ -315,7 +308,6 @@ const AddBlogForm = () => {
                         </button>
                       </div>
                     )}
-
                   </div>
                 ))}
                 <div className="flex justify-between items-center mb-2">
@@ -331,7 +323,6 @@ const AddBlogForm = () => {
                     <ImagePlus size={16} /> Add Section
                   </Button>
                 </div>
-
               </div>
 
               {/* Tags */}

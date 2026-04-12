@@ -47,7 +47,7 @@ const NotificationPage = () => {
         return `/account/wallet`;
       case 'follow':
         return `/profile/${n.triggeredBy?.username}`;
-           case 'customPackage':
+      case 'customPackage':
         return `/account/my-custom-package/user`;
       default:
         return `/user/notifications`;

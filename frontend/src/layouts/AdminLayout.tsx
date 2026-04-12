@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import AdminNavbar from '@/components/admin/AdminNavbar';
 import { AdminSidebar } from '@/components/admin/AdminSideBar';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@/redux/store';
 import { useNotificationSocket } from '@/hooks/useNotificationSocket';
-import { useChatRoomsSocket } from '@/hooks/useChatRoomsSocket ';
 import { useGlobalSocket } from '@/hooks/useGlobalSocket';
- import { VideoCallUI } from '@/components/chat/VideoCallUI';
+import { VideoCallUI } from '@/components/chat/VideoCallUI';
 
 const AdminLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -42,7 +41,6 @@ const AdminLayout = () => {
 
   //useChatRoomsSocket({ currentUserId: adminId });
   useNotificationSocket(adminId);
-
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);

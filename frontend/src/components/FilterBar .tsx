@@ -1,13 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/ui/Input';
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@/components/Select';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/Select';
 
 interface Option {
   value: string;

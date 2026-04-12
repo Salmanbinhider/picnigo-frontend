@@ -135,7 +135,9 @@ const SecurityTab = () => {
           />
           {formErrors.confirm && <p className="text-red-500 text-xs mt-1">{formErrors.confirm}</p>}
         </div>
-        <Button className=' text-white'>{loadingPassword ? 'Loading...' : 'Change Password'}</Button>
+        <Button className=" text-white">
+          {loadingPassword ? 'Loading...' : 'Change Password'}
+        </Button>
       </form>
     </div>
   );

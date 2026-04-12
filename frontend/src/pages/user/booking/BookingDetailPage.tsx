@@ -31,11 +31,9 @@ import {
   XCircle,
   Star,
 } from 'lucide-react';
-import { ChangeTravelDate } from './ChangeTravelDate';
 import PackageDetailPickUp from '../packages/pages/PackageDetailPickUp';
 import { BookingHistoryCard } from '@/components/booking/BookingHistoryCard';
 import MapModal from '@/components/MapModal';
-import MapPreview from '@/components/MapPreview';
 const BookingDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -56,7 +54,7 @@ const BookingDetailPage = () => {
       try {
         const data = await getBookingById(id!);
         setBooking(data.booking);
-        console.log(data, 'data');
+        //console.log(data, 'data');
       } catch {
         toast.error('Failed to load booking.');
         navigate('/account/bookings');
@@ -75,7 +73,7 @@ const BookingDetailPage = () => {
       }
       try {
         const data = await fetchPackgeById(pkgId);
-        console.log(data, 'pkg data');
+        //console.log(data, 'pkg data');
         setPkg(data as IPackage);
       } catch (error) {
         console.error('Failed to fetch package details', error);
@@ -92,22 +90,22 @@ const BookingDetailPage = () => {
 
     try {
       await cancelBooking(id!, cancelReason);
-      console.log(cancelReason, 'reason');
+      //console.log(cancelReason, 'reason');
       toast.success('Booking cancelled.');
 
       setBooking((prev) =>
         prev
           ? {
-            ...prev,
-            bookingStatus: 'cancelled',
-            updatedAt: new Date(),
-          }
+              ...prev,
+              bookingStatus: 'cancelled',
+              updatedAt: new Date(),
+            }
           : prev
       );
       setOpen(false);
     } catch (error: any) {
       toast.error(error?.response?.data.message || 'Cancellation failed.');
-      console.log(error?.response.data.message, 'bookinug')
+      //console.log(error?.response.data.message, 'bookinug');
     }
   };
 
@@ -152,7 +150,7 @@ const BookingDetailPage = () => {
     try {
       const updatedBooking = await changeTravelDate(id!, newDate, note);
       setBooking(updatedBooking);
-      console.log(updatedBooking, 'travel booking date cahge');
+      //console.log(updatedBooking, 'travel booking date cahge');
       toast.success('Travel date updated successfully.');
 
       setBooking(updatedBooking);
@@ -167,12 +165,9 @@ const BookingDetailPage = () => {
     navigate(`/packages/${packageId}/review/add`);
   };
 
-
-
   const handleAddTraveller = () => {
     navigate(`/checkout/add-traveller/${packageId}/${booking?._id}`);
   };
-
 
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
@@ -301,7 +296,6 @@ const BookingDetailPage = () => {
               </CardContent>
             </Card>
             <PackageDetailPickUp startPoint={pkg?.startPoint!} />
-          
 
             {/* Full screen map modal should be outside */}
             <MapModal
@@ -420,10 +414,10 @@ const BookingDetailPage = () => {
                   <span className="font-medium">
                     {booking?.travelDate
                       ? new Date(booking?.travelDate).toLocaleDateString('en-IN', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                      })
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })
                       : '—'}
                   </span>
                 </div>
@@ -445,12 +439,13 @@ const BookingDetailPage = () => {
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <span className="text-gray-600">Payment Status</span>
                   <span
-                    className={`font-medium ${booking?.paymentStatus === 'paid'
-                      ? 'text-green-600'
-                      : booking?.paymentStatus === 'pending'
-                        ? 'text-yellow-600'
-                        : 'text-red-600'
-                      }`}
+                    className={`font-medium ${
+                      booking?.paymentStatus === 'paid'
+                        ? 'text-green-600'
+                        : booking?.paymentStatus === 'pending'
+                          ? 'text-yellow-600'
+                          : 'text-red-600'
+                    }`}
                   >
                     {booking?.paymentStatus}
                   </span>
@@ -478,7 +473,6 @@ const BookingDetailPage = () => {
               </CardContent>
             </Card>
 
-
             <Card className="border-none shadow-md rounded-2xl overflow-hidden bg-white">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-2xl">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold">
@@ -505,19 +499,17 @@ const BookingDetailPage = () => {
 
                       <div className="text-sm text-gray-700 space-y-1">
                         <p>
-                          <span className="font-medium">Age:</span> {traveler?.age} •{" "}
+                          <span className="font-medium">Age:</span> {traveler?.age} •{' '}
                           <span className="capitalize">{traveler?.gender}</span>
                         </p>
                         <p className="text-gray-600">
-                          <span className="font-medium">
-                            {traveler?.idType?.toUpperCase()}:
-                          </span>{" "}
+                          <span className="font-medium">{traveler?.idType?.toUpperCase()}:</span>{' '}
                           {traveler?.idNumber}
                         </p>
                       </div>
 
-                      {booking?.bookingStatus !== "confirmed" &&
-                        booking?.bookingStatus !== "cancelled" && (
+                      {booking?.bookingStatus !== 'confirmed' &&
+                        booking?.bookingStatus !== 'cancelled' && (
                           <div className="mt-4 flex justify-end">
                             <Button
                               variant="destructive"
@@ -536,9 +528,7 @@ const BookingDetailPage = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center text-gray-500 py-4">
-                    No travelers added yet.
-                  </div>
+                  <div className="text-center text-gray-500 py-4">No travelers added yet.</div>
                 )}
               </CardContent>
 
@@ -546,9 +536,7 @@ const BookingDetailPage = () => {
               <Dialog open={travellerOpen} onOpenChange={setTravellerOpen}>
                 <DialogContent className="rounded-2xl">
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      Cancel Traveler
-                    </h3>
+                    <h3 className="text-xl font-semibold text-gray-800">Cancel Traveler</h3>
                     <Textarea
                       rows={4}
                       value={travellerCancelReason}
@@ -619,12 +607,9 @@ const BookingDetailPage = () => {
               {/* Retry Payment */}
               {(() => {
                 const now = new Date();
-                const travelDate = booking?.travelDate
-                  ? new Date(booking.travelDate)
-                  : null;
+                const travelDate = booking?.travelDate ? new Date(booking.travelDate) : null;
                 const hasPaymentIssue =
-                  booking?.paymentStatus === "pending" ||
-                  booking?.paymentStatus === "failed";
+                  booking?.paymentStatus === 'pending' || booking?.paymentStatus === 'failed';
 
                 const isBeforeTravel = travelDate && now < travelDate; // can't retry after travel date
 
@@ -646,20 +631,16 @@ const BookingDetailPage = () => {
               {(() => {
                 const now = new Date();
                 const endDate = pkg?.endDate ? new Date(pkg.endDate) : null;
-                const departureDate = booking?.travelDate
-                  ? new Date(booking.travelDate)
-                  : null;
+                const departureDate = booking?.travelDate ? new Date(booking.travelDate) : null;
 
-                const isPast =
-                  (endDate && now > endDate) || (departureDate && now > departureDate);
+                const isPast = (endDate && now > endDate) || (departureDate && now > departureDate);
 
-                const isGroup = pkg?.packageType === "group";
+                const isGroup = pkg?.packageType === 'group';
                 const isSlotsFull =
                   isGroup && pkg?.availableSlots !== undefined && pkg.availableSlots <= 0;
 
                 const isBookingValid =
-                  booking?.paymentStatus === "paid" ||
-                  booking?.paymentStatus === "failed"; // allow add if paid or failed (you can adjust)
+                  booking?.paymentStatus === 'paid' || booking?.paymentStatus === 'failed'; // allow add if paid or failed (you can adjust)
 
                 // Show only if trip not yet ended/departed AND slots available (if group) AND booking valid
                 if (!isPast && !isSlotsFull && isBookingValid) {
@@ -677,7 +658,7 @@ const BookingDetailPage = () => {
               })()}
 
               {/* Cancel Booking */}
-              {booking?.bookingStatus !== "cancelled" &&
+              {booking?.bookingStatus !== 'cancelled' &&
                 new Date(booking?.travelDate!) > new Date() && (
                   <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
@@ -691,12 +672,8 @@ const BookingDetailPage = () => {
 
                     <DialogContent className="rounded-2xl p-6 bg-white">
                       <div className="space-y-4">
-                        <h3 className="text-xl font-semibold text-gray-800">
-                          Cancel Booking
-                        </h3>
-                        <p className="text-gray-600">
-                          Please provide a reason for cancellation:
-                        </p>
+                        <h3 className="text-xl font-semibold text-gray-800">Cancel Booking</h3>
+                        <p className="text-gray-600">Please provide a reason for cancellation:</p>
                         <Textarea
                           rows={4}
                           value={cancelReason}
@@ -724,7 +701,6 @@ const BookingDetailPage = () => {
                     </DialogContent>
                   </Dialog>
                 )}
-
             </div>
             {booking?.bookingStatus !== 'cancelled' &&
               new Date(booking?.travelDate!) <= new Date() && (
@@ -739,21 +715,14 @@ const BookingDetailPage = () => {
               )}
           </div>
         </div>
-
-
       </div>
-
 
       <BookingHistoryCard
         title="Traveler History"
         type="traveler"
         history={booking?.travelerHistory || []}
       />
-      <BookingHistoryCard
-        title="Travel History"
-        type="date"
-        history={booking?.history || []}
-      />
+      <BookingHistoryCard title="Travel History" type="date" history={booking?.history || []} />
 
       {/* Retry Payment Modal */}
       <RetryPaymentModal

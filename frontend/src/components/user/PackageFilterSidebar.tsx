@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCategory } from '../../services/admin/packageService';
+import { getCategory } from '../../services/user/PackageService';
 import { X } from 'lucide-react';
 
 interface ICategory {
@@ -48,7 +48,7 @@ const PackageFilterSidebar: React.FC<Props> = ({ filters, onFilterChange, onClea
         const cat = await getCategory();
         setCategory(cat);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
     loadCat();
@@ -145,11 +145,9 @@ const PackageFilterSidebar: React.FC<Props> = ({ filters, onFilterChange, onClea
 
         {/* Clear button */}
 
-
         <button onClick={onClear} className="w-full bg-orange text-white py-2 rounded">
           Clear Filters
         </button>
-
       </aside>
 
       {/*  Category Modal */}
@@ -171,10 +169,11 @@ const PackageFilterSidebar: React.FC<Props> = ({ filters, onFilterChange, onClea
             <ul className="space-y-2">
               <li>
                 <button
-                  className={`w-full text-left px-3 py-2 rounded-lg transition ${!localFilters.category
-                    ? 'bg-orange-500 text-white'
-                    : 'hover:bg-orange-50 text-gray-700'
-                    }`}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition ${
+                    !localFilters.category
+                      ? 'bg-orange-500 text-white'
+                      : 'hover:bg-orange-50 text-gray-700'
+                  }`}
                   onClick={() => {
                     updateAndSendFilters({ category: '' });
                     setShowCategoryModal(false);
@@ -187,10 +186,11 @@ const PackageFilterSidebar: React.FC<Props> = ({ filters, onFilterChange, onClea
               {category.map((cat) => (
                 <li key={cat._id}>
                   <button
-                    className={`w-full text-left px-3 py-2 rounded-lg transition ${localFilters.category === cat._id
-                      ? 'bg-orange text-white'
-                      : 'hover:bg-orange-50 text-gray-700'
-                      }`}
+                    className={`w-full text-left px-3 py-2 rounded-lg transition ${
+                      localFilters.category === cat._id
+                        ? 'bg-orange text-white'
+                        : 'hover:bg-orange-50 text-gray-700'
+                    }`}
                     onClick={() => {
                       updateAndSendFilters({ category: cat._id });
                       setShowCategoryModal(false);
@@ -209,4 +209,3 @@ const PackageFilterSidebar: React.FC<Props> = ({ filters, onFilterChange, onClea
 };
 
 export default PackageFilterSidebar;
-

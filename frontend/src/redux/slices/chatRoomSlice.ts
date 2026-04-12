@@ -11,7 +11,6 @@ interface ChatRoomsState {
   onlineStatus: Record<string, boolean>;
   onlineUsers: string[];
   totalUnread: number;
-
 }
 
 const initialState: ChatRoomsState = {
@@ -21,7 +20,7 @@ const initialState: ChatRoomsState = {
   error: undefined,
   onlineStatus: {},
   onlineUsers: [] as string[],
-  totalUnread: 0
+  totalUnread: 0,
 };
 
 export const fetchUserRooms = createAsyncThunk(
@@ -32,7 +31,7 @@ export const fetchUserRooms = createAsyncThunk(
   ) => {
     try {
       const res = isAdmin ? await adminGetUserRoom(filters) : await getUserRoom(filters);
-      console.log(res, 'caht room');
+      //console.log(res, 'caht room');
 
       return res.data as IChatRoom[];
     } catch (err: any) {
@@ -55,25 +54,25 @@ const chatRoomsSlice = createSlice({
 
     //   const room = state.rooms.find((r) => r._id === action.payload.roomId);
     //   if (room && room.unreadCounts) {
-    //     //     console.log(room, 'from setacive')
+    //     //     //console.log(room, 'from setacive')
     //     room.unreadCounts[action.payload.currentUserId] = 0;
     //   }
     // },
-setActiveRoom: (state, action: PayloadAction<{ roomId: string; currentUserId: string }>) => {
-  state.activeRoomId = action.payload.roomId;
-  const { roomId, currentUserId } = action.payload;
+    setActiveRoom: (state, action: PayloadAction<{ roomId: string; currentUserId: string }>) => {
+      state.activeRoomId = action.payload.roomId;
+      const { roomId, currentUserId } = action.payload;
 
-  const room = state.rooms.find((r) => r._id === roomId);
-  if (room && room.unreadCounts) {
-    const unreadCount = room.unreadCounts[currentUserId] || 0;
+      const room = state.rooms.find((r) => r._id === roomId);
+      if (room && room.unreadCounts) {
+        const unreadCount = room.unreadCounts[currentUserId] || 0;
 
-    // 🟢 Subtract from total unread
-    state.totalUnread = Math.max(state.totalUnread - unreadCount, 0);
+        // 🟢 Subtract from total unread
+        state.totalUnread = Math.max(state.totalUnread - unreadCount, 0);
 
-    // 🟢 Clear unread for this user in this room
-    room.unreadCounts[currentUserId] = 0;
-  }
-},
+        // 🟢 Clear unread for this user in this room
+        room.unreadCounts[currentUserId] = 0;
+      }
+    },
 
     addMessageToRoom: (
       state,
@@ -121,7 +120,7 @@ setActiveRoom: (state, action: PayloadAction<{ roomId: string; currentUserId: st
     // ) => {
     //   const { roomId, message, currentUserId } = action.payload;
     //   const room = state.rooms.find((r) => r._id === roomId);
-    //   console.log(message, 'redux');
+    //   //console.log(message, 'redux');
     //   if (room) {
     //     //  update last message info for chat list
     //     room.lastMessageContent = message.content || message.mediaUrl;
@@ -131,42 +130,42 @@ setActiveRoom: (state, action: PayloadAction<{ roomId: string; currentUserId: st
     //     if (message.senderId._id !== currentUserId) {
     //       if (!room.unreadCounts) {
     //         room.unreadCounts = { [currentUserId]: 1 };
-    //         console.log(room.unreadCounts, 'if');
+    //         //console.log(room.unreadCounts, 'if');
     //       } else {
     //         room.unreadCounts[currentUserId] = (room.unreadCounts[currentUserId] || 0) + 1;
     //       }
     //     }
     //   }
     // },
-updateRoomOnNewMessage: (
-  state,
-  action: PayloadAction<{ roomId: string; message: IMessage; currentUserId: string }>
-) => {
-  const { roomId, message, currentUserId } = action.payload;
-  const room = state.rooms.find((r) => r._id === roomId);
+    updateRoomOnNewMessage: (
+      state,
+      action: PayloadAction<{ roomId: string; message: IMessage; currentUserId: string }>
+    ) => {
+      const { roomId, message, currentUserId } = action.payload;
+      const room = state.rooms.find((r) => r._id === roomId);
 
-  if (room) {
-    room.lastMessageContent = message.content || message.mediaUrl;
-    room.updatedAt = new Date();
+      if (room) {
+        room.lastMessageContent = message.content || message.mediaUrl;
+        room.updatedAt = new Date();
 
-    // 🟢 If not sender, increase unread
-    if (message.senderId._id !== currentUserId) {
-      if (!room.unreadCounts) room.unreadCounts = {};
-      const prev = room.unreadCounts[currentUserId] || 0;
-      room.unreadCounts[currentUserId] = prev + 1;
+        // 🟢 If not sender, increase unread
+        if (message.senderId._id !== currentUserId) {
+          if (!room.unreadCounts) room.unreadCounts = {};
+          const prev = room.unreadCounts[currentUserId] || 0;
+          room.unreadCounts[currentUserId] = prev + 1;
 
-      // 🟢 Also increase totalUnread
-      state.totalUnread += 1;
-    }
-  }
-},
+          // 🟢 Also increase totalUnread
+          state.totalUnread += 1;
+        }
+      }
+    },
 
     deleteMessageFromRoom: (
       state,
       action: PayloadAction<{ roomId: string; messageId: string; lastMessageContent?: string }>
     ) => {
       const { roomId } = action.payload;
-      //console.log(lastMessageContent, 'redux')
+      ////console.log(lastMessageContent, 'redux')
       const room = state.rooms.find((r) => r._id === roomId);
       if (room) {
         room.lastMessageContent = 'Message deleted';
@@ -199,7 +198,6 @@ updateRoomOnNewMessage: (
     decrementTotalUnread: (state) => {
       if (state.totalUnread > 0) state.totalUnread -= 1;
     },
-
   },
 
   extraReducers: (builder) => {
@@ -232,9 +230,9 @@ export const {
   setCurrentOnlineUsers,
   setUserOffline,
   setUserOnline,
-   setTotalUnread,           
-  incrementTotalUnread,    
-  decrementTotalUnread, 
+  setTotalUnread,
+  incrementTotalUnread,
+  decrementTotalUnread,
 } = chatRoomsSlice.actions;
 
 export default chatRoomsSlice.reducer;
@@ -287,8 +285,8 @@ export default chatRoomsSlice.reducer;
 //   async (_, { rejectWithValue }) => {
 //     try {
 //       const res = await userTotalChatUnreadCount();
-//       console.log(res.data,'redux count');
-      
+//       //console.log(res.data,'redux count');
+
 //       return res.data as number; // Adjust key if different
 //     } catch (err: any) {
 //       return rejectWithValue(err.message || 'Failed to fetch unread count');

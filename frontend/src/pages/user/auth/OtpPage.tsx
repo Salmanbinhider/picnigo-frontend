@@ -28,12 +28,12 @@ const VerifyOtp = () => {
 
   const handleVerify = async () => {
     if (!otp || otp.length !== 6) {
-      snackbar.error('Enter a valid 6-digit OTP')
+      snackbar.error('Enter a valid 6-digit OTP');
       //toast.error('Enter a valid 6-digit OTP');
       return;
     }
     if (isExpired) {
-      snackbar.error('OTP expired. Please resend.')
+      snackbar.error('OTP expired. Please resend.');
       //toast.error('OTP expired. Please resend.');
       return;
     }
@@ -41,7 +41,7 @@ const VerifyOtp = () => {
     setLoading(true);
     try {
       await handleVerifyAndRegister(email, otp);
-      
+
       snackbar.success('Registration successful!');
       localStorage.removeItem('signupEmail');
       localStorage.removeItem('otp_expiry_timestamp');
@@ -111,10 +111,11 @@ const VerifyOtp = () => {
               type="button"
               onClick={handleResend}
               disabled={!isExpired || resendLoading}
-              className={`font-semibold transition ${isExpired && !resendLoading
+              className={`font-semibold transition ${
+                isExpired && !resendLoading
                   ? 'text-orange hover:underline'
                   : 'text-gray-400 cursor-not-allowed'
-                }`}
+              }`}
             >
               {resendLoading
                 ? 'Resending...'

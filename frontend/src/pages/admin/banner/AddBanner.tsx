@@ -102,9 +102,7 @@ const AddBannerForm = () => {
 
       navigate('/admin/banners');
     } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message || 'Failed to add banner.'
-      );
+      toast.error(error?.response?.data?.message || 'Failed to add banner.');
       console.error('Banner creation error:', error);
     } finally {
       setIsSubmitting(false);
@@ -119,12 +117,7 @@ const AddBannerForm = () => {
         {/* Title */}
         <div>
           <Label htmlFor="title">Title</Label>
-          <Input
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
+          <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
         </div>
 
         {/* Description */}
@@ -141,13 +134,7 @@ const AddBannerForm = () => {
         {/* Image Upload */}
         <div>
           <Label htmlFor="image">Banner Image</Label>
-          <Input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            required
-          />
+          <Input id="image" type="file" accept="image/*" onChange={handleImageChange} required />
         </div>
 
         {/* Preview */}

@@ -28,7 +28,7 @@ const CoverImageTab = ({ user, loading }: Props) => {
   const profilePicPreview = user?.coverImage?.url
     ? user.coverImage.url.replace('/upload/', '/upload/f_webp,q_auto/')
     : '/profile-default.jpg';
-  console.log(profilePicPreview, 'cover image');
+  //console.log(profilePicPreview, 'cover image');
   const uploadCoverImage = async (file: File) => {
     try {
       setLoadingImage(true);

@@ -10,16 +10,13 @@ const AdminLogin = () => {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
-  const snackbar=useAppSnackbar()
+  const snackbar = useAppSnackbar();
 
   const { loading, error, isAuthenticated } = useSelector((state: RootState) => state.adminAuth);
   const accessToken = useSelector((state: RootState) => state.adminAuth.accessToken);
-  ;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState('');
-
-
 
   useEffect(() => {
     if (location.state?.email && location.state?.password) {
@@ -33,7 +30,7 @@ const AdminLogin = () => {
     if (token) {
       //  If token exists, redirect to dashboard
       navigate('/admin/dashboard', { replace: true });
-      console.log(token);
+      //console.log(token);
     }
   }, [accessToken, navigate]);
 

@@ -23,10 +23,8 @@ interface CommentSectionProps {
 const CommentSection = ({ parentId, parentType }: CommentSectionProps) => {
   const { openLogin } = useAuthModal();
 
-  const { isAuthenticated, user } = useSelector(
-    (state: RootState) => state.userAuth
-  );
-  const currentUser = user
+  const { isAuthenticated, user } = useSelector((state: RootState) => state.userAuth);
+  const currentUser = user;
 
   const [comments, setComments] = useState<IComment[]>([]);
   const [text, setText] = useState('');
@@ -81,12 +79,9 @@ const CommentSection = ({ parentId, parentType }: CommentSectionProps) => {
         [commentId]: pageParam < res.pagination.totalPages,
       }));
     } catch (error) {
-      console.error('Failed to load replies', error);
+     // console.error('Failed to load replies', error);
     }
   };
-
-
-
 
   // Add comment or reply
   const onSubmit = async (message: string, parentCommentId?: string) => {
@@ -94,7 +89,7 @@ const CommentSection = ({ parentId, parentType }: CommentSectionProps) => {
 
     if (!isAllowed) {
       openLogin(); //  open modal
-      return;      //  stop navigation
+      return; //  stop navigation
     }
     if (!message.trim()) return toast.error('Please write something');
 
@@ -132,7 +127,7 @@ const CommentSection = ({ parentId, parentType }: CommentSectionProps) => {
         setText('');
       }
     } catch (error) {
-      console.error(error);
+      //console.error(error);
       toast.error('Error posting comment');
     }
   };

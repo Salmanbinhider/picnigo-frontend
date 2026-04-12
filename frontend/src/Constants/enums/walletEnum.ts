@@ -8,4 +8,5 @@ export const EnumWalletTransactionType = {
   CREDIT: 'credit',
   DEBIT: 'debit',
 } as const;
-export type EnumWalletTransactionType = (typeof EnumWalletTransactionType)[keyof typeof EnumWalletTransactionType];
+export type EnumWalletTransactionType =
+  (typeof EnumWalletTransactionType)[keyof typeof EnumWalletTransactionType];

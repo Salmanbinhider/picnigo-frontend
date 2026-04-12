@@ -5,14 +5,14 @@ import {
   Popup,
   Polyline,
   useMap,
-  Circle as LeafletCircle
-} from "react-leaflet";
-import L from "leaflet";
-import { useEffect, useState } from "react";
-import "leaflet/dist/leaflet.css";
+  Circle as LeafletCircle,
+} from 'react-leaflet';
+import L from 'leaflet';
+import { useEffect, useState } from 'react';
+import 'leaflet/dist/leaflet.css';
 
 interface GeoPoint {
-  type: "Point";
+  type: 'Point';
   coordinates: [number, number]; // [lng, lat]
 }
 
@@ -30,14 +30,14 @@ interface MapModalProps {
 
 // Default marker icon
 const markerIcon = new L.Icon({
-  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
 });
 
 // Live location (pulsing blue)
 const liveLocationIcon = L.divIcon({
-  className: "",
+  className: '',
   html: `<div class="live-location-dot"></div>`,
   iconSize: [18, 18],
   iconAnchor: [9, 9],
@@ -71,33 +71,33 @@ function Compass() {
       }
     };
 
-    window.addEventListener("deviceorientation", handleOrientation);
+    window.addEventListener('deviceorientation', handleOrientation);
 
-    return () => window.removeEventListener("deviceorientation", handleOrientation);
+    return () => window.removeEventListener('deviceorientation', handleOrientation);
   }, []);
 
   return (
     <div
       style={{
-        position: "absolute",
-        top: "80px",
-        right: "20px",
+        position: 'absolute',
+        top: '80px',
+        right: '20px',
         zIndex: 2000,
-        background: "white",
-        padding: "8px",
-        borderRadius: "12px",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-        fontSize: "14px",
-        fontWeight: "bold",
-        display: "flex",
-        alignItems: "center",
-        gap: "6px",
-        userSelect: "none",
+        background: 'white',
+        padding: '8px',
+        borderRadius: '12px',
+        boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        userSelect: 'none',
       }}
     >
       <div
         style={{
-          transition: "transform 0.2s linear",
+          transition: 'transform 0.2s linear',
           transform: `rotate(${rotation}deg)`,
         }}
       >
@@ -115,9 +115,7 @@ function calcDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   const dLon = ((lon2 - lon1) * Math.PI) / 180;
   const a =
     Math.sin(dLat / 2) ** 2 +
-    Math.cos(lat1 * (Math.PI / 180)) *
-    Math.cos(lat2 * (Math.PI / 180)) *
-    Math.sin(dLon / 2) ** 2;
+    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * Math.sin(dLon / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
@@ -129,11 +127,9 @@ function getBearing(lat1: number, lon1: number, lat2: number, lon2: number) {
   lat2 = lat2 * (Math.PI / 180);
 
   const y = Math.sin(dLon) * Math.cos(lat2);
-  const x =
-    Math.cos(lat1) * Math.sin(lat2) -
-    Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
 
-  let brng = (Math.atan2(y, x) * 180) / Math.PI;
+  const brng = (Math.atan2(y, x) * 180) / Math.PI;
   return (brng + 360) % 360;
 }
 
@@ -151,7 +147,7 @@ export default function MapModal({ open, onClose, locations }: MapModalProps) {
         setUserPos([pos.coords.latitude, pos.coords.longitude]);
         setUserAccuracy(pos.coords.accuracy || 50);
       },
-      (err) => console.error("Live location error:", err),
+      (err) => console.error('Live location error:', err),
       { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 }
     );
 
@@ -162,7 +158,6 @@ export default function MapModal({ open, onClose, locations }: MapModalProps) {
 
   const first = locations[0];
 
-
   // Select 2 locations to show distance
   const toggleSelect = (i: number) => {
     setSelected((prev) =>
@@ -170,7 +165,7 @@ export default function MapModal({ open, onClose, locations }: MapModalProps) {
     );
   };
 
-  let selectedDistance = "";
+  let selectedDistance = '';
   if (selected.length === 2) {
     const A = locations[selected[0]];
     const B = locations[selected[1]];
@@ -211,7 +206,6 @@ export default function MapModal({ open, onClose, locations }: MapModalProps) {
           scrollWheelZoom={true}
           // className="w-full h-full"
           className="w-full h-full z-0"
-
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <FitBounds locations={locations} />
@@ -227,8 +221,8 @@ export default function MapModal({ open, onClose, locations }: MapModalProps) {
                 center={userPos}
                 radius={userAccuracy}
                 pathOptions={{
-                  color: "#4285F4",
-                  fillColor: "#4285F4",
+                  color: '#4285F4',
+                  fillColor: '#4285F4',
                   fillOpacity: 0.15,
                 }}
               />
@@ -258,14 +252,9 @@ export default function MapModal({ open, onClose, locations }: MapModalProps) {
             const lng = loc.geo.coordinates[0];
 
             // Compass direction
-            let direction = "";
+            let direction = '';
             if (userPos) {
-              const bearing = getBearing(
-                userPos[0],
-                userPos[1],
-                lat,
-                lng
-              );
+              const bearing = getBearing(userPos[0], userPos[1], lat, lng);
               direction = `${bearing.toFixed(0)}°`;
             }
 
@@ -280,7 +269,11 @@ export default function MapModal({ open, onClose, locations }: MapModalProps) {
               >
                 <Popup>
                   <strong>{loc.name}</strong> <br />
-                  {direction && <>Direction: {direction}° <br /></>}
+                  {direction && (
+                    <>
+                      Direction: {direction}° <br />
+                    </>
+                  )}
                   {selected.includes(index) && <span>Selected</span>}
                 </Popup>
               </Marker>

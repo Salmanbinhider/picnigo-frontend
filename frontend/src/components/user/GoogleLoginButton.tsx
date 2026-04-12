@@ -21,7 +21,7 @@ const GoogleLoginButton = () => {
       const { user, accessToken } = res;
 
       dispatch(setUser({ user, accessToken }));
-      // console.log(accessToken,'from google')
+      // //console.log(accessToken,'from google')
 
       toast.success('Logged in with Google');
       navigate('/home');

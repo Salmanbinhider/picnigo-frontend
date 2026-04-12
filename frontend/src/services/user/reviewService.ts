@@ -43,7 +43,7 @@ export const handleEditReview = async (
 
 export const handleUserReview = async (page: number, limit: number) => {
   const response = await api.get(`/user/users/me/reviews?page=${page}&limit=${limit}`);
-  console.log(response.data.data, 'in uer review');
+  //console.log(response.data.data, 'in uer review');
 
   return response.data.data;
 };
@@ -59,6 +59,6 @@ export const handleReviewRating = async (packageId: string) => {
 
 export const handleDeleteReview = async (reviewId: string) => {
   const response = await api.delete(`/user/reviews/${reviewId}/delete`);
-  console.log(response, 'response from user review');
+  //console.log(response, 'response from user review');
   return response.data;
 };

@@ -36,10 +36,7 @@ export default function RoomSearch({ onRoomSelect, placeholder = 'Search chats..
         const last = (room.lastMessageContent ?? '').toLowerCase();
 
         return (
-          username.includes(q) ||
-          fullName.includes(q) ||
-          roomName.includes(q) ||
-          last.includes(q)
+          username.includes(q) || fullName.includes(q) || roomName.includes(q) || last.includes(q)
         );
       });
 
@@ -70,36 +67,38 @@ export default function RoomSearch({ onRoomSelect, placeholder = 'Search chats..
           <p className="p-3 text-sm text-gray-500">No chats found</p>
         )}
 
-        {!loading && results.map((room) => {
-          const other = room.otherUser;
-          const title = room.isGroup ? room.name ?? 'Group' : other?.username ?? 'Unknown';
-          const subtitle = (!room.isGroup && (other as any)?.fullName) || room.lastMessageContent || '';
+        {!loading &&
+          results.map((room) => {
+            const other = room.otherUser;
+            const title = room.isGroup ? (room.name ?? 'Group') : (other?.username ?? 'Unknown');
+            const subtitle =
+              (!room.isGroup && (other as any)?.fullName) || room.lastMessageContent || '';
 
-          return (
-            <button
-              key={room._id}
-              onClick={() => {
-                setQuery('');
-                setResults([]);
-                onRoomSelect(room);
-              }}
-              className="w-full text-left flex items-center p-3 hover:bg-gray-50 border-b border-gray-100"
-            >
-              <img
-                src={other?.profileImage || '/profile-default.jpg'}
-                alt={title}
-                className="w-10 h-10 rounded-full object-cover mr-3 border"
-              />
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-gray-900">{title}</p>
-                  <span className="text-xs text-gray-400">{/* optionally show date */}</span>
+            return (
+              <button
+                key={room._id}
+                onClick={() => {
+                  setQuery('');
+                  setResults([]);
+                  onRoomSelect(room);
+                }}
+                className="w-full text-left flex items-center p-3 hover:bg-gray-50 border-b border-gray-100"
+              >
+                <img
+                  src={other?.profileImage || '/profile-default.jpg'}
+                  alt={title}
+                  className="w-10 h-10 rounded-full object-cover mr-3 border"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-900">{title}</p>
+                    <span className="text-xs text-gray-400">{/* optionally show date */}</span>
+                  </div>
+                  <p className="text-xs text-gray-500 truncate">{subtitle}</p>
                 </div>
-                <p className="text-xs text-gray-500 truncate">{subtitle}</p>
-              </div>
-            </button>
-          );
-        })}
+              </button>
+            );
+          })}
       </div>
     </div>
   );

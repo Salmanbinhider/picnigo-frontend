@@ -36,7 +36,7 @@ export default function Footer() {
 
     if (!isAllowed) {
       openLogin(); // 🔥 open modal
-      return;      // ❌ stop navigation
+      return; // ❌ stop navigation
     }
     try {
       setLoading(true);
@@ -117,21 +117,18 @@ export default function Footer() {
           {/* Logo & Info */}
           <div className="space-y-4 text-center sm:text-left">
             {/* <div className="flex items-center justify-center sm:justify-start space-x-1">
-              <span className="text-3xl font-bold text-orange">Tripsera</span>
+              <span className="text-3xl font-bold text-orange">Picnigo</span>
               <PlaneTakeoff className="text-orange w-6 h-6" />
             </div> */}
- <Link
-  to="/"
-  className="flex items-center gap-2 text-2xl font-bold"
->
-  <span className="bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-transparent">
-    Tripsera
-  </span>
-  <PlaneTakeoff className="w-5 h-5 text-orange-500" />
-</Link>
-         
+            <Link to="/" className="flex items-center gap-2 text-2xl font-bold">
+              <span className="bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-transparent">
+                Picnigo
+              </span>
+              <PlaneTakeoff className="w-5 h-5 text-orange-500" />
+            </Link>
+
             <p className="text-gray-600 text-sm leading-relaxed">
-              Discover amazing destinations and travel packages with Tripsera.
+              Discover amazing destinations and travel packages with Picnigo.
             </p>
 
             {/* Social Icons */}
@@ -191,9 +188,7 @@ export default function Footer() {
           </div>
 
           {/* Popular Destinations */}
-          <div className="text-center sm:text-left">
-
-          </div>
+          <div className="text-center sm:text-left"></div>
 
           {/* Newsletter Section */}
           <div className="text-center sm:text-left">
@@ -205,12 +200,13 @@ export default function Footer() {
             <button
               onClick={handleNewsletterToggle}
               disabled={loading}
-              className={`px-6 py-2 text-sm font-medium rounded-lg shadow-md transition-colors ${loading
-                ? 'bg-gray-400 cursor-not-allowed text-white'
-                : isSubscribed
-                  ? 'bg-gray-600 hover:bg-gray-700 text-white'
-                  : 'bg-orange hover:bg-orange/90 text-white'
-                }`}
+              className={`px-6 py-2 text-sm font-medium rounded-lg shadow-md transition-colors ${
+                loading
+                  ? 'bg-gray-400 cursor-not-allowed text-white'
+                  : isSubscribed
+                    ? 'bg-gray-600 hover:bg-gray-700 text-white'
+                    : 'bg-orange hover:bg-orange/90 text-white'
+              }`}
             >
               {loading
                 ? 'Processing...'
@@ -223,7 +219,7 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <div className="mt-10 border-t border-gray-200 pt-6 text-center text-gray-500 text-sm">
-          © 2025 <span className="text-orange font-medium">Tripsera</span>. All rights reserved. |{' '}
+          © 2025 <span className="text-orange font-medium">Picnigo</span>. All rights reserved. |{' '}
           <Link to="/privacy" className="hover:text-orange">
             Privacy Policy
           </Link>{' '}

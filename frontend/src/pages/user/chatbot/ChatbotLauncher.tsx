@@ -7,21 +7,19 @@ import type { RootState } from '@/redux/store';
 
 const ChatbotLauncher = () => {
   const navigate = useNavigate();
-const { openLogin } = useAuthModal();
+  const { openLogin } = useAuthModal();
 
-const { isAuthenticated, user } = useSelector(
-  (state: RootState) => state.userAuth
-);
-const handleClick = () => {
-  const isAllowed = isAuthenticated && !user?.isBlocked;
+  const { isAuthenticated, user } = useSelector((state: RootState) => state.userAuth);
+  const handleClick = () => {
+    const isAllowed = isAuthenticated && !user?.isBlocked;
 
-  if (!isAllowed) {
-    openLogin(); // 🔥 open modal
-    return;      // ❌ stop navigation
-  }
+    if (!isAllowed) {
+      openLogin(); // 🔥 open modal
+      return; // ❌ stop navigation
+    }
 
-  navigate(`/chatbot`); //  allowed
-};
+    navigate(`/chatbot`); //  allowed
+  };
 
   return (
     <motion.div

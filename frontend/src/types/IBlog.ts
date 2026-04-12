@@ -20,7 +20,7 @@
 //   createdAt?: Date;
 //   updatedAt?: Date;
 // }
-import type { IUser } from "./IUser";
+import type { IUser } from './IUser';
 export interface IBlogSection {
   heading: string;
   content: string;
@@ -28,18 +28,18 @@ export interface IBlogSection {
     url: string;
     public_id?: string;
   };
-  _id:string
+  _id: string;
 }
 
 export interface IBlogComment {
-  _id?:  string;
-  user:  IUser;
+  _id?: string;
+  user: IUser;
   text: string;
   createdAt?: Date;
 }
 
 export interface IBlog {
-  _id:  string;
+  _id: string;
   title: string;
   slug?: string;
   overview: string; // short intro / summary
@@ -52,7 +52,7 @@ export interface IBlog {
 
   sections?: IBlogSection[]; // multi-section layout (heading + image + text)
   images?: { url: string; public_id?: string }[];
- author: {
+  author: {
     _id: string;
     username: string;
     profileImage?: {
@@ -62,7 +62,7 @@ export interface IBlog {
   tags?: string[];
   //author:  IUser;
 
-  likes?:  IUser[];
+  likes?: IUser[];
   comments?: IBlogComment[];
 
   status: 'draft' | 'published' | 'archived';

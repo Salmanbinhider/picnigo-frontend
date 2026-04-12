@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from 'react';
 
 interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export const Label: React.FC<LabelProps> = ({ children, className = '', ...props }) => {
@@ -12,5 +12,5 @@ export const Label: React.FC<LabelProps> = ({ children, className = '', ...props
     >
       {children}
     </label>
-  )
-}
+  );
+};

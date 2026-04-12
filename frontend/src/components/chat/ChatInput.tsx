@@ -38,7 +38,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
     try {
       const response = await uploadFile(formData);
-      console.log('Uploaded:', response.data);
+      //console.log('Uploaded:', response.data);
       // TODO: send message via socket here with file URL + type
     } catch (error) {
       console.error('Upload failed', error);
@@ -82,7 +82,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         {selectedUpload === 'image' && (
           <ImageUpload
             onUpload={(file) => {
-              console.log('Cropped image ready:', file);
+              //console.log('Cropped image ready:', file);
               // TODO: send message with image file URL here
               setSelectedUpload(null); // close after upload
             }}

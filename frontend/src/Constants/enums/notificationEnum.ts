@@ -17,7 +17,8 @@ export const EnumNotificationEntityType = {
   REPORT: 'report',
   FOLLOW: 'follow',
 } as const;
-export type EnumNotificationEntityType = (typeof EnumNotificationEntityType)[keyof typeof EnumNotificationEntityType];
+export type EnumNotificationEntityType =
+  (typeof EnumNotificationEntityType)[keyof typeof EnumNotificationEntityType];
 
 // export enum EnumNotificationType {
 //   INFO = 'info',

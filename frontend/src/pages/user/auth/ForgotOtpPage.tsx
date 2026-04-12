@@ -9,7 +9,6 @@ const ForgotOtpPage = () => {
   const navigate = useNavigate();
   const snackbar = useAppSnackbar();
 
-
   const { timeLeft, formattedTime, isExpired, startTimer } = useOtpTimer();
 
   const [otp, setOtp] = useState('');
@@ -113,8 +112,9 @@ const ForgotOtpPage = () => {
             type="button"
             onClick={handleResend}
             disabled={!isExpired}
-            className={`font-semibold ${isExpired ? 'text-orange hover:underline' : 'text-gray-400 cursor-not-allowed'
-              }`}
+            className={`font-semibold ${
+              isExpired ? 'text-orange hover:underline' : 'text-gray-400 cursor-not-allowed'
+            }`}
           >
             {isExpired ? 'Resend' : `Resend in ${formattedTime}`}
           </button>

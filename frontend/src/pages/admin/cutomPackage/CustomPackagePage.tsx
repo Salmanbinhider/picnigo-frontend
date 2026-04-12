@@ -179,7 +179,9 @@ const CustomPackagePage = () => {
                       {item.userId?.username}
                     </TableCell>
                     <TableCell className="font-medium text-gray-800">{item.destination}</TableCell>
-                    <TableCell className="font-medium text-gray-800">{item.startingPoint}</TableCell>
+                    <TableCell className="font-medium text-gray-800">
+                      {item.startingPoint}
+                    </TableCell>
                     <TableCell className="capitalize text-gray-700">{item.tripType}</TableCell>
                     <TableCell className="font-semibold text-gray-900">
                       ₹ {item.budget.toLocaleString()}

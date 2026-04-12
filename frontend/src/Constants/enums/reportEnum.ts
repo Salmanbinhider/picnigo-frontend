@@ -27,4 +27,5 @@ export const EnumReportBlockStatus = {
   BLOCK: 'block',
   ACTIVE: 'active',
 } as const;
-export type EnumReportBlockStatus = (typeof EnumReportBlockStatus)[keyof typeof EnumReportBlockStatus];
+export type EnumReportBlockStatus =
+  (typeof EnumReportBlockStatus)[keyof typeof EnumReportBlockStatus];

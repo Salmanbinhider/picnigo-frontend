@@ -7,7 +7,6 @@ import { useSearchParams } from 'react-router-dom';
 import { Loader2, SlidersHorizontal } from 'lucide-react';
 import { usePaginationButtons } from '@/hooks/usePaginationButtons';
 
-
 const Packages = () => {
   const [packages, setPackages] = useState<IPackage[]>([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -200,14 +199,12 @@ const Packages = () => {
                   ))}
                 </div>
 
-                 {/* Pagination */}
+                {/* Pagination */}
                 <div className="flex justify-center mt-8">
                   <div className="flex items-center gap-1 p-2 bg-white rounded-xl shadow-md border border-gray-200">
                     {paginationButtons}
                   </div>
                 </div>
-
-
               </>
             ) : (
               <div className="flex flex-col items-center justify-center py-16">
@@ -216,9 +213,7 @@ const Packages = () => {
                   alt="No packages"
                   className="w-32 h-32 mb-4 opacity-70"
                 />
-                <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                  No Packages Found
-                </h2>
+                <h2 className="text-xl font-semibold text-gray-700 mb-2">No Packages Found</h2>
                 <p className="text-gray-500 text-center max-w-md">
                   Try adjusting your filters or searching with different keywords.
                 </p>

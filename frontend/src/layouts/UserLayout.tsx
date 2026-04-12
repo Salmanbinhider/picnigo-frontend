@@ -3,18 +3,17 @@ import Navbar from '@/components/user/Navbar';
 import Footer from '@/components/user/Footer';
 import ChatbotLauncher from '@/pages/user/chatbot/ChatbotLauncher';
 import { useNotificationSocket } from '@/hooks/useNotificationSocket';
-import { useSelector  } from 'react-redux';
-import type {  RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/redux/store';
 import { useState } from 'react';
-import WhatsAppButton from '@/components/WhatsAppButton';
 import { useGlobalSocket } from '@/hooks/useGlobalSocket';
 import { VideoCallUI } from '@/components/chat/VideoCallUI';
- import { useAuthModal } from '@/context/AuthModalContext';
+import { useAuthModal } from '@/context/AuthModalContext';
 import LoginModal from '@/pages/user/auth/LoginModal';
 
 const UserLayout = () => {
   const userId = useSelector((state: RootState) => state.userAuth.user?._id);
-const { isOpen, closeLogin } = useAuthModal();
+  const { isOpen, closeLogin } = useAuthModal();
   const [incomingCallData, setIncomingCallData] = useState<{
     fromUserId: string;
     roomId: string;
@@ -78,9 +77,10 @@ const { isOpen, closeLogin } = useAuthModal();
         />
       )}
 
-    {isOpen && (
- <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 px-4">
-<div className="
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 px-4">
+          <div
+            className="
   w-full
   max-w-lg        /* desktop width */
   sm:max-w-xl
@@ -90,18 +90,16 @@ const { isOpen, closeLogin } = useAuthModal();
   bg-white
   rounded-2xl
   relative
-">      
-      <button
-        onClick={closeLogin}
-        className="absolute top-3 right-3 text-gray-500 text-xl"
-      >
-        ✕
-      </button>
+"
+          >
+            <button onClick={closeLogin} className="absolute top-3 right-3 text-gray-500 text-xl">
+              ✕
+            </button>
 
-      <LoginModal />
-    </div>
-  </div>
-)}
+            <LoginModal />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

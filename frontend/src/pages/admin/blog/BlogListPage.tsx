@@ -66,7 +66,7 @@ const AdminBlogList = () => {
         };
         const filter = cleanFilter(rawFilters);
         const response = await getAllBlogs(currentPage, limit, filter);
-        console.log(response, 'bl;og res');
+        //console.log(response, 'bl;og res');
         setBlogs(response.data);
         setTotalPages(response.pagination.totalPages);
       } catch (error) {

@@ -80,7 +80,6 @@ const CustomPackagePage = () => {
   return (
     <div className="px-3 sm:px-6 py-4">
       <Card className="p-4 sm:p-6 shadow-xl border rounded-xl">
-
         <CardHeader>
           <CardTitle className="text-lg sm:text-xl md:text-2xl font-semibold">
             My Custom Packages
@@ -95,14 +94,9 @@ const CustomPackagePage = () => {
               {/* ✅ MOBILE VIEW (CARD) */}
               <div className="block md:hidden space-y-4">
                 {pkg.map((item) => (
-                  <div
-                    key={item.id}
-                    className="border rounded-lg p-4 shadow-sm bg-white"
-                  >
+                  <div key={item.id} className="border rounded-lg p-4 shadow-sm bg-white">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-semibold text-base">
-                        {item.destination}
-                      </h3>
+                      <h3 className="font-semibold text-base">{item.destination}</h3>
                       <Badge className={`${getStatusColor(item.status)} text-white text-xs`}>
                         {item.status}
                       </Badge>
@@ -124,9 +118,7 @@ const CustomPackagePage = () => {
                     <Button
                       size="sm"
                       className="w-full"
-                      onClick={() =>
-                        navigate(`/account/my-custom-package/${item.id}`)
-                      }
+                      onClick={() => navigate(`/account/my-custom-package/${item.id}`)}
                     >
                       <Eye className="w-4 h-4 mr-1" /> View Details
                     </Button>
@@ -166,9 +158,7 @@ const CustomPackagePage = () => {
                         <TableCell className="text-right">
                           <Button
                             size="sm"
-                            onClick={() =>
-                              navigate(`/account/my-custom-package/${item.id}`)
-                            }
+                            onClick={() => navigate(`/account/my-custom-package/${item.id}`)}
                           >
                             <Eye className="w-4 h-4 mr-1" /> Details
                           </Button>
@@ -182,9 +172,7 @@ const CustomPackagePage = () => {
           )}
         </CardContent>
 
-        <div className="flex justify-center gap-2 mt-6 flex-wrap">
-          {paginationButtons}
-        </div>
+        <div className="flex justify-center gap-2 mt-6 flex-wrap">{paginationButtons}</div>
       </Card>
     </div>
   );

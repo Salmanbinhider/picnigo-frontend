@@ -14,7 +14,6 @@ import {
   Gift,
   FileBarChart,
   Flag,
-  Settings,
   Menu,
   ChevronDown,
   ChevronRight,
@@ -32,19 +31,18 @@ interface AdminSidebarProps {
 export const AdminSidebar = ({ isOpen, onToggle, collapsed, onCollapse }: AdminSidebarProps) => {
   const isMobile = window.innerWidth < 1024;
   const location = useLocation();
-useEffect(() => {
-  const newOpenMenus: Record<string, boolean> = {};
+  useEffect(() => {
+    const newOpenMenus: Record<string, boolean> = {};
 
-  mainItems.forEach((item) => {
-    // Open submenu only if current route matches any of its children
-    if (item.children?.some((child) => location.pathname.includes(child.path))) {
-      newOpenMenus[item.label] = true;
-    }
-  });
+    mainItems.forEach((item) => {
+      // Open submenu only if current route matches any of its children
+      if (item.children?.some((child) => location.pathname.includes(child.path))) {
+        newOpenMenus[item.label] = true;
+      }
+    });
 
-  setOpenMenus(newOpenMenus);
-}, [location.pathname]);
-
+    setOpenMenus(newOpenMenus);
+  }, [location.pathname]);
 
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
 
@@ -93,9 +91,7 @@ useEffect(() => {
   const renderMenuGroup = (title: string, items: typeof mainItems) => (
     <div className="mb-4">
       {!collapsed && (
-        <h3 className="text-xs font-medium text-muted-foreground uppercase px-3 mb-1">
-          {title}
-        </h3>
+        <h3 className="text-xs font-medium text-muted-foreground uppercase px-3 mb-1">{title}</h3>
       )}
       <ul className="space-y-1">
         {items.map(({ path, label, icon: Icon, children }) =>
@@ -156,9 +152,7 @@ useEffect(() => {
                 className={({ isActive }) =>
                   cn(
                     'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors',
-                    isActive
-                      ? 'bg-orange text-white'
-                      : 'hover:bg-orange/10 hover:text-orange'
+                    isActive ? 'bg-orange text-white' : 'hover:bg-orange/10 hover:text-orange'
                   )
                 }
                 onClick={() => {
@@ -168,7 +162,6 @@ useEffect(() => {
                 {Icon && <Icon className="w-4 h-4" />}
                 {!collapsed && <span>{label}</span>}
               </NavLink>
-
             </li>
           )
         )}
@@ -179,10 +172,7 @@ useEffect(() => {
   return (
     <>
       {isOpen && isMobile && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={onToggle}
-        />
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={onToggle} />
       )}
 
       <aside

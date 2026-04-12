@@ -24,7 +24,7 @@ const EditProfileTab = ({ user, loading, refetchUser }: Props) => {
   const currentUser = useSelector((state: RootState) => state.userAuth.user);
   const dispatch = useDispatch<AppDispatch>();
 
-  // console.log(currentUser,'resux user')
+  // //console.log(currentUser,'resux user')
   const {
     register,
     handleSubmit,

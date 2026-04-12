@@ -30,7 +30,6 @@ export interface ICustomPackage {
   updatedAt?: Date;
 }
 
-
 export interface ICustomAdminPackage {
   id: string;
   userId: string;
@@ -58,9 +57,6 @@ export interface ICustomAdminPackage {
   updatedAt?: Date;
 }
 
-
-
-
 export interface OfferDTO {
   discountType: 'percentage' | 'flat';
   discountValue: number;
@@ -71,7 +67,7 @@ export interface UserInfoDTO {
   _id: string;
   username: string;
   email: string;
-  profileImage?: {url:string | null};
+  profileImage?: { url: string | null };
 }
 
 export interface CustomRequestInfoDTO {
@@ -94,4 +90,4 @@ export interface CustomPackageApprovedResponseDTO {
 
   userDetails?: UserInfoDTO;
   customRequest?: CustomRequestInfoDTO;
- }
+}

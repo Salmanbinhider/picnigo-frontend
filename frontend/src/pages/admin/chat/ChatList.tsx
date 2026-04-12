@@ -1,24 +1,22 @@
-import { useSelector,useDispatch } from 'react-redux';
-import type { RootState,AppDispatch } from '@/redux/store';
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '@/redux/store';
 import { ChatRoomItem } from '@/components/chat/ChatRoomItem';
 import { ChatListHeader } from '@/components/chat/ChatListHeader';
-import UserSearchForChat from '@/components/chat/UserSearchForChat';
 import { MessageCircle } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import type { IChatRoom } from '@/types/IMessage';
-import { Button } from '@/components/ui/button';
 import { useTotalUnreadCount } from '@/hooks/useTotalUnreadCount';
 import { EnumUserRole } from '@/Constants/enums/userEnum';
 import ChatSearchBar from '@/components/chat/ChatSearchBar';
 
 import { fetchUserRooms } from '@/redux/slices/chatRoomSlice';
- interface ChatListProps {
+interface ChatListProps {
   onRoomSelect: (room: IChatRoom) => void;
   selectedRoomId?: string;
 }
 
 export const ChatList = ({ onRoomSelect, selectedRoomId }: ChatListProps) => {
-  const dispatch=useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const rooms = useSelector((state: RootState) => state.chatRoom.rooms);
   const currentUserId = useSelector((state: RootState) => state.adminAuth.admin?._id);
 
@@ -26,7 +24,7 @@ export const ChatList = ({ onRoomSelect, selectedRoomId }: ChatListProps) => {
   const [sortByUnread, setSortByUnread] = useState(false);
 
   const totalUnread = useTotalUnreadCount(EnumUserRole.ADMIN);
-  console.log(totalUnread, 'coutn unread');
+  //console.log(totalUnread, 'coutn unread');
 
   const filteredRooms = useMemo(() => {
     return rooms.filter((room) => {
@@ -59,18 +57,17 @@ export const ChatList = ({ onRoomSelect, selectedRoomId }: ChatListProps) => {
       <div className="sticky top-0 z-10 bg-white shadow-sm">
         <div className="p-2">
           {/* <ChatListHeader role="admin" totalUnread={totalUnread} /> */}
-           <ChatListHeader
-          role="admin"
-          totalUnread={totalUnread}
-          onRoomCreated={async (room) => {
-            await dispatch(fetchUserRooms({ isAdmin: true }));
-            onRoomSelect(room);
-          }}
-        />
+          <ChatListHeader
+            role="admin"
+            totalUnread={totalUnread}
+            onRoomCreated={async (room) => {
+              await dispatch(fetchUserRooms({ isAdmin: true }));
+              onRoomSelect(room);
+            }}
+          />
         </div>
 
-            <ChatSearchBar value={search} onChange={setSearch} />
-
+        <ChatSearchBar value={search} onChange={setSearch} />
 
         {/* Search */}
         {/* <AdminSearchForChat

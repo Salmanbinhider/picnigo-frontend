@@ -20,12 +20,12 @@ export const handleReviewDetail = async (reviewId: string) => {
 
 export const handleChangeStatus = async (reviewId: string, status: boolean) => {
   const response = await api.patch(`/admin/reviews/${reviewId}/status`, { status });
-  console.log(response, 'response from admin review');
+  //console.log(response, 'response from admin review');
   return response.data;
 };
 
 export const handleDeleteReview = async (reviewId: string) => {
   const response = await api.delete(`/admin/reviews/${reviewId}/delete`);
-  console.log(response, 'response from admin review');
+  //console.log(response, 'response from admin review');
   return response.data;
 };

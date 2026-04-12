@@ -18,7 +18,7 @@ export const fetchPackagesData = async (page: number, limit: number, filter: IFi
   };
 
   const response = await api.get(`/admin/packages`, { params });
-  console.log(response.data.data, 'i service ');
+  //console.log(response.data.data, 'i service ');
 
   return response.data.data;
 };
@@ -34,7 +34,7 @@ export const unBlockPackage = async (id: string) => {
 
 export const getPackageById = async (id: string) => {
   const response = await api.get(`/admin/packages/${id}`);
-  console.log(response.data?.packages, 'd');
+  //console.log(response.data?.packages, 'd');
   return response.data.packages;
 };
 

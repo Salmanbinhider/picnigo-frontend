@@ -19,10 +19,7 @@ import {
   //markMessageAsReadInRoom,
 } from '@/redux/slices/chatRoomSlice';
 import type { RootState } from '@/redux/store';
-import {
-  setActiveRoom, setTotalUnread,
-  decrementTotalUnread, incrementTotalUnread
-} from '@/redux/slices/chatRoomSlice';
+import { setActiveRoom, decrementTotalUnread } from '@/redux/slices/chatRoomSlice';
 import { useLoadMore } from '@/hooks/useLoadMore';
 
 interface Props {
@@ -50,7 +47,7 @@ const MessagePage = ({ roomId, user }: Props) => {
   const [totalPages, setTotalPages] = useState(1);
   const [limit] = useState(20); // You can adjust
   const [loading, setLoading] = useState(false);
-   // --- Fetch room ---
+  // --- Fetch room ---
   useEffect(() => {
     const fetchRoom = async () => {
       if (!roomId) return;
@@ -66,7 +63,6 @@ const MessagePage = ({ roomId, user }: Props) => {
     fetchRoom();
   }, [roomId, user.role]);
 
-   
   const fetchMessages = async (page: number) => {
     if (!roomId) return;
     setLoading(true);
@@ -80,8 +76,8 @@ const MessagePage = ({ roomId, user }: Props) => {
       }
 
       // response.data should have { data, pagination }
-      console.log(response.data.data,'repsones');
-      
+      //console.log(response.data.data, 'repsones');
+
       if (page === 1) {
         setMessages(response.data.data);
       } else {
@@ -97,13 +93,13 @@ const MessagePage = ({ roomId, user }: Props) => {
     }
   };
   useEffect(() => {
-  fetchMessages(1);
-}, [roomId, user.role]);
+    fetchMessages(1);
+  }, [roomId, user.role]);
 
   const handleMessageReceived = useCallback(
     (newMessage: IMessage) => {
       setMessages((prev) => [...prev, newMessage]);
-      console.log('new messssage recied');
+      //console.log('new messssage recied');
       scrollToBottom();
       dispatch(
         addMessageToRoom({
@@ -132,10 +128,9 @@ const MessagePage = ({ roomId, user }: Props) => {
       setMessages((prev) =>
         prev.map((msg) => (msg._id === messageId ? { ...msg, isRead: true } : msg))
       );
-      //   console.log('kkkkkkkkkkkkk')
+      //   //console.log('kkkkkkkkkkkkk')
       // dispatch(markMessageAsReadInRoom({ roomId, userId }));
       dispatch(decrementTotalUnread());
-
     },
     [dispatch, roomId]
   );
@@ -171,7 +166,7 @@ const MessagePage = ({ roomId, user }: Props) => {
     messages.forEach((msg) => {
       if (!msg.isRead && msg.senderId._id !== user._id && !readMessagesRef.current.has(msg._id)) {
         markAsRead(msg._id);
-         
+
         readMessagesRef.current.add(msg._id);
       }
     });
@@ -193,7 +188,7 @@ const MessagePage = ({ roomId, user }: Props) => {
       content: messageInput ?? 'Image',
       type: IMessageType.TEXT,
     };
-    console.log(newMessage, 'new message from message page');
+    //console.log(newMessage, 'new message from message page');
 
     sendMessage(newMessage);
     setMessageInput('');

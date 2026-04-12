@@ -7,8 +7,6 @@ import type { RootState } from '@/redux/store';
 import { TravelerBookingSchema, type TravelerBookingFormSchema } from '@/schemas/BookingSchema';
 import {
   applyCoupon,
-  createBookingWithWalletPayment,
-  createBookingWithOnlinePayment,
   verifyRazorpayPayment,
   cancelUnpaidBooking,
   addTravellerBookingWithWalletPayment,
@@ -54,7 +52,7 @@ const AddTravellerCheckoutPage = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [amountAfterDiscount, setAmountAfterDiscount] = useState(0);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
   const paymentMethods = [
     {
@@ -116,7 +114,7 @@ const AddTravellerCheckoutPage = () => {
     setCouponError('');
   };
 
-  console.log(couponCode, couponDiscount, 'coupon in payment');
+  //console.log(couponCode, couponDiscount, 'coupon in payment');
   useEffect(() => {
     const loadPackage = async () => {
       if (!packageId) {
@@ -144,7 +142,7 @@ const AddTravellerCheckoutPage = () => {
     resolver: zodResolver(TravelerBookingSchema),
     defaultValues: {
       packageId: packageId ?? '',
-      bookingId: bookingId ?? "",
+      bookingId: bookingId ?? '',
       travelDate: '',
       travelers: [{ fullName: '', age: 0, gender: 'male', idType: 'aadhaar', idNumber: '' }],
 
@@ -199,8 +197,7 @@ const AddTravellerCheckoutPage = () => {
     setValue('couponCode', couponCode);
     setValue('discount', couponDiscount);
 
-    setValue('packageType', packageData?.packageType!)
-
+    setValue('packageType', packageData?.packageType!);
   }, [
     packageData?.finalPrice,
     travelers.length,
@@ -217,7 +214,7 @@ const AddTravellerCheckoutPage = () => {
     booking: any,
     formData: TravelerBookingFormSchema
   ) => {
-    console.log('razorpayOrder', razorpayOrder);
+    //console.log('razorpayOrder', razorpayOrder);
 
     const options = {
       key: import.meta.env.VITE_RAZORPAY_ID_KEY,
@@ -297,10 +294,10 @@ const AddTravellerCheckoutPage = () => {
   };
 
   // const onSubmit = (data: BookingFormSchema) => {
-  //   console.log("Submitting...", data);
+  //   //console.log("Submitting...", data);
   // };
   return (
-    <form onSubmit={handleSubmit(handlePayment, (err) => console.log('Validation errors:', err))}>
+    <form onSubmit={handleSubmit(handlePayment, (err) => //console.log('Validation errors:', err))}>
       <div className="min-h-screen bg-bg">
         <div className="bg-orange text-white py-10 shadow-md">
           <div className="max-w-6xl mx-auto px-4 flex items-center gap-6">
@@ -318,12 +315,9 @@ const AddTravellerCheckoutPage = () => {
 
         <div className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <Card>
-
-            </Card>
+            <Card></Card>
 
             <Card>
-
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Traveler Details</h3>
 
@@ -602,9 +596,7 @@ const AddTravellerCheckoutPage = () => {
                 )}
               </CardContent>
             </Card>
-
           </div>
-
 
           <div className="space-y-6">
             <Card className="sticky top-4 overflow-hidden shadow-md rounded-xl">
@@ -628,9 +620,7 @@ const AddTravellerCheckoutPage = () => {
                   <p className="text-sm text-gray-600">
                     ⏱️ {packageData?.durationDays} Days / {packageData?.durationNights} Nights
                   </p>
-                  <p className="text-sm text-gray-500">
-                    Start: {packageData?.startPoint}
-                  </p>
+                  <p className="text-sm text-gray-500">Start: {packageData?.startPoint}</p>
                 </div>
 
                 <Separator className="mb-4" />
@@ -665,11 +655,11 @@ const AddTravellerCheckoutPage = () => {
 
                   {(watch('paymentMethod') === 'wallet' ||
                     watch('paymentMethod') === 'wallet+razorpay') && (
-                      <div className="flex justify-between">
-                        <span>Wallet Used</span>
-                        <span>- ₹{walletUsed.toLocaleString()}</span>
-                      </div>
-                    )}
+                    <div className="flex justify-between">
+                      <span>Wallet Used</span>
+                      <span>- ₹{walletUsed.toLocaleString()}</span>
+                    </div>
+                  )}
 
                   <Separator />
 
@@ -688,7 +678,6 @@ const AddTravellerCheckoutPage = () => {
               </CardContent>
             </Card>
           </div>
-
         </div>
       </div>
     </form>

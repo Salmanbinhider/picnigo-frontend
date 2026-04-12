@@ -74,4 +74,5 @@ export const EnumBookingHistoryAction = {
   STATUS_CHANGED: 'status_changed',
   AMOUNT_CHANGED: 'amount_changed',
 } as const;
-export type EnumBookingHistoryAction = (typeof EnumBookingHistoryAction)[keyof typeof EnumBookingHistoryAction];
+export type EnumBookingHistoryAction =
+  (typeof EnumBookingHistoryAction)[keyof typeof EnumBookingHistoryAction];

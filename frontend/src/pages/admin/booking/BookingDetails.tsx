@@ -46,7 +46,7 @@ const BookingDetails = () => {
       try {
         const data = await getBookingById(id!);
         setBooking(data.booking);
-        console.log(data, 'data');
+        //console.log(data, 'data');
       } catch {
         toast.error('Failed to load booking.');
         navigate(-1);
@@ -65,7 +65,7 @@ const BookingDetails = () => {
       }
       try {
         const data = await getPackageById(pkgId);
-        console.log(data, 'pkg data');
+        //console.log(data, 'pkg data');
         setPkg(data);
       } catch (error) {
         console.error('Failed to fetch package details', error);
@@ -82,7 +82,7 @@ const BookingDetails = () => {
 
     try {
       await cancelBooking(id!, cancelReason);
-      console.log(cancelReason, 'reason');
+      //console.log(cancelReason, 'reason');
       toast.success('Booking cancelled.');
 
       setBooking((prev) =>
@@ -109,7 +109,7 @@ const BookingDetails = () => {
     try {
       const updatedBooking = await changeTravelDate(id!, newDate, note);
       setBooking(updatedBooking);
-      console.log(updatedBooking, 'travel booking date cahge');
+      //console.log(updatedBooking, 'travel booking date cahge');
       toast.success('Travel date updated successfully.');
 
       setBooking(updatedBooking);

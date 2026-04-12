@@ -9,7 +9,6 @@ import {
   setUserOnline,
   setUserOffline,
   setCurrentOnlineUsers,
-  incrementTotalUnread,
 } from '@/redux/slices/chatRoomSlice';
 import type { AppDispatch } from '@/redux/store';
 import type { IMessage } from '@/types/IMessage';
@@ -28,7 +27,7 @@ export const useChatRoomsSocket = ({ currentUserId }: UseChatRoomsSocketProps) =
 
     const handleNewMessage = (message: IMessage) => {
       dispatch(updateRoomOnNewMessage({ roomId: message.roomId, message, currentUserId }));
-     };
+    };
 
     const handleMessageDeleted = ({ roomId, messageId }: { roomId: string; messageId: string }) => {
       dispatch(deleteMessageFromRoom({ roomId, messageId }));
@@ -47,7 +46,7 @@ export const useChatRoomsSocket = ({ currentUserId }: UseChatRoomsSocketProps) =
     };
 
     const handleCurrentOnlineUsers = ({ users }: { users: string[] }) => {
-      // console.log(" Current online users:", users);
+      // //console.log(" Current online users:", users);
       dispatch(setCurrentOnlineUsers(users));
     };
 
@@ -68,7 +67,7 @@ export const useChatRoomsSocket = ({ currentUserId }: UseChatRoomsSocketProps) =
     socket.on(SOCKET_EVENTS.CURRENT_ONLINE_USERS, handleCurrentOnlineUsers);
 
     return () => {
-      //  console.log("Cleaning up socket listeners for user:", currentUserId);
+      //  //console.log("Cleaning up socket listeners for user:", currentUserId);
       socket.emit(SOCKET_EVENTS.USER_DISCONNECTED, { userId: currentUserId });
 
       socket.off(SOCKET_EVENTS.NEW_MESSAGE, handleNewMessage);

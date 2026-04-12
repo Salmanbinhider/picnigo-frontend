@@ -17,8 +17,6 @@ export const updateUserRoom = async (roomId: string) => {
   return response.data;
 };
 
-
-
 export const deleteUserRoom = async (roomId: string) => {
   const response = await api.delete(`/user/chatrooms/${roomId}`);
   return response.data;
@@ -28,11 +26,10 @@ export const getChatRoomById = async (roomId: string) => {
   const response = await api.get(`/user/chatrooms/${roomId}`);
   return response.data;
 };
-export const userTotalChatUnreadCount= async () => {
+export const userTotalChatUnreadCount = async () => {
   const response = await api.get(`/user/count/chatrooms`);
   return response.data;
 };
-
 
 export const getUserRoom = async (filters?: IChatRoomFilter) => {
   const response = await api.get(`/user/chatrooms`, {
@@ -44,12 +41,12 @@ export const getUserRoom = async (filters?: IChatRoomFilter) => {
 //   const response = await api.get(`/user/chatrooms/${roomId}/messages`);
 //   return response.data;
 // };
-export const getMessagesByRoom = async (roomId: string,page:number,limit:number) => {
+export const getMessagesByRoom = async (roomId: string, page: number, limit: number) => {
   const params = {
     page,
     limit,
-   };
-  const response = await api.get(`/user/chatrooms/${roomId}/messages`,{params});
+  };
+  const response = await api.get(`/user/chatrooms/${roomId}/messages`, { params });
   return response.data;
 };
 
@@ -59,11 +56,9 @@ export const uploadFile = async (formData: FormData) => {
       'Content-Type': 'multipart/form-data',
     },
   });
-  console.log(response, 'response chat');
+  //console.log(response, 'response chat');
   return response.data;
 };
-
-
 
 export const handleSearchUser = async (search: string) => {
   const response = await api.get(`/user/users/search-all?search=${search}`);

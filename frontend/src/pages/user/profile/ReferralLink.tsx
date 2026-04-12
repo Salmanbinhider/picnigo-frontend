@@ -25,7 +25,6 @@ const ReferralLinkBox = ({ referralCode }: Props) => {
 
   return (
     <div className="p-4 sm:p-6 rounded-2xl border bg-gradient-to-br from-blue-50 to-white shadow-sm space-y-4">
-
       {/* 🎁 HEADER */}
       <div className="flex items-start gap-3">
         <div className="bg-blue-100 p-2 rounded-lg">
@@ -33,22 +32,17 @@ const ReferralLinkBox = ({ referralCode }: Props) => {
         </div>
 
         <div>
-          <h3 className="font-semibold text-lg">
-            Refer & Earn Cashback 💸
-          </h3>
+          <h3 className="font-semibold text-lg">Refer & Earn Cashback 💸</h3>
           <p className="text-sm text-gray-500">
-            Share your referral link with friends and earn rewards in your wallet when they sign up and book.
+            Share your referral link with friends and earn rewards in your wallet when they sign up
+            and book.
           </p>
         </div>
       </div>
 
       {/* 🔗 INPUT + BUTTON */}
       <div className="flex flex-col sm:flex-row gap-2">
-        <Input
-          value={referralLink}
-          readOnly
-          className="flex-1 text-sm"
-        />
+        <Input value={referralLink} readOnly className="flex-1 text-sm" />
 
         <Button
           onClick={handleCopy}

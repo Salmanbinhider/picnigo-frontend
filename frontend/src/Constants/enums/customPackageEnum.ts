@@ -14,7 +14,8 @@ export const AccommodationTypeEnum = {
   STANDARD: 'standard',
   BUDGET: 'budget',
 } as const;
-export type AccommodationTypeEnum = (typeof AccommodationTypeEnum)[keyof typeof AccommodationTypeEnum];
+export type AccommodationTypeEnum =
+  (typeof AccommodationTypeEnum)[keyof typeof AccommodationTypeEnum];
 
 // ✅ Custom Package Status
 export const CustomPkgStatusEnum = {

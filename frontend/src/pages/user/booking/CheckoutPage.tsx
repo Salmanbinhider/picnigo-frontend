@@ -21,9 +21,18 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/Label';
 import { Separator } from '@/components/ui/separator';
 import {
-  CheckCircle, Plane, Plus, Minus,
-  CreditCard, Wallet, Zap, Check,
-  MapPin, Clock, Users, Ticket
+  CheckCircle,
+  Plane,
+  Plus,
+  Minus,
+  CreditCard,
+  Wallet,
+  Zap,
+  Check,
+  MapPin,
+  Clock,
+  Users,
+  Ticket,
 } from 'lucide-react';
 import type { IPackage } from '@/types/IPackage';
 import { cn } from '@/lib/utils';
@@ -38,7 +47,7 @@ declare global {
 const CheckoutPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-      const snackbar = useAppSnackbar();
+  const snackbar = useAppSnackbar();
 
   const userData = useSelector((state: RootState) => state.userAuth.user);
 
@@ -59,7 +68,7 @@ const CheckoutPage = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [amountAfterDiscount, setAmountAfterDiscount] = useState(0);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
   const paymentMethods = [
     {
@@ -130,7 +139,6 @@ const CheckoutPage = () => {
         const data = await fetchPackgeById(id);
 
         setPackageData(data as IPackage);
-
       } catch (error) {
         console.error('Failed to fetch package details', error);
       }
@@ -151,24 +159,24 @@ const CheckoutPage = () => {
     defaultValues: savedCheckoutData
       ? JSON.parse(savedCheckoutData)
       : {
-        packageId: id ?? '',
-        travelDate: '',
-        travelers: [
-          {
-            fullName: '',
-            age: 22,
-            gender: 'male',
-            idType: 'aadhaar',
-            idNumber: '',
+          packageId: id ?? '',
+          travelDate: '',
+          travelers: [
+            {
+              fullName: '',
+              age: 22,
+              gender: 'male',
+              idType: 'aadhaar',
+              idNumber: '',
+            },
+          ],
+          contactDetails: {
+            name: userData?.fullName || '',
+            phone: userData?.phone ? String(userData.phone) : '',
+            alternatePhone: '',
+            email: userData?.email || '',
           },
-        ],
-        contactDetails: {
-          name: userData?.fullName || '',
-          phone: userData?.phone ? String(userData.phone) : '',
-          alternatePhone: '',
-          email: userData?.email || '',
         },
-      },
   });
   const { fields, append, remove } = useFieldArray({ control, name: 'travelers' });
   const travelers = watch('travelers');
@@ -218,7 +226,7 @@ const CheckoutPage = () => {
     setValue('amountPaid', amountToPay);
     setValue('couponCode', couponCode);
     setValue('discount', couponDiscount);
-    setValue('packageType', packageData?.packageType!)
+    setValue('packageType', packageData?.packageType!);
     if (packageData?.departureDates) {
       if (typeof packageData.departureDates === 'string') {
         setValue('travelDate', packageData.departureDates);
@@ -246,7 +254,7 @@ const CheckoutPage = () => {
     booking: any,
     formData: BookingFormSchema
   ) => {
-    console.log('razorpayOrder', razorpayOrder);
+    //console.log('razorpayOrder', razorpayOrder);
 
     const options = {
       key: import.meta.env.VITE_RAZORPAY_ID_KEY,
@@ -351,10 +359,10 @@ const CheckoutPage = () => {
   // };
 
   // const onSubmit = (data: BookingFormSchema) => {
-  //   console.log("Submitting...", data);
+  //   //console.log("Submitting...", data);
   // };
   return (
-    <form onSubmit={handleSubmit(handlePayment, (err) => console.log('Validation errors:', err))}>
+    <form onSubmit={handleSubmit(handlePayment, (err) => //console.log('Validation errors:', err))}>
       <div className="min-h-screen bg-bg">
         <div className="bg-orange text-white py-10 shadow-md">
           <div className="max-w-6xl mx-auto px-4 flex items-center gap-6">
@@ -434,10 +442,7 @@ const CheckoutPage = () => {
               </CardContent>
             </Card>
 
-
             <Card>
-
-
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Traveler Details</h3>
 
@@ -614,7 +619,6 @@ const CheckoutPage = () => {
                     >
                       Apply
                     </Button>
-
                   ) : (
                     <Button
                       type="button"
@@ -628,7 +632,6 @@ const CheckoutPage = () => {
                 </div>
                 <br />
                 <div className="flex justify-end">
-
                   <Button
                     type="button"
                     variant="ghost"
@@ -746,10 +749,7 @@ const CheckoutPage = () => {
                 )}
               </CardContent>
             </Card>
-
           </div>
-
-
 
           <div className="space-y-6">
             <Card className="sticky top-4 overflow-hidden shadow-lg rounded-2xl hover:shadow-xl transition-shadow duration-300">
@@ -779,7 +779,9 @@ const CheckoutPage = () => {
                 <div className="flex flex-col space-y-2 text-sm text-gray-700">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-orange-500" />
-                    <span>{packageData?.durationDays} Days / {packageData?.durationNights} Nights</span>
+                    <span>
+                      {packageData?.durationDays} Days / {packageData?.durationNights} Nights
+                    </span>
                   </div>
 
                   <div className="flex items-center gap-2 text-gray-500">
@@ -822,11 +824,11 @@ const CheckoutPage = () => {
 
                   {(watch('paymentMethod') === 'wallet' ||
                     watch('paymentMethod') === 'wallet+razorpay') && (
-                      <div className="flex justify-between text-blue-600">
-                        <span>Wallet Used</span>
-                        <span>- ₹{walletUsed.toLocaleString()}</span>
-                      </div>
-                    )}
+                    <div className="flex justify-between text-blue-600">
+                      <span>Wallet Used</span>
+                      <span>- ₹{walletUsed.toLocaleString()}</span>
+                    </div>
+                  )}
 
                   <Separator />
 
@@ -845,13 +847,11 @@ const CheckoutPage = () => {
               </CardContent>
             </Card>
           </div>
-
         </div>
       </div>
       {showCouponModal && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
           <div className="bg-white w-full max-w-4xl rounded-xl shadow-lg relative max-h-[90vh] overflow-y-auto">
-
             {/* Close Button */}
             <button
               onClick={() => setShowCouponModal(false)}
@@ -861,9 +861,7 @@ const CheckoutPage = () => {
             </button>
 
             {/* Title */}
-            <h2 className="text-2xl font-bold text-center text-orange mt-6">
-              Available Coupons
-            </h2>
+            <h2 className="text-2xl font-bold text-center text-orange mt-6">Available Coupons</h2>
 
             {/* Coupon List */}
             <CouponList
@@ -881,7 +879,6 @@ const CheckoutPage = () => {
         </div>
       )}
     </form>
-
   );
 };
 

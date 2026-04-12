@@ -15,7 +15,7 @@ export const handelFetchBlockedUser = async () => {
   return response.data;
 };
 export const handelIsBlocked = async (blockedId: string) => {
-  console.log(blockedId, 'id from seeeeee');
+  //console.log(blockedId, 'id from seeeeee');
   const response = await api.get(`/user/blocked/${blockedId}`);
   return response.data;
 };

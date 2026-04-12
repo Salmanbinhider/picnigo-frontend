@@ -14,13 +14,7 @@ import type { IReview } from '@/types/IReview';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@/components/Select';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/Select';
 import { Badge } from '@/components/ui/Badge';
 import BlogDetailCard from '../blog/BlogDetailCard';
 import ReviewDetailCard from '../review/ReviewDetailCard';
@@ -44,7 +38,7 @@ const ReportDetails = () => {
     const fetchReport = async () => {
       try {
         const response = await handleFetchReport(reportId);
-        console.log(response, 'response');
+        //console.log(response, 'response');
         setReport(response.report);
         setStatus(response.report.status);
       } catch (error: any) {
@@ -56,31 +50,31 @@ const ReportDetails = () => {
 
   useEffect(() => {
     if (!report?.reportedId || !report?.reportedType) {
-      console.log('fetch');
+      //console.log('fetch');
       return;
     }
-    console.log('fetch');
+    //console.log('fetch');
 
     const fetchTarget = async () => {
       if (!report?.reportedId || !report?.reportedType) {
-        console.log('fetch');
+        //console.log('fetch');
         return;
       }
       try {
-        console.log('fetch');
+        //console.log('fetch');
         if (report.reportedType == 'blog') {
           const response = await fetchBlogById(report.reportedId);
-          // console.log(response, 'blog res')
+          // //console.log(response, 'blog res')
 
           setBlogData(response.blog);
         } else if (report.reportedType == 'review') {
           const response = await handleReviewDetail(report.reportedId);
-          console.log(response, 'review res');
+          //console.log(response, 'review res');
 
           setReviewData(response.review);
         } else if (report.reportedType == 'user') {
           const response = await fetchUserDetails(report.reportedId);
-          console.log(response, 'user res');
+          //console.log(response, 'user res');
 
           setUserData(response.user);
         }
@@ -94,12 +88,12 @@ const ReportDetails = () => {
   const handleStatusChange = async (value: string) => {
     if (!reportId) return;
     try {
-      console.log(value, 'value');
+      //console.log(value, 'value');
       await handleChangeStatusReport(reportId, value);
       setStatus(value);
       toast.success('Report status updated');
     } catch (error: any) {
-      console.log(error, 'error');
+      //console.log(error, 'error');
       toast.error(error?.response?.data?.message || 'Failed to change status');
     }
   };
@@ -125,7 +119,7 @@ const ReportDetails = () => {
     if (!id) return;
     try {
       if (report?.reportedType == 'blog') {
-        console.log(isBlocked, 'blocked in blog');
+        //console.log(isBlocked, 'blocked in blog');
 
         await changeBlogStatus(id, isBlocked);
         setBlogData((prev) => {
@@ -136,7 +130,7 @@ const ReportDetails = () => {
           };
         });
       } else if (report?.reportedType == 'review') {
-        console.log(isBlocked, 'blocked in review');
+        //console.log(isBlocked, 'blocked in review');
         await handleChangeStatus(reviewData?._id!, isBlocked);
 
         setReviewData((prev) => {
@@ -147,7 +141,7 @@ const ReportDetails = () => {
           };
         });
       } else if (report?.reportedType == 'user') {
-        console.log(isBlocked, 'blocked in review');
+        //console.log(isBlocked, 'blocked in review');
         await toggleBlockUser(userData?._id!);
 
         setUserData((prev) => {

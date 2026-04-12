@@ -12,8 +12,7 @@ const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
-      const snackbar = useAppSnackbar();
-  
+  const snackbar = useAppSnackbar();
 
   const { loading, error, isAuthenticated } = useSelector((state: RootState) => state.userAuth);
 
@@ -57,13 +56,13 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center font-poppins bg-gradient-to-br from-gray-50 to-orange-50 px-4">
-    {/* <div className="min-h-screen flex items-center justify-center font-poppins bg-background px-4"> */}
+      {/* <div className="min-h-screen flex items-center justify-center font-poppins bg-background px-4"> */}
       {/* <div className="flex w-full max-w-5xl shadow-lg rounded-xl overflow-hidden bg-white"> */}
-     <div className="flex w-full max-w-5xl rounded-xl overflow-hidden bg-white border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+      <div className="flex w-full max-w-5xl rounded-xl overflow-hidden bg-white border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
         {/* Left Side */}
         <div className="hidden md:flex md:w-1/2 bg-orange items-center justify-center p-8">
           <div className="text-center text-white">
-            <h2 className="text-3xl font-bold mb-4">Welcome Back to Tripsera</h2>
+            <h2 className="text-3xl font-bold mb-4">Welcome Back to Picnigo</h2>
             <p className="text-base leading-relaxed">
               Discover unforgettable journeys, explore breathtaking destinations, and turn your
               travel dreams into reality. Your next adventure starts here!
@@ -80,21 +79,15 @@ const Login = () => {
               handleSubmit();
             }}
           >
-            <h2 className="text-2xl font-bold text-orange mb-6 text-center">
-              Login to Tripsera
-            </h2>
+            <h2 className="text-2xl font-bold text-orange mb-6 text-center">Login to Picnigo</h2>
 
             {(localError || error) && (
-              <p className="text-sm text-red-500 mb-4 text-center">
-                {localError || error}
-              </p>
+              <p className="text-sm text-red-500 mb-4 text-center">{localError || error}</p>
             )}
 
             {/* Email */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-foreground mb-1">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-1">Email</label>
               <input
                 type="email"
                 value={email}
@@ -106,9 +99,7 @@ const Login = () => {
 
             {/* Password */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-foreground mb-1">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-1">Password</label>
 
               <div className="relative">
                 <input
@@ -164,7 +155,6 @@ const Login = () => {
 
 export default Login;
 
-
 // import { useState, useEffect } from 'react';
 // import { useNavigate, Link, useLocation } from 'react-router-dom';
 // import { toast } from 'sonner';
@@ -192,7 +182,7 @@ export default Login;
 
 //   useEffect(() => {
 //     if (isAuthenticated) {
-//       //   console.log(isAuthenticated,'isAuth')
+//       //   //console.log(isAuthenticated,'isAuth')
 
 //       navigate('/home');
 //     }
@@ -224,7 +214,7 @@ export default Login;
 //         {/* Left Side */}
 //         <div className="hidden md:flex md:w-1/2 bg-orange items-center justify-center p-8">
 //           <div className="text-center text-white">
-//             <h2 className="text-3xl font-bold mb-4">Welcome Back to Tripsera</h2>
+//             <h2 className="text-3xl font-bold mb-4">Welcome Back to Picnigo</h2>
 //             <p className="text-base leading-relaxed">
 //               Discover unforgettable journeys, explore breathtaking destinations, and turn your
 //               travel dreams into reality. Your next adventure starts here!
@@ -241,7 +231,7 @@ export default Login;
 //               handleSubmit();
 //             }}
 //           >
-//             <h2 className="text-2xl font-bold text-orange mb-6 text-center">Login to Tripsera</h2>
+//             <h2 className="text-2xl font-bold text-orange mb-6 text-center">Login to Picnigo</h2>
 
 //             {(localError || error) && (
 //               <p className="text-sm text-red-500 mb-4 text-center">{localError || error}</p>

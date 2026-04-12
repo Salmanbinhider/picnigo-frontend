@@ -14,15 +14,9 @@ import {
   TableRow,
 } from '@/components/ui/Table';
 import { Input } from '@/components/ui/Input';
- import { usePaginationButtons } from '@/hooks/usePaginationButtons';
+import { usePaginationButtons } from '@/hooks/usePaginationButtons';
 
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/Select';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/Select';
 import { getAllBooking } from '@/services/admin/bookingService';
 import type { IBooking } from '@/types/IBooking';
 
@@ -67,7 +61,7 @@ const BookingList = () => {
 
     fetchBookings();
   }, [currentPage, debouncedSearch, searchParams]);
-  // console.log(bookings, 'booki');
+  // //console.log(bookings, 'booki');
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);

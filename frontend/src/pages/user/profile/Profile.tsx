@@ -36,17 +36,13 @@ const Profile = () => {
       <div className="flex justify-center items-center h-64">
         <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
       </div>
-    )
+    );
   }
 
   return (
     <div className="w-full px-3 sm:px-6 lg:px-8 py-4">
       <div className="max-w-5xl mx-auto">
-
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-
-
-
           {/* ✅ TABLET + DESKTOP TABS */}
           <TabsList className="grid grid-cols-4 gap-2 border-black w-full mb-4">
             <TabsTrigger value="overview" className="text-xs sm:text-sm">
@@ -67,7 +63,6 @@ const Profile = () => {
           </TabsList>
           {/* ✅ CONTENT */}
           <div className="bg-white rounded-xl shadow-sm p-3 sm:p-6">
-
             <TabsContent value="overview">
               <Dashboard user={user} loading={loading} refetchUser={getUserInfo} />
             </TabsContent>
@@ -83,9 +78,7 @@ const Profile = () => {
             <TabsContent value="security">
               <SecurityTab />
             </TabsContent>
-
           </div>
-
         </Tabs>
       </div>
     </div>
@@ -131,12 +124,12 @@ export default Profile;
 
 //           {/* 🔥 MOBILE FRIENDLY TABS */}
 //           <TabsList className="
-//             flex 
-//             gap-2 
-//             border-b 
-//             mb-6 
-//             overflow-x-auto 
-//             whitespace-nowrap 
+//             flex
+//             gap-2
+//             border-b
+//             mb-6
+//             overflow-x-auto
+//             whitespace-nowrap
 //             no-scrollbar
 //             pb-2
 //           ">

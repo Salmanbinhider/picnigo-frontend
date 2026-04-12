@@ -1,6 +1,6 @@
 // components/chat/AttachmentMenu.tsx
 import React from 'react';
-import { Image, File, Mic } from 'lucide-react';
+import { Image } from 'lucide-react';
 
 interface Props {
   onSelect: (type: 'image' | 'audio' | 'file') => void;

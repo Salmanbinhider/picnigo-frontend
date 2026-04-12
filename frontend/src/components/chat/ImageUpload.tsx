@@ -47,7 +47,7 @@ const ImageUpload: React.FC<Props> = ({ onUpload, file }) => {
 
       const response = await uploadFile(formData);
       const url = response.url;
-      console.log(response, 'chat image url');
+      //console.log(response, 'chat image url');
 
       if (url) {
         onUpload(url, caption);

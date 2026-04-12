@@ -41,7 +41,7 @@ const UserBlogsPage = () => {
       <div className="flex flex-col sm:flex-row justify-between items-center mb-10">
         <div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">Your Blogs</h1>
-         </div>
+        </div>
 
         <Button
           onClick={() => navigate(`/account/my-blogs/add`)}
@@ -66,9 +66,7 @@ const UserBlogsPage = () => {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-10">
-          {paginationButtons}
-        </div>
+        <div className="flex justify-center items-center gap-2 mt-10">{paginationButtons}</div>
       )}
     </section>
   );

@@ -61,7 +61,7 @@ const CategoryList = () => {
       const res = await fetchCategoriesData(page, limit, search, statusValue);
       setCategories(res.data);
       setTotalPages(res.pagination.totalPages);
-      console.log(totalPages, 'pages');
+      //console.log(totalPages, 'pages');
     } catch {
       toast.error('Failed to load categories');
     }

@@ -35,7 +35,6 @@
 // //   };
 // // }
 
-
 // // // Request interceptor
 
 // // api.interceptors.request.use(
@@ -50,7 +49,6 @@
 // //   },
 // //   (error) => Promise.reject(error)
 // // );
-
 
 // // // Response interceptor
 
@@ -246,13 +244,12 @@
 
 // export default api;
 
-import { HttpStatus } from "@/Constants/HttpStatus/HttpStatus";
-import axios, { AxiosError, type AxiosRequestConfig } from "axios";
-import { warning } from "framer-motion";
-import { enqueueSnackbar } from "notistack";
+import { HttpStatus } from '@/Constants/HttpStatus/HttpStatus';
+import axios, { AxiosError, type AxiosRequestConfig } from 'axios';
+import { enqueueSnackbar } from 'notistack';
 
 // Add retry flag to Axios config
-declare module "axios" {
+declare module 'axios' {
   export interface AxiosRequestConfig {
     _retry?: boolean;
   }
@@ -266,25 +263,25 @@ const api = axios.create({
 
 // --- Helpers ---
 function getAuthType(url: string) {
-  const isUser = url.startsWith("/user");
-  const isAdmin = url.startsWith("/admin");
+  const isUser = url.startsWith('/user');
+  const isAdmin = url.startsWith('/admin');
   return { isUser, isAdmin };
 }
 
 function getTokenKey(url: string) {
   const { isUser } = getAuthType(url);
-  return isUser ? "accessToken" : "adminAccessToken";
+  return isUser ? 'accessToken' : 'adminAccessToken';
 }
 
 function getRefreshEndpoint(url: string) {
   const { isUser } = getAuthType(url);
-  return isUser ? "/user/refresh-token" : "/admin/refresh-token";
+  return isUser ? '/user/refresh-token' : '/admin/refresh-token';
 }
 
 // --- Request interceptor ---
 api.interceptors.request.use(
   (config) => {
-    const url = config.url ?? "";
+    const url = config.url ?? '';
     const tokenKey = getTokenKey(url);
     const token = localStorage.getItem(tokenKey);
 
@@ -304,28 +301,24 @@ api.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
     const status = error.response?.status;
-    const message = (error.response?.data as any)?.message ?? "";
-    const url = originalRequest.url ?? "";
+    const message = (error.response?.data as any)?.message ?? '';
+    const url = originalRequest.url ?? '';
 
     const { isUser, isAdmin } = getAuthType(url);
     const tokenKey = getTokenKey(url);
     const refreshEndpoint = getRefreshEndpoint(url);
 
     //  Blocked user
-    if (
-      isUser &&
-      status === HttpStatus.FORBIDDEN &&
-      message.toLowerCase().includes("blocked")
-    ) {
-      enqueueSnackbar("You have been blocked by the admin.",{variant:'error'});
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("user");
-      setTimeout(() => (window.location.href = "/login"), 1200);
+    if (isUser && status === HttpStatus.FORBIDDEN && message.toLowerCase().includes('blocked')) {
+      enqueueSnackbar('You have been blocked by the admin.', { variant: 'error' });
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('user');
+      setTimeout(() => (window.location.href = '/login'), 1200);
       return Promise.reject(error);
     }
 
     //   Guest user (no redirect)
-    if (isUser && status === HttpStatus.UNAUTHORIZED && !localStorage.getItem("accessToken")) {
+    if (isUser && status === HttpStatus.UNAUTHORIZED && !localStorage.getItem('accessToken')) {
       // Just reject silently (guest case)
       return Promise.reject(error);
     }
@@ -334,8 +327,8 @@ api.interceptors.response.use(
     if (
       status === HttpStatus.UNAUTHORIZED &&
       !originalRequest._retry &&
-      !url.includes("/login") &&
-      !url.includes("/refresh-token")
+      !url.includes('/login') &&
+      !url.includes('/refresh-token')
     ) {
       originalRequest._retry = true;
 
@@ -347,7 +340,7 @@ api.interceptors.response.use(
         );
 
         const { accessToken } = res.data as { accessToken: string };
-        if (!accessToken) throw new Error("No new token received");
+        if (!accessToken) throw new Error('No new token received');
 
         // Save new token and retry
         localStorage.setItem(tokenKey, accessToken);
@@ -359,12 +352,13 @@ api.interceptors.response.use(
         localStorage.removeItem(tokenKey);
 
         if (isUser) {
-          enqueueSnackbar("Session expired. Please login again.", {  variant: "error",});
-          setTimeout(() => (window.location.href = "/login"), 1000);
+          enqueueSnackbar('Session expired. Please login again.', { variant: 'error' });
+          setTimeout(() => (window.location.href = '/login'), 1000);
         } else if (isAdmin) {
-          enqueueSnackbar("Admin session expired. Please login again.", {
-            variant: "error",
-          }); setTimeout(() => (window.location.href = "/admin/login"), 1000);
+          enqueueSnackbar('Admin session expired. Please login again.', {
+            variant: 'error',
+          });
+          setTimeout(() => (window.location.href = '/admin/login'), 1000);
         }
 
         return Promise.reject(refreshError);
@@ -377,9 +371,9 @@ api.interceptors.response.use(
     }
     //  Generic fallback
     else if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      enqueueSnackbar("Something went wrong on the server.",{variant:'error'});
+      enqueueSnackbar('Something went wrong on the server.', { variant: 'error' });
     } else if (status === HttpStatus.NOT_FOUND) {
-      enqueueSnackbar("Requested resource not found.",{variant:'error'});
+      enqueueSnackbar('Requested resource not found.', { variant: 'error' });
     }
     // if (status === HttpStatus.INTERNAL_SERVER_ERROR) toast.error("Something went wrong on the server.");
     // if (status === HttpStatus.NOT_FOUND) toast.error("Requested resource not found.");

@@ -20,9 +20,7 @@ export const ChatList = ({ onRoomSelect, selectedRoomId }: ChatListProps) => {
   const [search, setSearch] = useState('');
 
   const rooms = useSelector((state: RootState) => state.chatRoom.rooms);
-  const currentUserId = useSelector(
-    (state: RootState) => state.userAuth.user?._id
-  );
+  const currentUserId = useSelector((state: RootState) => state.userAuth.user?._id);
 
   // ✅ Filtered rooms based on search
   const filteredRooms = useMemo(() => {
@@ -116,11 +114,11 @@ export const ChatList = ({ onRoomSelect, selectedRoomId }: ChatListProps) => {
 //   const [search, setSearch] = useState('');
 
 //   const totalUnread = useTotalUnreadCount(EnumUserRole.USER);
-//   console.log(totalUnread, 'coutn unread');
+//   //console.log(totalUnread, 'coutn unread');
 
 //   const filteredRooms = rooms.filter((room) => {
 //     const otherParticipant = room.otherUser;
-//     console.log(otherParticipant, 'other');
+//     //console.log(otherParticipant, 'other');
 //     //  room.participants.find((p) => p._id !== currentUserId) || room.participants[0];
 //     const searchTerm = search.toLowerCase();
 //     return (

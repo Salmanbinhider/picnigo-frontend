@@ -4,10 +4,8 @@ import { handleForgotPassword } from '@/services/auth/authService';
 import { useAppSnackbar } from '@/hooks/useSnackbar';
 
 const ForgotPassword = () => {
-
   const navigate = useNavigate();
   const snackbar = useAppSnackbar();
-
 
   const [email, setEmail] = useState<string>('');
   const [loading, setLoading] = useState(false);

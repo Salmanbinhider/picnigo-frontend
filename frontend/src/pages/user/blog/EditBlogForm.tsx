@@ -22,7 +22,7 @@ interface ExistingImage {
 const EditBlogForm = () => {
   const navigate = useNavigate();
   const { blogId } = useParams();
-  const [blogData, setBlogData] = useState<IBlog>()
+  const [blogData, setBlogData] = useState<IBlog>();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -66,7 +66,7 @@ const EditBlogForm = () => {
     const fetchBlog = async () => {
       try {
         const blog = await fetchBlogById(blogId!);
-        setBlogData(blog)
+        setBlogData(blog);
         setExistingCoverImage(blog.coverImage);
         setExistingSectionImages(blog.sections.map((s: any) => s.image || null));
 
@@ -79,7 +79,7 @@ const EditBlogForm = () => {
           sections: blog.sections.map((s: any) => ({
             heading: s.heading,
             content: s.content,
-            _id: s._id
+            _id: s._id,
           })),
         });
       } catch (err: any) {
@@ -99,7 +99,11 @@ const EditBlogForm = () => {
   }, [coverUpload.croppedImages, setValue]);
 
   // Remove existing image
-  const handleRemoveExistingImage = (public_id: string, type: 'cover' | 'section', index?: number) => {
+  const handleRemoveExistingImage = (
+    public_id: string,
+    type: 'cover' | 'section',
+    index?: number
+  ) => {
     setDeletedImageIds((prev) => [...prev, public_id]);
 
     if (type === 'cover') setExistingCoverImage(null);
@@ -119,10 +123,9 @@ const EditBlogForm = () => {
     updated.splice(index!, 1);
     setValue('sections', updated);
   };
-  console.log(deletedSectionIds, 'section id deleted');
+  //console.log(deletedSectionIds, 'section id deleted');
 
-
-  console.log(existingSectionImages, 'existingSectionImages');
+  //console.log(existingSectionImages, 'existingSectionImages');
 
   const onSubmit = async (data: EditBlogFormSchema) => {
     try {
@@ -133,7 +136,7 @@ const EditBlogForm = () => {
       const isNewBlog = !blogId; // if blogId not defined → adding new blog
 
       if ((isNewBlog && !hasNewCover) || (!isNewBlog && !hasExistingCover && !hasNewCover)) {
-        toast.error("Cover image is required.");
+        toast.error('Cover image is required.');
         setIsSubmitting(false);
         return;
       }
@@ -154,29 +157,29 @@ const EditBlogForm = () => {
       });
 
       if (missingImageSections) {
-        toast.error("Each section must have an image before submitting.");
+        toast.error('Each section must have an image before submitting.');
         setIsSubmitting(false);
         return;
       }
 
       //   Build form data
       const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("overview", data.overview);
-      formData.append("content", data.content);
-      formData.append("status", data.status);
+      formData.append('title', data.title);
+      formData.append('overview', data.overview);
+      formData.append('content', data.content);
+      formData.append('status', data.status);
 
       //   Cover image
       if (coverUpload.croppedImages[0]) {
-        formData.append("coverImage", coverUpload.croppedImages[0]);
+        formData.append('coverImage', coverUpload.croppedImages[0]);
       }
 
       //  Tags
-      data.tags?.forEach((tag) => formData.append("tags", tag));
+      data.tags?.forEach((tag) => formData.append('tags', tag));
 
       //   Handle deleted images and sections
-      deletedImageIds.forEach((id) => formData.append("deletedImages", id));
-      deletedSectionIds.forEach((id) => formData.append("deletedSections", id));
+      deletedImageIds.forEach((id) => formData.append('deletedImages', id));
+      deletedSectionIds.forEach((id) => formData.append('deletedSections', id));
 
       //   Loop through sections
       data.sections?.forEach((section, index) => {
@@ -188,28 +191,26 @@ const EditBlogForm = () => {
 
         //  If a new image was uploaded, attach it
         if (sectionImages[index]) {
-          formData.append("sectionImages", sectionImages[index]!);
-          formData.append("sectionImageIndexes", index.toString());
+          formData.append('sectionImages', sectionImages[index]!);
+          formData.append('sectionImageIndexes', index.toString());
         }
       });
 
       await handleBlogEdit(blogId!, formData);
-      toast.success("Blog updated successfully");
-      navigate("/account/my-blogs");
+      toast.success('Blog updated successfully');
+      navigate('/account/my-blogs');
     } catch (err: any) {
       console.error(err);
-      toast.error(err?.response?.data?.message || "Something went wrong");
+      toast.error(err?.response?.data?.message || 'Something went wrong');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-
   useEffect(() => {
-    console.log('Form errors:', errors);
+    //console.log('Form errors:', errors);
   }, [errors]);
   if (loading) return <p className="text-center mt-10">Loading blog...</p>;
-
 
   return (
     <>
@@ -244,8 +245,9 @@ const EditBlogForm = () => {
                 newImages[sectionCropIndex] = croppedFile;
                 setSectionImages(newImages);
                 setSectionCropIndex(null);
-                setValue(`sections.${sectionCropIndex}.image`, [croppedFile], { shouldValidate: true });
-
+                setValue(`sections.${sectionCropIndex}.image`, [croppedFile], {
+                  shouldValidate: true,
+                });
               }}
               onCancel={() => setSectionCropIndex(null)}
             />
@@ -268,16 +270,13 @@ const EditBlogForm = () => {
           <div>
             <Label>Overview</Label>
             <Textarea {...register('overview')} rows={3} />
-              {errors.overview && (
-                  <p className="text-red-500 text-sm">{errors.overview.message}</p>
-                )}
+            {errors.overview && <p className="text-red-500 text-sm">{errors.overview.message}</p>}
           </div>
 
           {/* Cover Image */}
           <div>
             <Label>Cover Image</Label>
             {existingCoverImage ? (
-
               <div className="relative w-full h-full mt-3">
                 <img
                   src={existingCoverImage.url}
@@ -336,8 +335,6 @@ const EditBlogForm = () => {
 
           {/* Sections */}
           <div>
-
-
             {fields.map((section, index) => {
               const sectionError = errors.sections?.[index];
 
@@ -359,9 +356,7 @@ const EditBlogForm = () => {
                         remove(index);
                         handleRemoveSection(section.id!);
                         setSectionImages((prev) => prev.filter((_, i) => i !== index));
-                        setExistingSectionImages((prev) =>
-                          prev.filter((_, i) => i !== index)
-                        );
+                        setExistingSectionImages((prev) => prev.filter((_, i) => i !== index));
                       }}
                     >
                       <X size={16} />
@@ -402,9 +397,8 @@ const EditBlogForm = () => {
                             existingSectionImages[index]!.public_id,
                             'section',
                             index
-                          )
+                          );
                           setValue(`sections.${index}.image`, [], { shouldValidate: true });
-
                         }}
                         className="absolute top-2 right-2 bg-black/60 text-white p-1 rounded-full"
                       >
@@ -438,18 +432,17 @@ const EditBlogForm = () => {
                       </button>
 
                       {!existingSectionImages[index] && !sectionImages[index] && (
-                        <p className="text-red-500 text-sm mt-2">Image is required for this section</p>
+                        <p className="text-red-500 text-sm mt-2">
+                          Image is required for this section
+                        </p>
                       )}
-
                     </div>
                   ) : (
                     <>
                       <Button
                         type="button"
                         className="bg-gray-700 text-white mt-2"
-                        onClick={() =>
-                          document.getElementById(`section-img-${index}`)?.click()
-                        }
+                        onClick={() => document.getElementById(`section-img-${index}`)?.click()}
                       >
                         <ImagePlus size={16} /> Upload Section Image
                       </Button>
@@ -502,9 +495,7 @@ const EditBlogForm = () => {
               render={({ field }) => (
                 <Input
                   placeholder="e.g. travel, adventure"
-                  onChange={(e) =>
-                    field.onChange(e.target.value.split(',').map((t) => t.trim()))
-                  }
+                  onChange={(e) => field.onChange(e.target.value.split(',').map((t) => t.trim()))}
                   value={field.value?.join(', ') || ''}
                 />
               )}
@@ -514,10 +505,7 @@ const EditBlogForm = () => {
           {/* Status */}
           <div>
             <Label>Status</Label>
-            <select
-              {...register('status')}
-              className="border rounded-lg w-full p-2"
-            >
+            <select {...register('status')} className="border rounded-lg w-full p-2">
               <option value="draft">Draft</option>
               <option value="published">Published</option>
               <option value="archived">Archived</option>

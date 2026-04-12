@@ -35,7 +35,7 @@ const CouponList = () => {
       try {
         const res = await fetchCouponData(currentPage, limit);
         setCoupons(res.coupons);
-        console.log('coupons response', res.data);
+        //console.log('coupons response', res.data);
 
         setTotalPages(res.totalPages);
       } catch (error) {

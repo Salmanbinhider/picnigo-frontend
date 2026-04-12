@@ -11,7 +11,7 @@ const UserRoutes = lazy(() => import('./router/user/UserRoutes'));
 function App() {
   return (
     <>
-     {/* <SnackbarProvider
+      {/* <SnackbarProvider
       maxSnack={3}
       autoHideDuration={3000}
       anchorOrigin={{
@@ -19,7 +19,7 @@ function App() {
         horizontal: 'right',
       }}
     > */}
-    <SnackbarProvider
+      <SnackbarProvider
         maxSnack={3}
         autoHideDuration={3000}
         anchorOrigin={{
@@ -29,21 +29,21 @@ function App() {
         action={(snackbarId) => (
           <button
             onClick={() => closeSnackbar(snackbarId)}
-          //  className="ml-2 text-white font-bold text-lg"
+            //  className="ml-2 text-white font-bold text-lg"
           >
             ✕
           </button>
         )}
       >
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/admin/*" element={<AdminRoutes />} />
-          <Route path="/*" element={<UserRoutes />} />
-        </Routes>
-      </Suspense>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/admin/*" element={<AdminRoutes />} />
+            <Route path="/*" element={<UserRoutes />} />
+          </Routes>
+        </Suspense>
 
-      <Toaster position="top-right" expand={true} duration={2000} theme="dark" richColors />
-   </SnackbarProvider>
+        <Toaster position="top-right" expand={true} duration={2000} theme="dark" richColors />
+      </SnackbarProvider>
     </>
   );
 }

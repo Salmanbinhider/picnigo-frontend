@@ -22,11 +22,11 @@ export const ChatRoomItem: React.FC<ChatRoomItemProps> = ({
 
   const otherParticipant = room.otherUser;
 
-  //console.log(otherParticipant, 'other')
+  ////console.log(otherParticipant, 'other')
   const isOnline = onlineUsers.includes(otherParticipant?._id!);
   // unread count for current user
   const unreadCount = room.unreadCounts?.[currentUserId] || 0;
-console.log(room,'chat romm');
+  //console.log(room, 'chat romm');
 
   // format last updated time
   const formatTime = (date: Date) => {

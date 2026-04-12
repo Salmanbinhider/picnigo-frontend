@@ -44,17 +44,17 @@ const PublicProfile = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetchPublicProfile(username);
-        console.log(response);
+        //console.log(response);
         setProfile(response.profile);
         setFollowers(response.profile.followersCount);
         setIsFollowing(response.isFollowing);
         // setTotalBlogs(response.profile.)
         if (response.profile?._id) {
-          console.log('is bloked');
+          //console.log('is bloked');
 
           const isBlocked = await handelIsBlocked(response.profile?._id!);
           setIsBlocked(isBlocked.data);
-          console.log(isBlocked, 'is bloked');
+          //console.log(isBlocked, 'is bloked');
         }
       } catch (error) {
         toast.error('Failed to fetch profile');
@@ -70,7 +70,6 @@ const PublicProfile = () => {
         const response = await handlePublicUserBlogs(profile._id, currentPage, limit);
         setBlogs(response.data);
         setTotalBlogs(response.data.length);
-
       } catch (error) {
         toast.error('Failed to fetch posts');
       }
@@ -200,8 +199,6 @@ const PublicProfile = () => {
               </div>
             </div>
           )}
-
-
         </div>
         {currentUserName !== username && (
           <div className="relative">

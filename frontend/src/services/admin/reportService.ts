@@ -13,7 +13,7 @@ export const handleListReport = async (page: number, limit: number, filter: IFil
 
 export const handleFetchReport = async (id: string) => {
   const response = await api.get(`/admin/reports/${id}`);
-  console.log(response.data, 'service');
+  //console.log(response.data, 'service');
   return response.data;
 };
 

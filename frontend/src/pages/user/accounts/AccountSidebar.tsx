@@ -48,9 +48,7 @@ const AccountSidebar = ({ isOpen, onToggle }: Props) => {
   // ✅ Automatically open submenu if current path matches any of its sub-items
   useEffect(() => {
     const matchedMenu = menuItems.find(
-      (item) =>
-        item.subItems &&
-        item.subItems.some((sub) => location.pathname.includes(sub.path))
+      (item) => item.subItems && item.subItems.some((sub) => location.pathname.includes(sub.path))
     );
     setOpenSubMenu(matchedMenu ? matchedMenu.label : null);
   }, [location.pathname]);
@@ -58,10 +56,7 @@ const AccountSidebar = ({ isOpen, onToggle }: Props) => {
   return (
     <>
       {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-40 lg:hidden"
-          onClick={onToggle}
-        />
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-40 lg:hidden" onClick={onToggle} />
       )}
 
       <aside
@@ -136,9 +131,7 @@ const AccountSidebar = ({ isOpen, onToggle }: Props) => {
                     className={({ isActive }) =>
                       cn(
                         'flex items-center gap-3 p-2 rounded-md text-sm font-medium transition-colors',
-                        isActive
-                          ? 'bg-orange text-white'
-                          : 'hover:bg-orange/10 hover:text-orange'
+                        isActive ? 'bg-orange text-white' : 'hover:bg-orange/10 hover:text-orange'
                       )
                     }
                     onClick={() => {

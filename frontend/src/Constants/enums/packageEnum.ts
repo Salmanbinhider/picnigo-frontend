@@ -1,4 +1,3 @@
-
 export const EnumPackageStatus = {
   ACTIVE: 'active',
   BLOCKED: 'blocked',

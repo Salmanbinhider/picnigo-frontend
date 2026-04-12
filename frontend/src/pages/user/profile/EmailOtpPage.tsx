@@ -47,7 +47,7 @@ const EmailOtpPage = () => {
     setLoading(true);
     try {
       const response = await emailChange(email, otp);
-      console.log(response, 'response');
+      //console.log(response, 'response');
       if (!accessToken) {
         toast.error('Access token missing. Please log in again.');
         return;

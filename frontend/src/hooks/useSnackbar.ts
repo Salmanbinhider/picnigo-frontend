@@ -4,16 +4,12 @@ export const useAppSnackbar = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   return {
-    success: (message: string) =>
-      enqueueSnackbar(message, { variant: 'success' }),
+    success: (message: string) => enqueueSnackbar(message, { variant: 'success' }),
 
-    error: (message: string) =>
-      enqueueSnackbar(message, { variant: 'error' }),
+    error: (message: string) => enqueueSnackbar(message, { variant: 'error' }),
 
-    warning: (message: string) =>
-      enqueueSnackbar(message, { variant: 'warning' }),
+    warning: (message: string) => enqueueSnackbar(message, { variant: 'warning' }),
 
-    info: (message: string) =>
-      enqueueSnackbar(message, { variant: 'info' }),
+    info: (message: string) => enqueueSnackbar(message, { variant: 'info' }),
   };
 };

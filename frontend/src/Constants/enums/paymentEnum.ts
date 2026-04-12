@@ -1,4 +1,3 @@
-
 // ✅ Payment Status
 export const EnumPaymentStatus = {
   PAID: 'paid',
@@ -14,4 +13,3 @@ export const EnumPaymentMethod = {
   WALLET_RAZORPAY: 'wallet+razorpay',
 } as const;
 export type EnumPaymentMethod = (typeof EnumPaymentMethod)[keyof typeof EnumPaymentMethod];
-

@@ -79,8 +79,8 @@ const AdminRoutes = () => {
           <Route path="reports/:reportId" element={<ReportDetails />} />
           <Route path="custom-packages" element={<CustomPackagePage />} />
           <Route path="custom-packages/:pkgId" element={<CustomPackageDetails />} />
-<Route path="custom-package/create/:customId" element={<CreateCustomPackagePage />} />
-<Route path="custom-packages/approved" element={<CustomApprovedPkg />} />
+          <Route path="custom-package/create/:customId" element={<CreateCustomPackagePage />} />
+          <Route path="custom-packages/approved" element={<CustomApprovedPkg />} />
           <Route path="notification" element={<NotificationPage />} />
 
           <Route path="/chat" element={<ChatAdminLayout />}>

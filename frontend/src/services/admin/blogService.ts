@@ -2,7 +2,7 @@ import api from '@/lib/axios/api';
 import type { IFilter } from '@/types/IFilter';
 export const fetchBlogById = async (blogId: string) => {
   const response = await api.get(`/admin/blog/${blogId}`);
-  console.log(response, 'from servoce');
+  //console.log(response, 'from servoce');
   return response.data;
 };
 export const getAllBlogs = async (page: number, limit: number, filter: IFilter) => {

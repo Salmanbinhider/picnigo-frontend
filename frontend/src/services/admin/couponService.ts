@@ -3,7 +3,7 @@ import type { CouponFormSchema } from '@/schemas/CouponFormSchema';
 
 export const fetchCouponData = async (page: number, limit: number) => {
   const response = await api.get(`/admin/coupons?page=${page}&limit=${limit}`);
-  console.log(response.data, 'coupons');
+  //console.log(response.data, 'coupons');
   return response.data;
 };
 
