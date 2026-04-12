@@ -362,7 +362,8 @@ const CheckoutPage = () => {
   //   //console.log("Submitting...", data);
   // };
   return (
-    <form onSubmit={handleSubmit(handlePayment, (err) => //console.log('Validation errors:', err))}>
+    <form onSubmit={handleSubmit(handlePayment, (err) =>
+       )}>
       <div className="min-h-screen bg-bg">
         <div className="bg-orange text-white py-10 shadow-md">
           <div className="max-w-6xl mx-auto px-4 flex items-center gap-6">
