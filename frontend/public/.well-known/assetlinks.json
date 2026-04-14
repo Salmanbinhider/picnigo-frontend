@@ -1,0 +1,13 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.picnigo.app",
+        "sha256_cert_fingerprints": [
+          "F5:54:58:E6:C1:47:60:23:2C:78:D3:5B:2A:CC:EA:D1:39:A8:A6:58:9C:C8:39:73:B3:60:DA:AC:47:82:55:9A",
+          "03:F0:B9:9F:5D:C9:B1:B2:70:4C:25:1C:4A:0C:9B:A2:7D:6D:33:57:A4:ED:16:77:DD:6F:1D:33:D1:86:62:95"
+        ]
+      }
+    }
+  ]
