@@ -1,3 +1,4 @@
+import ContactUs from '@/pages/user/contact/ContactUs';
 import { Fragment, lazy } from 'react';
 import { Route } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ const CommonRoutes = (
     <Route path="/blog" element={<BlogsPage />} />
     <Route path="/blog/:slug" element={<BlogDetail />} />
     <Route path="/about" element={<About />} />
+    <Route path="/contact-us" element={<ContactUs />} />
     {/* <Route path="/demo" element={<DemoSetupPage />} /> */}
   </Fragment>
 );

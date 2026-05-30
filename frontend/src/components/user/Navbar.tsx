@@ -71,13 +71,13 @@ const Navbar = () => {
                 { to: '/packages', label: 'Packages' },
                 { to: '/blog', label: 'Blog' },
                 { to: '/about', label: 'About' },
+                { to: '/contact-us', label: 'Contact Us' },
               ].map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`relative pb-1 ${
-                    isActive(item.to) ? 'text-orange font-semibold' : 'hover:text-orange'
-                  }`}
+                  className={`relative pb-1 ${isActive(item.to) ? 'text-orange font-semibold' : 'hover:text-orange'
+                    }`}
                 >
                   {item.label}
                   {isActive(item.to) && (
@@ -89,9 +89,8 @@ const Navbar = () => {
               <ProtectedLink
                 to="/custom-package"
                 requireAuth
-                className={`relative pb-1 ${
-                  isActive('/custom-package') ? 'text-orange font-semibold' : 'hover:text-orange'
-                }`}
+                className={`relative pb-1 ${isActive('/custom-package') ? 'text-orange font-semibold' : 'hover:text-orange'
+                  }`}
               >
                 Custom Package
                 {isActive('/custom-package') && (
@@ -129,9 +128,8 @@ const Navbar = () => {
               className="relative flex flex-col items-center"
             >
               <Bell
-                className={`w-6 h-6 ${
-                  isActive('/notification') ? 'text-orange' : 'hover:text-orange'
-                }`}
+                className={`w-6 h-6 ${isActive('/notification') ? 'text-orange' : 'hover:text-orange'
+                  }`}
               />
               {unreadNotifications > 0 && (
                 <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1.5 rounded-full">
@@ -204,6 +202,8 @@ const Navbar = () => {
               { to: '/packages', label: 'Packages' },
               { to: '/blog', label: 'Blog' },
               { to: '/about', label: 'About' },
+              { to: '/contact-us', label: 'Contact Us' },
+
             ].map((item) => (
               <Link
                 key={item.to}
