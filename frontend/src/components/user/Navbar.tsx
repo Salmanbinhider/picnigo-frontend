@@ -70,37 +70,68 @@ const Navbar = () => {
                 { to: '/', label: 'Home' },
                 { to: '/packages', label: 'Packages' },
                 { to: '/blog', label: 'Blog' },
-                { to: '/about', label: 'About' },
-                { to: '/contact-us', label: 'Contact Us' },
               ].map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`relative pb-1 ${isActive(item.to) ? 'text-orange font-semibold' : 'hover:text-orange'
+                  className={`relative pb-1 ${isActive(item.to)
+                      ? 'text-orange font-semibold'
+                      : 'hover:text-orange'
                     }`}
                 >
                   {item.label}
+
                   {isActive(item.to) && (
-                    <span className="absolute left-0 bottom-0 w-full h-[2px] bg-orange rounded"></span>
+                    <span className="absolute left-0 bottom-0 w-full h-[2px] bg-orange rounded" />
                   )}
                 </Link>
               ))}
 
+              {/* Custom Package */}
               <ProtectedLink
                 to="/custom-package"
                 requireAuth
-                className={`relative pb-1 ${isActive('/custom-package') ? 'text-orange font-semibold' : 'hover:text-orange'
+                className={`relative pb-1 ${isActive('/custom-package')
+                    ? 'text-orange font-semibold'
+                    : 'hover:text-orange'
                   }`}
               >
                 Custom Package
+
                 {isActive('/custom-package') && (
-                  <span className="absolute left-0 bottom-0 w-full h-[2px] bg-orange"></span>
+                  <span className="absolute left-0 bottom-0 w-full h-[2px] bg-orange" />
                 )}
               </ProtectedLink>
 
-              {/* <Link to="/demo" className="bg-orange text-white px-3 py-1 rounded text-sm">
-                Demo Access
-              </Link> */}
+              {/* About */}
+              <Link
+                to="/about"
+                className={`relative pb-1 ${isActive('/about')
+                    ? 'text-orange font-semibold'
+                    : 'hover:text-orange'
+                  }`}
+              >
+                About
+
+                {isActive('/about') && (
+                  <span className="absolute left-0 bottom-0 w-full h-[2px] bg-orange rounded" />
+                )}
+              </Link>
+
+              {/* Contact Us */}
+              <Link
+                to="/contact-us"
+                className={`relative pb-1 ${isActive('/contact-us')
+                    ? 'text-orange font-semibold'
+                    : 'hover:text-orange'
+                  }`}
+              >
+                Contact Us
+
+                {isActive('/contact-us') && (
+                  <span className="absolute left-0 bottom-0 w-full h-[2px] bg-orange rounded" />
+                )}
+              </Link>
             </nav>
           </div>
 
