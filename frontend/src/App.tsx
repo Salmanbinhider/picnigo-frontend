@@ -42,7 +42,7 @@ function App() {
           </Routes>
         </Suspense>
 
-        <Toaster position="top-right" expand={true} duration={2000} theme="dark" richColors />
+        <Toaster position="top-right"  duration={2000}   richColors />
       </SnackbarProvider>
     </>
   );
